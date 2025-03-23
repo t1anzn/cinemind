@@ -155,7 +155,7 @@ erDiagram
 
 ---
 
-### Movie_Production_Country Table
+### Movie_Production_Countries Table
 
 | Field                        | Description                                                               |
 | ---------------------------- | ------------------------------------------------------------------------- |
