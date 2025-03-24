@@ -1,7 +1,7 @@
 ```mermaid
 erDiagram
     MOVIES {
-        int id
+        int id PK
         string title
         string original_title
         string overview
@@ -19,89 +19,58 @@ erDiagram
     }
 
     GENRES {
-        int genre_id
+        int genre_id PK
         string genre_name
     }
 
     MOVIE_GENRE {
-        int movie_id
-        int genre_id
+        int movie_id FK
+        int genre_id FK
     }
 
     PRODUCTION_COUNTRIES {
-        int country_id
+        int country_id PK
         string country_name
         string iso_code
     }
 
     MOVIE_PRODUCTION_COUNTRY {
-        int movie_id
-        int country_id
+        int movie_id FK
+        int country_id FK
     }
 
     SPOKEN_LANGUAGES {
-        int language_id
+        int language_id PK
         string name
         string iso_code
     }
 
     MOVIE_SPOKEN_LANGUAGES {
-        int movie_id
-        int language_id
+        int movie_id FK
+        int language_id FK
     }
 
     KEYWORDS {
-        int keyword_id
+        int keyword_id PK
         string keyword_name
     }
 
     MOVIE_KEYWORDS {
-        int movie_id
-        int keyword_id
+        int movie_id FK
+        int keyword_id FK
     }
 
-    MOVIES ||--o| MOVIE_GENRE: has
-    GENRES ||--o| MOVIE_GENRE: contains
-    MOVIES ||--o| MOVIE_PRODUCTION_COUNTRY: has
-    PRODUCTION_COUNTRIES ||--o| MOVIE_PRODUCTION_COUNTRY: contains
-    MOVIES ||--o| MOVIE_SPOKEN_LANGUAGES: has
-    SPOKEN_LANGUAGES ||--o| MOVIE_SPOKEN_LANGUAGES: contains
-    MOVIES ||--o| MOVIE_KEYWORDS: has
-    KEYWORDS ||--o| MOVIE_KEYWORDS: contains
+    MOVIES ||--o{ MOVIE_GENRE : has
+    GENRES ||--o{ MOVIE_GENRE : contains
 
-    MOVIES {
-        id PK
-    }
-    GENRES {
-        genre_id PK
-    }
-    MOVIE_GENRE {
-        movie_id FK
-        genre_id FK
-    }
-    PRODUCTION_COUNTRIES {
-        country_id PK
-    }
-    MOVIE_PRODUCTION_COUNTRY {
-        movie_id FK
-        country_id FK
-    }
-    SPOKEN_LANGUAGES {
-        language_id PK
-    }
-    MOVIE_SPOKEN_LANGUAGES {
-        movie_id FK
-        language_id FK
-    }
-    KEYWORDS {
-        keyword_id PK
-    }
-    MOVIE_KEYWORDS {
-        movie_id FK
-        keyword_id FK
-    }
+    MOVIES ||--o{ MOVIE_PRODUCTION_COUNTRY : has
+    PRODUCTION_COUNTRIES ||--o{ MOVIE_PRODUCTION_COUNTRY : contains
 
+    MOVIES ||--o{ MOVIE_SPOKEN_LANGUAGES : has
+    SPOKEN_LANGUAGES ||--o{ MOVIE_SPOKEN_LANGUAGES : contains
 
+    MOVIES ||--o{ MOVIE_KEYWORDS : has
+    KEYWORDS ||--o{ MOVIE_KEYWORDS : contains
 ```
 
 ### Movies Table
