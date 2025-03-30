@@ -1,6 +1,9 @@
 ---
 import "../styles/global.css";
+import "@fontsource-variable/inter";
 import Navigation from "../components/Navigation.jsx";
+import Footer from "../components/Footer.jsx";
+import FeaturedSlider from "../components/FeaturedSlider.jsx";
 ---
 
 <!doctype html>
@@ -10,10 +13,14 @@ import Navigation from "../components/Navigation.jsx";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>CineMind</title>
   </head>
   <body>
-    <Navigation />
+    <div class="min-h-screen flex flex-col bg-black">
+      <Navigation />
+      <FeaturedSlider client:only />
+      <Footer />
+    </div>
   </body>
 </html>
 
