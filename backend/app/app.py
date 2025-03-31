@@ -1,8 +1,10 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 import os
 
 app = Flask(__name__)
+CORS(app) # Enable CORS for all routes
 
 # Path to your existing cinemind.db database
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -135,20 +137,32 @@ def get_spoken_languages():
 # Enhanced Endpoints: makes use of the Relationship tables to link table information
 @app.route('/featured', methods=['GET'])
 def get_featured():
+
+    # Get the top 3 movies based on popularity
     movies = Movie.query.order_by(Movie.popularity.desc()).limit(3).all()
-    return jsonify([
-        {
+
+    featured_movies = []
+
+    # Loop through the movies
+    for movie in movies:
+
+        genres = Genres.query.join(MovieGenre).filter(MovieGenre.movie_id == movie.id).all()
+        genre_names = [genre.genre_name for genre in genres]
+
+        featured_movies.append({
             'id': movie.id,
             'title': movie.title,
             'vote_average': movie.vote_average,
             'release_date': movie.release_date,
+            'overview' : movie.overview,
             'original_language': movie.original_language,
             'runtime': movie.runtime,
             'popularity': movie.popularity,
-            'homepage': movie.homepage
-        } 
-        for movie in movies
-    ])
+            'homepage': movie.homepage,
+            'genres': genre_names  # Include genre names in the response
+        })
+
+    return jsonify(featured_movies)
 
 @app.route('/movies/genre/<int:genre_id>', methods=['GET'])
 def get_movies_by_genre(genre_id):
