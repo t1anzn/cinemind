@@ -91,7 +91,20 @@ class MovieCast(db.Model):
 @app.route('/movies', methods=['GET'])
 def get_movies():
     movies = Movie.query.all()
-    return jsonify([{'id': movie.id, 'title': movie.title} for movie in movies])
+    return jsonify([
+        {
+            'id': movie.id,
+            'title': movie.title,
+            'vote_average': movie.vote_average,
+            'release_date': movie.release_date,
+            'original_language': movie.original_language,
+            'runtime': movie.runtime,
+            'popularity': movie.popularity,
+            'homepage': movie.homepage
+        } 
+        for movie in movies
+    ])
+
 
 @app.route('/genres', methods=['GET'])
 def get_genres():
@@ -120,6 +133,23 @@ def get_spoken_languages():
 
 
 # Enhanced Endpoints: makes use of the Relationship tables to link table information
+@app.route('/featured', methods=['GET'])
+def get_featured():
+    movies = Movie.query.order_by(Movie.popularity.desc()).limit(3).all()
+    return jsonify([
+        {
+            'id': movie.id,
+            'title': movie.title,
+            'vote_average': movie.vote_average,
+            'release_date': movie.release_date,
+            'original_language': movie.original_language,
+            'runtime': movie.runtime,
+            'popularity': movie.popularity,
+            'homepage': movie.homepage
+        } 
+        for movie in movies
+    ])
+
 @app.route('/movies/genre/<int:genre_id>', methods=['GET'])
 def get_movies_by_genre(genre_id):
     genre = Genres.query.get(genre_id)
