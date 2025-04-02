@@ -7,3 +7,8 @@ body {
 .content-wrapper {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+
+.movie-card {
+    @apply relative overflow-hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
