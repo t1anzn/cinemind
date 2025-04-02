@@ -1,34 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
-export default function FeaturedSlider() { 
+export default function FeaturedSlider({ featuredMovies=[] }) { 
     const [movies, setMovies] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    useEffect(() => {
-        fetch("http://127.0.0.1:5000/featured")
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Fetched movies:", data);
-                setMovies(data);
-                setCurrentIndex(0);
-            })
-            .catch((error) => console.error("Error fetching movies:", error));
-    }, []);
-
-
-    if (movies.length === 0) {
+    if (featuredMovies.length === 0) {
         return <h1> Loading...</h1>
     }
 
-    const currentMovie = movies[currentIndex];
-    console.log("Current movie:", currentMovie.title)
+    const currentMovie = featuredMovies[currentIndex];
+    console.log("Current movie:", currentMovie)
 
     const goToPrev = () => {
-        setCurrentIndex((prevIndex) => (prevIndex === 0 ? movies.length - 1 : prevIndex - 1));
+        setCurrentIndex((prevIndex) => (prevIndex === 0 ? featuredMovies.length - 1 : prevIndex - 1));
     };
 
     const goToNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex === movies.length - 1 ? 0 : prevIndex + 1));
+        setCurrentIndex((prevIndex) => (prevIndex === featuredMovies.length - 1 ? 0 : prevIndex + 1));
         
     };
 
