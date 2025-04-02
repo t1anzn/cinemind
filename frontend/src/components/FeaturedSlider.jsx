@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 export default function FeaturedSlider({ featuredMovies=[] }) { 
-    const [movies, setMovies] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     if (featuredMovies.length === 0) {
@@ -20,6 +19,16 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
         
     };
 
+    // Format Movie release year
+    const getReleaseYear = (dateString) => {
+        if(!dateString) return 'Unknown';
+        try {
+            return new Date(dateString).getFullYear();
+        } catch (error) {
+            return 'Unknown';
+        }
+    };
+
 
 
 
@@ -35,13 +44,63 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                 </div>
       
                 {/* Content */}
-                <div className="absolute inset-0 flex items-end pb-16 px-8 z-20">
+                <div className="content-wrapper relative h-full flex items-end pb-20 z-20">
                     <div className="bg-black/60 p-6 rounded-lg max-w-2xl">
-                    <h1 className="text-4xl font-light text-white mb-3">{currentMovie.title}</h1>
-                    <div className="text-cyan-400 text-sm mb-2">{currentMovie.genres && currentMovie.genres.join(', ')}</div>
-                    <div className="text-slate-300 text-sm mb-2">{currentMovie.release_date}</div>
-                    <p className="text-slate-300 text-sm">{currentMovie.overview}</p>
+                        <h1 className="text-5xl font-extralight text-white mb-3 tracking-wider">{currentMovie.title}</h1>
+                        
+                        {/* Vote Average and Release Year */}
+                        <div className="flex flex-wrap items-center space-x-4 mb-5 mt-5">
+                            <div className="inline-flex items-center text-sm px-2 py-1 font-extrabold tracking-wide bg-cyan-700 text-white"> {currentMovie.vote_average} </div>
+                            <span className="text-sm tracking-wide font-light text-slate-400">{getReleaseYear(currentMovie.release_date)}</span>
+                        </div>
+
+                        {/* Overview and Genres */}
+                        <div className="text-cyan-400 text-sm mb-2">{currentMovie.genres && currentMovie.genres.join(', ')}</div>
+                        <p className="text-slate-300/90 mb-6 text-sm max-w-2xl tracking-wide font-light leading-relaxed line-clamp-3">{currentMovie.overview}</p>
+
+                        {/* Action Buttons */}
+                        <div className="flex space-x-4">
+                            <a href="#" className="group relative inline-flex items-center text-white text-md font-light tracking-wider px-4 py-2 bg-gradient-to-r from-cyan-900/80 to-blue-900/80 rounded-sm border border-cyan-800/50 hover:from-cyan-700/90 hover:to-blue-800/80 transition-colors duration-300 overflow-hidden">
+                                <span>VIEW DETAILS</span>
+                            </a>
+                            <a href='#' className="group relative inline-flex items-center bg-black/30 text-white/70 text-md font-light tracking-wider px-4 py-2 border rounded-sm border-slate-700/30 hover:border-slate-600/50 hover:text-white transition-all duration-300 backdrop-blur-sm">
+                                <span>EXPLORE SIMILAR</span>
+                            </a>
+                        </div>
+                        {/* Movie Data Visualization */}
+                        <div className="mt-8 grid grid-cols-3 gap-10 max-w-md">
+                            {currentMovie.popularity && (
+                                <div className="space-y-1">
+                                    <div className="text-xs text-slate-500 font-light tracking-wider">POPULARITY</div>
+                                    <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
+                                        <div className="h-full bg-gradient-to-r from-cyan-500 to-blue-500"
+                                        style={{ width: `${Math.min(100, currentMovie.popularity/10)}%` }}></div>
+                                        </div>
+                                </div>
+                            )}
+
+                            {currentMovie.runtime && (
+                                <div className="space-y-1">
+                                    <div className="text-xs text-slate-500 font-light  tracking-wider">RUNTIME</div>
+                                    <div className="text-slate-300 text-sm font-light">
+                                        {/* Convert runtime from minutes to hours and minutes */}
+                                        {Math.floor(currentMovie.runtime / 60)}H {currentMovie.runtime % 60}M
+                                    </div>
+                                </div>
+                            )}
+
+                            {currentMovie.original_language && (
+                                <div className="space-y-1">
+                                    <div className="text-xs text-slate-500 font-light tracking-wider">LANGUAGE</div>
+                                    <div className="text-slate-300 text-sm font-light">
+                                        {currentMovie.original_language.toUpperCase()}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        
                     </div>
+
                 </div>
       
                 {/* Navigation */}
