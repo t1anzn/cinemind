@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FeaturedSlider from "../components/FeaturedSlider";
+import MovieGrid from "../components/MovieGrid";
+import SearchBar from "../components/SearchBar";
+
+// Fetch initial movies data
+const initialMoviesResponse = await fetch(
+  "http://127.0.0.1:5000/movies?limit-20"
+);
+const initialMoviesData = await initialMoviesResponse.json();
+const initialMovies = initialMoviesData || [];
+
+// console.log("Fetched initial movies", initialMovies);
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layout title="CineMind Search">
+  <div class="content-wrapper py-10">
+    <h1 class="text-3xl text-white font-bold mb-8 md:text-4xl">
+      Browse Movies
+    </h1>
+    <SearchBar client:load />
+    <MovieGrid client:visible title="Search Movies" movies={initialMovies} />
+  </div>
+</Layout>
