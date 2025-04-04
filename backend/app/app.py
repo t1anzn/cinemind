@@ -164,6 +164,20 @@ def get_featured():
 
     return jsonify(featured_movies)
 
+# Get the top 10 movies based on vote average   
+@app.route('/popular', methods=['GET'])
+def get_popular():
+    movies= Movie.query.order_by(Movie.popularity.desc()).offset(3).limit(10).all()
+    popular_movies = []
+    for movie in movies:
+        popular_movies.append({
+            'id': movie.id,
+            'title': movie.title,
+            'release_date': movie.release_date,
+            'vote_average': movie.vote_average
+        })
+    return jsonify(popular_movies)
+
 @app.route('/movies/genre/<int:genre_id>', methods=['GET'])
 def get_movies_by_genre(genre_id):
     genre = Genres.query.get(genre_id)

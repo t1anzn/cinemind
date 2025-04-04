@@ -8,7 +8,7 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
     }
 
     const currentMovie = featuredMovies[currentIndex];
-    console.log("Current movie:", currentMovie)
+    // console.log("Current movie:", currentMovie)
 
     const goToPrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex === 0 ? featuredMovies.length - 1 : prevIndex - 1));
@@ -36,16 +36,26 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
     return (
         <>
         <div className="relative h-[75vh] overflow-hidden">
-            
-            {/* Background Effects */}
-            <div className="absolute inset-0 z-0 bg-gradient-to-b from-black via-black/90 to-black/80"></div>
-                <div className="absolute inset-0 z-10 transition-opacity duration-1000">
 
+            {/* Slider Background */}
+            <div className="absolute inset-0 z-10 transition-opacity duration-1000">
+                <div className="relative w-full h-full overflow-hidden">
+                    {/* Backdrop Image */}
+                    <img
+                    src={"https://cdn2.nbcuni.com/NBCUniversal/2024-07/dm4-blogroll-1719790355961.jpg?VersionId=o81CDkGmYnsyvA6FTQlECKrTeIOuISdk"}
+                    alt={`${currentMovie.title} Backdrop Image`}
+                    className={"w-full h-full object-cover scale-110"}
+                    />
+                    {/* Background Effects */}
+                    <div className="absolute inset-0 z-0 bg-gradient-to-b from-black-30 via-transparent to-black/50"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/80"></div>
                 </div>
-      
-                {/* Content */}
+            </div>
+
+
+                {/* Movie Content */}
                 <div className="content-wrapper relative h-full flex items-end pb-20 z-20">
-                    <div className="bg-black/60 p-6 rounded-lg max-w-2xl">
+                    <div className="p-6 rounded-lg max-w-2xl">
                         <h1 className="text-5xl font-extralight text-white mb-3 tracking-wider">{currentMovie.title}</h1>
                         
                         {/* Vote Average and Release Year */}
@@ -104,8 +114,8 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                 </div>
       
                 {/* Navigation */}
-                <button onClick={goToPrev} className="absolute left-5 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white rounded-full z-50">❮</button>
-                <button onClick={goToNext} className="absolute right-5 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white rounded-full z-50">❯</button>
+                <button onClick={goToPrev} className="absolute left-5 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white hover:text-cyan-500 hover:bg-black border border-slate-700/30 hover:border-cyan-700 hover:border-2 backdrop-blur-sm rounded-full transition-all duration:300 z-50 ">❮</button>
+                <button onClick={goToNext} className="absolute right-5 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white hover:text-cyan-500 hover:bg-black border border-slate-700/30 hover:border-cyan-700 hover:border-2 backdrop-blur-sm rounded-full transition-all duration:300 z-50 ">❯</button>
             </div>
         </>
     )

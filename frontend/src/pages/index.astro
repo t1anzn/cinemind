@@ -9,6 +9,12 @@ const featuredMoviesData = await featuredMoviesResponse.json();
 const featuredMovies = featuredMoviesData || [];
 // console.log("Fetched featured movies", featuredMovies);
 
+// Fetch popular movies from the backend
+const popularMoviesResponse = await fetch("http://127.0.0.1:5000/popular");
+const popularMoviesData = await popularMoviesResponse.json();
+const popularMovies = popularMoviesData || [];
+console.log("Fetched popular movies", popularMovies);
+
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
@@ -17,7 +23,7 @@ const featuredMovies = featuredMoviesData || [];
   <FeaturedSlider client:load featuredMovies={featuredMovies} />
 
   <div class="content-wrapper py-10">
-    <MovieGrid client:visible title="Popular Movies" />
-    <MovieGrid client:visible title="Explore" />
+    <MovieGrid client:visible title="Popular Movies" movies={popularMovies} />
+    <!-- <MovieGrid client:visible title="Explore" /> -->
   </div>
 </Layout>
