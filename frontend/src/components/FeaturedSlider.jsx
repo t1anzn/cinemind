@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { extractYouTubeId } from '../utils/youtubeUtils';
+import { SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/solid';
 
 export default function FeaturedSlider({ featuredMovies=[] }) { 
     const [currentIndex, setCurrentIndex] = useState(0);
     const playerRef = useRef(null);
     const playerContainerRef = useRef(null);
     const intervalRef = useRef(null);
+    const [isMuted, setIsMuted] = useState(true)   
 
     
     if (featuredMovies.length === 0) {
@@ -72,12 +74,16 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                 rel: 0,
                 start: start,
                 end: end,
-                mute: 1,
+                mute: isMuted ? 1 : 0, //Mute if isMuted is true
             },
             events: {
                 onReady: (event) => {
                     event.target.playVideo();
-                    event.target.mute();
+                    if (isMuted) { 
+                        event.target.mute();
+                    } else { 
+                        event.target.unMute();
+                    }
 
                     // Set up the interval to loop the video
                     intervalRef.current = setInterval(() => {
@@ -115,6 +121,18 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
         };
       }, [currentMovie]);     
 
+      // Mute Toggle whilst playing  
+      const toggleMute = () => { 
+        if(playerRef.current) {  
+            const player = playerRef.current; 
+            if(isMuted) {  
+                player.unMute(); 
+            } else { 
+                player.mute();
+            }
+        }
+        setIsMuted(!isMuted); // Toggle mute state
+      };
 
 
 
@@ -227,6 +245,17 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                 {/* Navigation */}
                 <button onClick={goToPrev} className="absolute left-5 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white hover:text-cyan-500 hover:bg-black border border-slate-700/30 hover:border-cyan-700 hover:border-2 backdrop-blur-sm rounded-full transition-all duration:300 z-50 ">❮</button>
                 <button onClick={goToNext} className="absolute right-5 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white hover:text-cyan-500 hover:bg-black border border-slate-700/30 hover:border-cyan-700 hover:border-2 backdrop-blur-sm rounded-full transition-all duration:300 z-50 ">❯</button>
+
+                {/* Toggle Mute Button */} 
+                <button onClick={toggleMute}   
+                        className="absolute bottom-5 right-5 p-3 bg-black/50 text-white hover:text-cyan-500 hover:bg-black border border-slate-700/30 hover:border-cyan-700 hover:border-2 backdrop-blur-sm rounded-full transition-all duration:300 z-50"
+                >
+                    {isMuted ? 
+                    <SpeakerXMarkIcon className="h-6 w-6"/>
+                     :
+                    <SpeakerWaveIcon className="h-6 w-6"/>
+                    }
+                </button>
             </div>
         </>
     )
