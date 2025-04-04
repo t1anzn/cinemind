@@ -23,7 +23,7 @@ export default function MovieCard( { movie }){
 
                     {/* Movie Poster */}
                     <div className="h-[380px] w-[220px] relative bg-slate-900">
-                    <img src="https://cdn.prod.website-files.com/6009ec8cda7f305645c9d91b/66a4263d01a185d5ea22eeec_6408f6e7b5811271dc883aa8_batman-min.png" alt="Movie Poster" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                    <img src={movie.poster_url} alt="Movie Poster" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
                     </div>
 
 

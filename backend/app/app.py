@@ -51,6 +51,9 @@ class Movie(db.Model):
     vote_count = db.Column(db.Integer)
     original_language = db.Column(db.String(50))
     homepage = db.Column(db.String(255))
+    poster_url = db.Column(db.String(255))
+    backdrop_url = db.Column(db.String(255))
+    video_url = db.Column(db.String(255))
 
 class MovieGenre(db.Model):
     __tablename__ = 'movie_genre'
@@ -102,7 +105,10 @@ def get_movies():
             'original_language': movie.original_language,
             'runtime': movie.runtime,
             'popularity': movie.popularity,
-            'homepage': movie.homepage
+            'homepage': movie.homepage,
+            'poster_url': movie.poster_url,
+            'backdrop_url': movie.backdrop_url,
+            'video_url': movie.video_url,
         } 
         for movie in movies
     ])
@@ -174,7 +180,8 @@ def get_popular():
             'id': movie.id,
             'title': movie.title,
             'release_date': movie.release_date,
-            'vote_average': movie.vote_average
+            'vote_average': movie.vote_average,
+            'poster_url': movie.poster_url,
         })
     return jsonify(popular_movies)
 
