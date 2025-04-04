@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { extractYouTubeId } from '../utils/youtubeUtils';
 
 export default function FeaturedSlider({ featuredMovies=[] }) { 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const playerRef = useRef(null);
+    const playerContainerRef = useRef(null);
+    const intervalRef = useRef(null);
 
+    
     if (featuredMovies.length === 0) {
         return <h1> Loading...</h1>
     }
 
     const currentMovie = featuredMovies[currentIndex];
-    // console.log("Current movie:", currentMovie)
+    const currentMovieId = extractYouTubeId(currentMovie.video_url);
 
+    // Button handlers
     const goToPrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex === 0 ? featuredMovies.length - 1 : prevIndex - 1));
     };
-
     const goToNext = () => {
         setCurrentIndex((prevIndex) => (prevIndex === featuredMovies.length - 1 ? 0 : prevIndex + 1));
-        
     };
 
     // Format Movie release year
@@ -28,6 +32,88 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
             return 'Unknown';
         }
     };
+    
+
+    // Load YouTube Iframe API if not already loaded
+    useEffect(() => {
+        if (!window.YT) {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
+
+        // Clean up player when component unmounts
+        return () => {
+            if (playerRef.current) {
+                playerRef.current.destroy();
+                playerRef.current = null;
+            }
+        };
+    }, []);
+
+    // Function to initialize the player
+    const initializePlayer = () => {
+        const start = currentMovie.snippetStart || 10;  
+        const end = currentMovie.snippetEnd || 50;  
+
+        // Destroy previous player if it exists
+        if(playerRef.current) {  
+            playerRef.current.destroy();
+        }
+        
+        // Create a new player instance  
+        playerRef.current = new window.YT.Player('player', {
+            videoId: currentMovieId,
+            playerVars: {
+                autoplay: 1,
+                controls: 0,
+                showinfo: 0,
+                rel: 0,
+                start: start,
+                end: end,
+                mute: 1,
+            },
+            events: {
+                onReady: (event) => {
+                    event.target.playVideo();
+                    event.target.mute();
+
+                    // Set up the interval to loop the video
+                    intervalRef.current = setInterval(() => {
+                        const currentTime = event.target.getCurrentTime();
+                        if (currentTime >= end) {
+                            event.target.seekTo(start); // Loop back to start   
+                        }
+                    }, 50);
+                },
+            },
+        });
+    };
+
+      // Effect to handle movie change and YouTube API readiness
+      useEffect(() => {
+        const checkYTReady = () => { 
+            if(window.YT && window.YT.Player) { 
+                initializePlayer();  
+            } else { 
+                setTimeout(checkYTReady, 100); // Retry if not ready
+            }
+            
+        };
+
+        checkYTReady(); // Run the check to initialize the player
+
+        // Cleanup when the movie changes or component unmounts
+        return () => { 
+            if(intervalRef.current) {
+                clearInterval(intervalRef.current); 
+            }
+            if(playerRef.current) { 
+                playerRef.current.destroy(); // Destroy player instance on unmount  
+            }
+        };
+      }, [currentMovie]);     
 
 
 
@@ -57,7 +143,7 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                             title="Movie Trailer"
                         ></iframe> */}
 
-                        <iframe
+                        {/* <iframe
                             width="100%"
                             height="100%" 
                             src="https://www.youtube.com/embed/jc86EFjLFV4?start=10&autoplay=1&loop=1&playlist=jc86EFjLFV4&rel=0&modestbranding=1&controls=0&showinfo=0"
@@ -67,7 +153,9 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                             referrerpolicy="strict-origin-when-cross-origin"
                             className="w-full h-full object-cover scale-140"
                             allowfullscreen>
-                        </iframe>
+                        </iframe> */}
+
+                        <div id="player" ref={playerContainerRef} className="w-full h-full scale-150"></div>
 
                     {/* Background Effects */}
                     <div className="absolute inset-0 z-0 bg-gradient-to-b from-black-30 via-transparent to-black/50"></div>
