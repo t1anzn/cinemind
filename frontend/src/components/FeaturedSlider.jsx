@@ -41,11 +41,34 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
             <div className="absolute inset-0 z-10 transition-opacity duration-1000">
                 <div className="relative w-full h-full overflow-hidden">
                     {/* Backdrop Image */}
-                    <img
+                    {/* <img
                     src={"https://cdn2.nbcuni.com/NBCUniversal/2024-07/dm4-blogroll-1719790355961.jpg?VersionId=o81CDkGmYnsyvA6FTQlECKrTeIOuISdk"}
                     alt={`${currentMovie.title} Backdrop Image`}
                     className={"w-full h-full object-cover scale-110"}
-                    />
+                    /> */}
+                    {/* <iframe
+                            width="100%"
+                            height="100%"
+                            src="https://www.youtube.com/watch?v=-9HT0l9HV4c"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className="w-full h-full object-cover"
+                            title="Movie Trailer"
+                        ></iframe> */}
+
+                        <iframe
+                            width="100%"
+                            height="100%" 
+                            src="https://www.youtube.com/embed/jc86EFjLFV4?start=10&autoplay=1&loop=1&playlist=jc86EFjLFV4&rel=0&modestbranding=1&controls=0&showinfo=0"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture;"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            className="w-full h-full object-cover scale-140"
+                            allowfullscreen>
+                        </iframe>
+
                     {/* Background Effects */}
                     <div className="absolute inset-0 z-0 bg-gradient-to-b from-black-30 via-transparent to-black/50"></div>
                     <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/80"></div>
