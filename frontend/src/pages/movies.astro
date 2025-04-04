@@ -22,7 +22,7 @@ const initialMovies = initialMoviesData || [];
     <h1 class="text-3xl text-white font-bold mb-8 md:text-4xl">
       Browse Movies
     </h1>
-    <SearchBar client:load />
+    <SearchBar client:only />
     <MovieGrid client:visible title="Search Movies" movies={initialMovies} />
   </div>
 </Layout>
