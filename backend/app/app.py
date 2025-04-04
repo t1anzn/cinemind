@@ -165,6 +165,7 @@ def get_featured():
             'runtime': movie.runtime,
             'popularity': movie.popularity,
             'homepage': movie.homepage,
+            'video_url': movie.video_url,
             'genres': genre_names  # Include genre names in the response
         })
 
