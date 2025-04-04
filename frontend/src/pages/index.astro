@@ -24,6 +24,6 @@ console.log("Fetched popular movies", popularMovies);
 
   <div class="content-wrapper py-10">
     <MovieGrid client:visible title="Popular Movies" movies={popularMovies} />
-    <!-- <MovieGrid client:visible title="Explore" /> -->
+    <MovieGrid client:visible title="Explore" movies={popularMovies} />
   </div>
 </Layout>
