@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import os
@@ -215,6 +215,35 @@ def get_movies_by_language(language_id):
     language = SpokenLanguages.query.get(language_id)
     movies = Movie.query.join(MovieSpokenLanguages).filter(MovieSpokenLanguages.language_id == language_id).all()
     return jsonify({'language': language.language_name, 'movies': [{'id': movie.id, 'title': movie.title} for movie in movies]})
+
+# Search Bar Endpoints:
+@app.route('/movies/search', methods=['GET'])
+def search_movies():
+    query = Movie.query
+
+    title = request.args.get('title')
+    genre_id = request.args.get('genre_id')
+    language_id = request.args.get('language_id')
+
+    if title:
+        query = query.filter(Movie.title.ilike(f"%{title}%"))
+    if genre_id:
+        query = query.join(MovieGenre).filter(MovieGenre.genre_id == genre_id)
+    if language_id:
+        query = query.join(MovieSpokenLanguages).filter(MovieSpokenLanguages.language_id == language_id)
+
+    movies = query.all()
+    return jsonify([{
+        "id": movie.id, "title": movie.title,
+        "vote_average": movie.vote_average, "release_date": movie.release_date
+    } for movie in movies])
+
+# Endpoint made to create suggestions as user types in searchbar
+@app.route('/movies/suggest', methods=['GET'])
+def suggest_movies():
+    query = request.args.get('query', '')
+    movies = Movie.query.filter(Movie.title.ilike(f"%{query}%")).limit(5).all()
+    return jsonify([{"id": movie.id, "title": movie.title} for movie in movies])
 
 
 # default message to test API is connected
