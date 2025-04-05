@@ -95,9 +95,25 @@ class MovieCast(db.Model):
 # Endpoints
 @app.route('/movies', methods=['GET'])
 def get_movies():
-    movies = Movie.query.all()
-    return jsonify([
-        {
+
+    # Pagination parameters from query string, with default values
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 20, type=int)
+
+    # Paginate the query
+    pagination = Movie.query.paginate(page=page, per_page=per_page, error_out=False)
+    movies = pagination.items
+
+    
+    return jsonify({
+        'total': pagination.total,
+        'page': page,
+        'per_page': per_page,
+        'total_pages': pagination.pages,
+        'has_next': pagination.has_next,
+        'has_prev': pagination.has_prev,
+        'movies': [
+            {
             'id': movie.id,
             'title': movie.title,
             'vote_average': movie.vote_average,
@@ -111,7 +127,8 @@ def get_movies():
             'video_url': movie.video_url,
         } 
         for movie in movies
-    ])
+    ]
+    })
 
 
 @app.route('/genres', methods=['GET'])

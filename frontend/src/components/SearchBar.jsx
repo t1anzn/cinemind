@@ -12,7 +12,7 @@ export default function SearchBar() {
     useEffect(() => {
         if (searchTerm.length > 1) {
             setIsTyping(true);
-            fetch(`http://localhost:5000/movies/suggest?query=${searchTerm}`)
+            fetch(`http://127.0.0.1:5000/movies/suggest?query=${searchTerm}`)
                 .then(res => res.json())
                 .then(setSuggestions)
                 .finally(() => setIsTyping(false));
@@ -32,6 +32,8 @@ export default function SearchBar() {
         const match = suggestions.find(
             (m) => m.title.toLowerCase() === searchTerm.toLowerCase()
         );
+
+        console.log(match);
 
         if (match) {
             setIsSearching(true);
