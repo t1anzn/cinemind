@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { extractYouTubeId } from '../utils/youtubeUtils';
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/solid';
+import { getReleaseYear, formatVoteBadge } from '../utils/movieDisplayUtils';
 
 export default function FeaturedSlider({ featuredMovies=[] }) { 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -24,17 +25,6 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
     const goToNext = () => {
         setCurrentIndex((prevIndex) => (prevIndex === featuredMovies.length - 1 ? 0 : prevIndex + 1));
     };
-
-    // Format Movie release year
-    const getReleaseYear = (dateString) => {
-        if(!dateString) return 'Unknown';
-        try {
-            return new Date(dateString).getFullYear();
-        } catch (error) {
-            return 'Unknown';
-        }
-    };
-    
 
     // Load YouTube Iframe API if not already loaded
     useEffect(() => {
@@ -189,7 +179,13 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                         
                         {/* Vote Average and Release Year */}
                         <div className="flex flex-wrap items-center space-x-4 mb-5 mt-5">
-                            <div className="inline-flex items-center text-sm px-2 py-1 font-extrabold tracking-wide bg-cyan-700 text-white"> {currentMovie.vote_average} </div>
+                            {currentMovie?.vote_average && (
+                            <div
+                            class={`inline-flex items-center text-[15px] px-1.5 py-0.5 font-extrabold tracking-wide ${formatVoteBadge(currentMovie.vote_average)}`}
+                            >
+                            {currentMovie.vote_average}
+                            </div>
+                            )}
                             <span className="text-sm tracking-wide font-light text-slate-400">{getReleaseYear(currentMovie.release_date)}</span>
                         </div>
 
@@ -199,7 +195,7 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
 
                         {/* Action Buttons */}
                         <div className="flex space-x-4">
-                            <a href="#" className="group relative inline-flex items-center text-white text-md font-light tracking-wider px-4 py-2 bg-gradient-to-r from-cyan-900/80 to-blue-900/80 rounded-sm border border-cyan-800/50 hover:from-cyan-700/90 hover:to-blue-800/80 transition-colors duration-300 overflow-hidden">
+                                <a href={`/movie/${currentMovie.id}`} className="group relative inline-flex items-center text-white text-md font-light tracking-wider px-4 py-2 bg-gradient-to-r from-cyan-900/80 to-blue-900/80 rounded-sm border border-cyan-800/50 hover:from-cyan-700/90 hover:to-blue-800/80 transition-colors duration-300 overflow-hidden">
                                 <span>VIEW DETAILS</span>
                             </a>
                             <a href='#' className="group relative inline-flex items-center bg-black/30 text-white/70 text-md font-light tracking-wider px-4 py-2 border rounded-sm border-slate-700/30 hover:border-slate-600/50 hover:text-white transition-all duration-300 backdrop-blur-sm">
