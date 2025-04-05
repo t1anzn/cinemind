@@ -22,6 +22,8 @@ export default function MoviePage() {
 
   const handlePageChange = (pageNum) => {
     setCurrentPage(pageNum); //Update the currentPage state
+    
+    window.scrollTo(0, 150); // Scroll to the top
   }
 
   return (
