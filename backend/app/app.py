@@ -191,7 +191,7 @@ def get_featured():
 # Get the top 10 movies based on vote average   
 @app.route('/popular', methods=['GET'])
 def get_popular():
-    movies= Movie.query.order_by(Movie.popularity.desc()).offset(3).limit(10).all()
+    movies = Movie.query.order_by(Movie.popularity.desc()).offset(3).limit(10).all()
     popular_movies = []
     for movie in movies:
         popular_movies.append({
@@ -202,6 +202,55 @@ def get_popular():
             'poster_url': movie.poster_url,
         })
     return jsonify(popular_movies)
+
+@app.route('/movies/<int:id>', methods=['GET'])
+def get_movie_by_id(id):
+    print(f"Received request for movie with ID {id}")  # Debugging statement
+    movie = Movie.query.get(id)
+
+    if not movie:
+        return jsonify({'error': f'Movie with ID {id} not found'}), 404
+    
+    # Query the genres of the movie
+    genres = Genres.query.join(MovieGenre).filter(MovieGenre.movie_id == movie.id).all()
+    genre_names = [genre.genre_name for genre in genres]
+
+    # Query the keywords of the movie
+    keywords = Keywords.query.join(MovieKeywords).filter(MovieKeywords.movie_id == movie.id).all()
+    keyword_names = [keyword.keyword_name for keyword in keywords]
+
+    # Query the cast of the cast of the movie
+    cast_members = Cast.query.join(MovieCast).filter(MovieCast.movie_id == movie.id).all()
+    cast_names = [cast.name for cast in cast_members]
+
+    movie_data = {
+        'id': movie.id,
+        'title': movie.title,
+        'overview': movie.overview,
+        'release_date': movie.release_date,
+        'original_title': movie.original_title,
+        'genres': genre_names,
+        'keywords': keyword_names,
+        'cast': cast_names,
+        'budget': movie.budget,
+        'revenue': movie.revenue,
+        'runtime': movie.runtime,
+        'status': movie.status,
+        'tagline': movie.tagline,
+        'popularity': movie.popularity,
+        'vote_average': movie.vote_average,
+        'vote_count': movie.vote_count,
+        'original_language': movie.original_language,
+        'homepage': movie.homepage,
+        'poster_url': movie.poster_url,
+        'backdrop_url': movie.backdrop_url,
+        'video_url': movie.video_url,
+    }
+
+    return jsonify(movie_data)
+
+
+
 
 @app.route('/movies/genre/<int:genre_id>', methods=['GET'])
 def get_movies_by_genre(genre_id):

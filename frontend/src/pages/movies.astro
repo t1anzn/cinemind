@@ -1,14 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import MoviePage from "../components/MoviePage";
-
-// Fetch initial movies data
-const initialMoviesResponse = await fetch(
-  "http://127.0.0.1:5000/movies?page=1&limit=20"
-);
-const initialMoviesData = await initialMoviesResponse.json();
-const initialMovies = initialMoviesData || [];
-const totalPages = initialMovies.total_pages;
 ---
 
 <Layout title="CineMind Search">
