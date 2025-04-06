@@ -9,6 +9,7 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
     const playerContainerRef = useRef(null);
     const intervalRef = useRef(null);
     const [isMuted, setIsMuted] = useState(true)   
+    const [volume, setVolume] = useState(100)
 
     
     if (featuredMovies.length === 0) {
@@ -80,6 +81,8 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                     } else { 
                         event.target.unMute();
                     }
+
+                    event.target.setVolume(40);
 
                     // Set up the interval to loop the video
                     intervalRef.current = setInterval(() => {
@@ -205,7 +208,7 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                             currentMovie.genres.map((genre, index) => (
                             <span
                              key={index}
-                             className="inline-flex items-center justify-center bg-gradient-to-b from-blue-600/30 to-transparent text-white text-xs font-semibold py-1 px-3 rounded-xl border-1 border-blue-400/50 h-8 min-h-[32px] hover:bg-cyan-500/80 transition-all duration-300">
+                             className="inline-flex items-center justify-center bg-gradient-to-b from-blue-500/50 to-blue-500/30 border-1 border-cyan-400/30 backdrop-blur-sm text-white text-xs font-semibold py-1 px-3 rounded-xl h-8 min-h-[32px] hover:bg-cyan-500/80 transition-all duration-300">
                                 {genre}
                             </span>
                             ))}
