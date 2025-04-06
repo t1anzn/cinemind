@@ -95,25 +95,26 @@ class MovieCast(db.Model):
 # Endpoints
 @app.route('/movies', methods=['GET'])
 def get_movies():
-
     # Pagination parameters from query string, with default values
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 20, type=int)
 
     # Paginate the query
-    pagination = Movie.query.paginate(page=page, per_page=per_page, error_out=False)
+    pagination = Movie.query.order_by(Movie.popularity.desc()).paginate(page=page, per_page=per_page, error_out=False)
     movies = pagination.items
 
+    movie_data = []
     
-    return jsonify({
-        'total': pagination.total,
-        'page': page,
-        'per_page': per_page,
-        'total_pages': pagination.pages,
-        'has_next': pagination.has_next,
-        'has_prev': pagination.has_prev,
-        'movies': [
-            {
+    for movie in movies:
+        # Query the production countries
+        countries = ProductionCountries.query.join(MovieProductionCountries).filter(MovieProductionCountries.movie_id == movie.id).all()
+        country_names = [country.country_name for country in countries]
+
+        # Query the spoken languages
+        languages = SpokenLanguages.query.join(MovieSpokenLanguages).filter(MovieSpokenLanguages.movie_id == movie.id).all()
+        language_names = [language.language_name for language in languages]
+
+        movie_data.append({
             'id': movie.id,
             'title': movie.title,
             'vote_average': movie.vote_average,
@@ -122,13 +123,24 @@ def get_movies():
             'runtime': movie.runtime,
             'popularity': movie.popularity,
             'homepage': movie.homepage,
+            'status': movie.status,
             'poster_url': movie.poster_url,
             'backdrop_url': movie.backdrop_url,
             'video_url': movie.video_url,
-        } 
-        for movie in movies
-    ]
+            'production_countries': country_names,  # Add production countries to the response
+            'spoken_languages': language_names,    # Add spoken languages to the response
+        })
+
+    return jsonify({
+        'total': pagination.total,
+        'page': page,
+        'per_page': per_page,
+        'total_pages': pagination.pages,
+        'has_next': pagination.has_next,
+        'has_prev': pagination.has_prev,
+        'movies': movie_data
     })
+
 
 
 @app.route('/genres', methods=['GET'])
@@ -219,9 +231,17 @@ def get_movie_by_id(id):
     keywords = Keywords.query.join(MovieKeywords).filter(MovieKeywords.movie_id == movie.id).all()
     keyword_names = [keyword.keyword_name for keyword in keywords]
 
-    # Query the cast of the cast of the movie
+    # Query the cast of the movie
     cast_members = Cast.query.join(MovieCast).filter(MovieCast.movie_id == movie.id).all()
     cast_names = [cast.name for cast in cast_members]
+
+    # Query the production countries of the movie
+    countries = ProductionCountries.query.join(MovieProductionCountries).filter(MovieProductionCountries.movie_id == movie.id).all()
+    country_names = [country.country_name for country in countries]
+
+    # Query the spoken languages using MovieSpokenLanguages association with `join`
+    languages = SpokenLanguages.query.join(MovieSpokenLanguages).filter(MovieSpokenLanguages.movie_id == movie.id).all()
+    language_names = [language.language_name for language in languages]
 
     movie_data = {
         'id': movie.id,
@@ -242,6 +262,8 @@ def get_movie_by_id(id):
         'vote_count': movie.vote_count,
         'original_language': movie.original_language,
         'homepage': movie.homepage,
+        'production_countries': country_names,
+        'spoken_languages': language_names,
         'poster_url': movie.poster_url,
         'backdrop_url': movie.backdrop_url,
         'video_url': movie.video_url,
@@ -249,7 +271,10 @@ def get_movie_by_id(id):
 
     return jsonify(movie_data)
 
-
+@app.route('/movies/ids', methods=['GET'])
+def get_movie_ids():
+    movie_ids = Movie.query.with_entities(Movie.id).all()
+    return jsonify([{'id': m.id} for m in movie_ids])
 
 
 @app.route('/movies/genre/<int:genre_id>', methods=['GET'])

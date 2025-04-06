@@ -1,3 +1,5 @@
+import * as movieDisplayUtils from "../../src/utils/movieDisplayUtils"
+
 export default function MovieCard( { movie }){
 
         // Format Movie release year
@@ -22,7 +24,7 @@ export default function MovieCard( { movie }){
                     </div>
 
                     {/* Movie Poster */}
-                    <div className="h-[380px] w-[220px] relative bg-slate-900">
+                    <div className="h-[350px] w-full relative bg-slate-900">
                     <img src={movie.poster_url} alt="Movie Poster" className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
                     </div>
 
@@ -36,11 +38,7 @@ export default function MovieCard( { movie }){
                         <span><h3 className="font-light text-white/90 text-sm truncate tracking-wide group-hover:text-cyan-300 transition-colors duration-300">{movie.title}</h3></span>
                         
                         <div className={`inline-flex items-center text-[10px] px-1.5 py-0.5 font-extrabold tracking-wide
-                            ${parseFloat(movie.vote_average) >= 7
-                            ? 'bg-cyan-700 text-white'
-                            : parseFloat(movie.vote_average) >= 5
-                                ? 'bg-yellow-500/60 text-white' 
-                                : 'bg-red-500/50 text-white'}
+                            ${movieDisplayUtils.formatVoteBadge(movie.vote_average)}
                                 `}>
                             {movie.vote_average}
                         </div>
