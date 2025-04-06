@@ -19,7 +19,7 @@ export default function Navbar() {
               <div class="hidden md:flex space-x-10"> 
                 <a href="/" class="text-white/80 hover:text-cyan-400 transition-colors duration-300 text-sm font-light tracking-wider group relative px-1 py-1">HOME</a>
                 <a href="/movies" class="text-white/80 hover:text-cyan-400 transition-colors duration-300 text-sm font-light tracking-wider group relative px-1 py-1">MOVIES</a>
-                <a href="#" class="text-white/80 hover:text-cyan-400 transition-colors duration-300 text-sm font-light tracking-wider group relative px-1 py-1">ABOUT</a>
+                <a href="/about" class="text-white/80 hover:text-cyan-400 transition-colors duration-300 text-sm font-light tracking-wider group relative px-1 py-1">ABOUT</a>
               </div>
             </nav>
 

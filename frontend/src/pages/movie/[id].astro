@@ -79,7 +79,6 @@ try {
 
 const profit = movieDisplayUtils.calculateProfit(movie.budget, movie.revenue);
 const roi = movieDisplayUtils.calculateROI(movie.budget, movie.revenue);
-const width = Math.min(100, movie.popularity / 10); // cap at 100%
 ---
 
 <Layout
@@ -318,14 +317,17 @@ const width = Math.min(100, movie.popularity / 10); // cap at 100%
               Popularity
             </h3>
 
-            <!-- For some reason, the movieDisplayUtils.formatPopularityBar() does not work here, the function code is rewritten here to make it show -->
             <p class="text-xs text-slate-300 font-light tracking-wide mb-1">
               {movieDisplayUtils.formatPopularityBar(movie.popularity)}
             </p>
             <div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
               <div
                 class="h-full bg-gradient-to-r from-cyan-200 to-blue-500"
-                style={{ width: `${width}%` }}
+                style={{
+                  width: movieDisplayUtils.formatPopularityBar(
+                    movie.popularity
+                  ),
+                }}
               >
               </div>
             </div>
