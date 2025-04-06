@@ -83,7 +83,7 @@ export default function SearchBar() {
 
             {/* Suggestions dropdown */}
             {suggestions.length > 0 && (
-                <ul className="absolute z-10 bg-gray-900 text-white w-full mt-1 rounded max-h-48 overflow-y-auto">
+                <ul className="absolute z-10 bg-gradient-to-b from-gray-900/10 to-gray-900 backdrop-blur-sm text-white w-full mt-1 rounded max-h-48 overflow-y-auto">
                     {suggestions.map(movie => (
                         <li 
                             key={movie.id} 

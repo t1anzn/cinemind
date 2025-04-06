@@ -4,7 +4,7 @@ import {
   getReleaseYear,
   formatRuntime,
   formatVoteBadge,
-} from "../../utils/movieDisplayUtils";
+} from "../../utils/movieDisplayUtils.jsx";
 
 export async function getStaticPaths() {
   try {
@@ -47,7 +47,38 @@ export async function getStaticPaths() {
 
 const { id } = Astro.params;
 
-let movie;
+let movie: {
+  budget: number;
+  revenue: number;
+  title: unknown;
+  release_date: any;
+  backdrop_url: string | null | undefined;
+  poster_url: string | null | undefined;
+  vote_average: number;
+  vote_count: number;
+  runtime: any;
+  tagline: string;
+  genres: string[];
+  overview: string;
+  cast: any[];
+  original_language: string;
+} = {
+  budget: 0,
+  revenue: 0,
+  title: "Unknown",
+  release_date: null,
+  backdrop_url: null,
+  poster_url: null,
+  vote_average: 0,
+  vote_count: 0,
+  runtime: null,
+  genres: [],
+  overview: "No overview available.",
+  cast: [],
+  tagline: "No tagline available.",
+  original_language: "en",
+};
+
 let error = null;
 
 try {
@@ -62,13 +93,13 @@ try {
 }
 
 // Format budget and revenue to USD
-const formatMoney = (amount) => {
+const formatMoney = (amount: string | number | bigint) => {
   if (!amount) return "N/A";
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: 0,
-  }).format(amount);
+  }).format(typeof amount === "string" ? parseFloat(amount) : amount);
 };
 
 // Calculate profit and ROI
@@ -91,169 +122,164 @@ const roi = calculateROI();
     ? `${movie.title} - (${getReleaseYear(movie.release_date)}) - CineMind`
     : "Movie Not Found"}
 >
-  {
-    // ERROR Page Layout
-    error ? (
-      <div class="text-center py-20">
-        <h1 class="text-3xl text-red-500 font-bold">Error</h1>
-        <p class="text-xl text-gray-300">{error}</p>
-        <a href="/movies" class="text-blue-500 underline mt-8">
-          Back to Movies
-        </a>
+  <>
+    <!-- Movie Details Layout -->
+    <!-- Hero Section -->
+    <div class="relative h-[70vh]">
+      <div class="absolute inset-0 bg-black">
+        <div class="w-full h-full">
+          <img
+            class="w-full h-full object-cover overflow-hidden"
+            src={movie.backdrop_url}
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black to-black/60">
+          </div>
+        </div>
       </div>
-    ) : (
-      // Movie Details Layout
-      <>
-        {/* Hero Section */}
-        <div class="relative h-[70vh]">
-          <div class="absolute inset-0 bg-black">
-            <div class="w-full h-full">
-              <img
-                class="w-full h-full object-cover overflow-hidden"
-                src={movie.backdrop_url}
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black to-black/60" />
+      <!-- Movie Poster -->
+      <div class="content-wrapper relative h-full flex items-end pb-16 z-10">
+        <div class="flex flex-col md:flex-row gap-8">
+          <div class="hidden md:block w-64 flex-shrink-0">
+            <img
+              class="w-full rounded-md shadow-xl overflow-hidden"
+              src={movie.poster_url}
+            />
+          </div>
+
+          <!-- Title -->
+          <div class="flex-1">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2 text-white">
+              {movie.title}
+            </h1>
+
+            <!-- Movie vote badge, vote count, release year and runtime -->
+            <div class="flex flex-wrap items-center gap-4 text-slate-400 mb-4">
+              {
+                movie?.vote_average && (
+                  <div
+                    class={`inline-flex items-center text-[15px] px-1.5 py-0.5 font-extrabold tracking-wide ${formatVoteBadge(movie.vote_average)}`}
+                  >
+                    {movie.vote_average}
+                  </div>
+                )
+              }
+              {movie?.vote_count && <span>({movie.vote_count} votes)</span>}
+
+              {
+                movie?.release_date && (
+                  <span>{getReleaseYear(movie?.release_date)}</span>
+                )
+              }
+
+              {movie?.runtime && <span>{formatRuntime(movie.runtime)}</span>}
+            </div>
+
+            <!-- Movie Genres List -->
+            <div class="flex flex-wrap space-x-2 space-y-2">
+              {
+                movie.genres &&
+                  movie.genres.map((genre: string, index: number) => (
+                    <span class="inline-flex items-center justify-center bg-gradient-to-b from-blue-600/50 to-transparent text-white text-xs font-semibold py-1 px-3 rounded-xl border-1 border-blue-400 h-8 min-h-[32px] hover:bg-cyan-500/80 transition-all duration-300">
+                      {genre}
+                    </span>
+                  ))
+              }
+            </div>
+
+            <!-- Overview Text -->
+            <div class="text-slate-300 text-xl pt-2 tracking-wide">
+              {movie.tagline}
             </div>
           </div>
-          {/* Movie Poster */}
-          <div class="content-wrapper relative h-full flex items-end pb-16 z-10">
-            <div class="flex flex-col md:flex-row gap-8">
-              <div class="hidden md:block w-64 flex-shrink-0">
-                <img
-                  class="w-full rounded-md shadow-xl overflow-hidden"
-                  src={movie.poster_url}
-                />
-              </div>
+        </div>
+      </div>
+    </div>
+    <!-- Hero End -->
 
-              {/* Title */}
-              <div class="flex-1">
-                <h1 class="text-4xl md:text-5xl font-bold mb-2 text-white">
-                  {movie.title}
-                </h1>
+    <div class="content-wrapper relative h-full w-full">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <!-- Left Column - About -->
+        <div class="col-span-2">
+          <!-- Overview -->
+          <h2 class="text-2xl text-white font-bold mb-4">Overview</h2>
 
-                {/* Movie vote badge, vote count, release year and runtime */}
-                <div class="flex flex-wrap items-center gap-4 text-slate-400 mb-4">
-                  {movie?.vote_average && (
-                    <div
-                      class={`inline-flex items-center text-[15px] px-1.5 py-0.5 font-extrabold tracking-wide ${formatVoteBadge(movie.vote_average)}`}
-                    >
-                      {movie.vote_average}
+          <p class="text-white text-lg mb-4">{movie.overview}</p>
+
+          <!-- Cast -->
+          <h2 class="text-xl text-white font-bold mb-4">Cast</h2>
+          <div class="flex flex-wrap gap-2">
+            {
+              movie.cast &&
+                movie.cast.map((actor: unknown, index: any) => (
+                  <span class="inline-flex items-center justify-center bg-gradient-to-b from-slate-800/50 to-transparent text-white text-sm font-semibold py-1 px-3 rounded-lg border-1 border-gray-600">
+                    {actor}
+                  </span>
+                ))
+            }
+          </div>
+
+          <!-- Original Language -->
+          <h2 class="text-xl text-white font-bold mt-6 mb-4">
+            Original Language
+          </h2>
+          <p class="text-white text-xl mb-10">
+            {movie.original_language.toUpperCase()}
+          </p>
+
+          <!-- Financial performance -->
+          {
+            (movie?.budget > 0 || movie?.revenue > 0) && (
+              <div class="bg-gradient-to-b from-slate-800/30 to-transparent shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-6 mb-8">
+                <h3 class="text-lg text-white font-semibold mb-4">
+                  Financial Performance
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {movie?.budget > 0 && (
+                    <div>
+                      <h4 class="text-white text-sm">Budget</h4>
+                      <p class="text-xl text-white">
+                        {formatMoney(movie.budget)}
+                      </p>
                     </div>
                   )}
-                  {movie?.vote_count && <span>({movie.vote_count} votes)</span>}
 
-                  {movie?.release_date && (
-                    <span>{getReleaseYear(movie?.release_date)}</span>
+                  {movie?.revenue > 0 && (
+                    <div>
+                      <h4 class="text-white text-sm">Box Office Revenue</h4>
+                      <p class="text-xl text-white">
+                        {formatMoney(movie.revenue)}
+                      </p>
+                    </div>
                   )}
 
-                  {movie?.runtime && (
-                    <span>{formatRuntime(movie.runtime)}</span>
-                  )}
-                </div>
-
-                {/* Movie Genres List */}
-                <div class="flex flex-wrap space-x-2 space-y-2">
-                  {movie.genres &&
-                    movie.genres.map((genre: string, index: number) => (
-                      <span
-                        key={index}
-                        class="inline-flex items-center justify-center bg-black/30 text-white text-xs font-semibold py-1 px-3 rounded-xl border-1 border-blue-400 h-8 min-h-[32px] hover:bg-cyan-500/80 transition-all duration-300"
+                  {profit !== null && (
+                    <div>
+                      <h4 class="text-white text-sm">Profit / Loss</h4>
+                      <p
+                        class={`text-xl ${profit >= 0 ? "text-green-500" : "text-red-500"}`}
                       >
-                        {genre}
-                      </span>
-                    ))}
-                </div>
+                        {formatMoney(profit)}
+                      </p>
+                    </div>
+                  )}
 
-                {/* Overview Text */}
-                <div class="text-slate-300 text-xl pt-2 tracking-wide">
-                  {movie.overview}
+                  {roi !== null && (
+                    <div>
+                      <h4 class="text-white text-sm">Return on Investment</h4>
+                      <p
+                        class={`text-xl ${roi >= 0 ? "text-green-500" : "text-red-500"}`}
+                      >
+                        {roi.toFixed(2)}%
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-          </div>
+            )
+          }
         </div>
-        {/* Hero End */}
-
-        <div class="content-wrapper relative h-full w-full">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {/* Left Column - About*/}
-            <div class="col-span-2">
-              <h2 class="text-2xl text-white font-bold mb-4">Overview</h2>
-
-              <p class="text-white text-lg mb-4">{movie.overview}</p>
-
-              <h2 class="text-xl text-white font-bold mb-4">Cast</h2>
-              <div class="flex flex-wrap gap-2">
-                {movie.cast &&
-                  movie.cast.map((actor, index) => (
-                    <span
-                      key={index}
-                      class="inline-flex items-center justify-center bg-gray-800 text-white text-sm font-semibold py-1 px-3 rounded-lg border-1 border-gray-600"
-                    >
-                      {actor}
-                    </span>
-                  ))}
-              </div>
-              <h2 class="text-xl text-white font-bold mt-6 mb-4">
-                Original Language
-              </h2>
-              <p class="text-white text-xl mb-10">
-                {movie.original_language.toUpperCase()}
-              </p>
-
-              {/* Financial performance */}
-              {(movie?.budget > 0 || movie?.revenue > 0) && (
-                <div class="bg-slate-800 rounded-lg p-6 mb-8">
-                  <h3 class="text-lg text-white font-semibold mb-4">
-                    Financial Performance
-                  </h3>
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {movie?.budget > 0 && (
-                      <div>
-                        <h4 class="text-white text-sm">Budget</h4>
-                        <p class="text-xl text-white">
-                          {formatMoney(movie.budget)}
-                        </p>
-                      </div>
-                    )}
-
-                    {movie?.revenue > 0 && (
-                      <div>
-                        <h4 class="text-white text-sm">Box Office Revenue</h4>
-                        <p class="text-xl text-white">
-                          {formatMoney(movie.revenue)}
-                        </p>
-                      </div>
-                    )}
-
-                    {profit !== null && (
-                      <div>
-                        <h4 class="text-white text-sm">Profit/Loss</h4>
-                        <p
-                          class={`text-xl ${profit >= 0 ? "text-green-500" : "text-red-500"}`}
-                        >
-                          {formatMoney(profit)}
-                        </p>
-                      </div>
-                    )}
-
-                    {roi !== null && (
-                      <div>
-                        <h4 class="text-white text-sm">Return on Investment</h4>
-                        <p
-                          class={`text-xl ${roi >= 0 ? "text-green-500" : "text-red-500"}`}
-                        >
-                          {roi.toFixed(2)}%
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </>
-    )
-  }
+      </div>
+    </div>
+  </>
+  ) }
 </Layout>

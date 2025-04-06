@@ -2,7 +2,7 @@ import { FilmIcon } from '@heroicons/react/24/solid';
 import MovieCard from './MovieCard';
 
 export default function MovieGrid({title, movies}){
-    console.log(movies)
+    
     return (
         <>
             <div className="py-8 relative space-y-8 ">

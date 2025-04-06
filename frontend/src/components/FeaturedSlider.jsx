@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { extractYouTubeId } from '../utils/youtubeUtils';
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/solid';
-import { getReleaseYear, formatVoteBadge } from '../utils/movieDisplayUtils';
+import { getReleaseYear, formatVoteBadge, formatPopularityBar } from '../utils/movieDisplayUtils.jsx';
 
 export default function FeaturedSlider({ featuredMovies=[] }) { 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -62,9 +62,15 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                 controls: 0,
                 showinfo: 0,
                 rel: 0,
+                modestbranding: 1,
                 start: start,
                 end: end,
                 mute: isMuted ? 1 : 0, //Mute if isMuted is true
+                enablejsapi: 1,
+                iv_load_policy: 3,
+                cc_load_policy: 0,
+                fs:0,
+                origin: "https://www.youtube.com",
             },
             events: {
                 onReady: (event) => {
@@ -181,7 +187,7 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                         <div className="flex flex-wrap items-center space-x-4 mb-5 mt-5">
                             {currentMovie?.vote_average && (
                             <div
-                            class={`inline-flex items-center text-[15px] px-1.5 py-0.5 font-extrabold tracking-wide ${formatVoteBadge(currentMovie.vote_average)}`}
+                            className={`inline-flex items-center text-[15px] px-1.5 py-0.5 font-extrabold tracking-wide ${formatVoteBadge(currentMovie.vote_average)}`}
                             >
                             {currentMovie.vote_average}
                             </div>
@@ -190,7 +196,20 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                         </div>
 
                         {/* Overview and Genres */}
-                        <div className="text-cyan-400 text-sm mb-2">{currentMovie.genres && currentMovie.genres.join(', ')}</div>
+
+                        {/* <div className="text-cyan-400 text-sm mb-2">{currentMovie.genres && currentMovie.genres.join(', ')}</div> */}
+
+                        {/* Movie Genres List */}
+                        <div className="flex flex-wrap space-x-2 space-y-2">
+                        {currentMovie.genres &&
+                            currentMovie.genres.map((genre, index) => (
+                            <span
+                             key={index}
+                             className="inline-flex items-center justify-center bg-gradient-to-b from-blue-600/30 to-transparent text-white text-xs font-semibold py-1 px-3 rounded-xl border-1 border-blue-400/50 h-8 min-h-[32px] hover:bg-cyan-500/80 transition-all duration-300">
+                                {genre}
+                            </span>
+                            ))}
+                        </div>
                         <p className="text-slate-300/90 mb-6 text-sm max-w-2xl tracking-wide font-light leading-relaxed line-clamp-3">{currentMovie.overview}</p>
 
                         {/* Action Buttons */}
@@ -204,15 +223,8 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                         </div>
                         {/* Movie Data Visualization */}
                         <div className="mt-8 grid grid-cols-3 gap-10 max-w-md">
-                            {currentMovie.popularity && (
-                                <div className="space-y-1">
-                                    <div className="text-xs text-slate-500 font-light tracking-wider">POPULARITY</div>
-                                    <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
-                                        <div className="h-full bg-gradient-to-r from-cyan-500 to-blue-500"
-                                        style={{ width: `${Math.min(100, currentMovie.popularity/10)}%` }}></div>
-                                        </div>
-                                </div>
-                            )}
+                            
+                            {currentMovie.popularity && formatPopularityBar(currentMovie.popularity)}
 
                             {currentMovie.runtime && (
                                 <div className="space-y-1">
