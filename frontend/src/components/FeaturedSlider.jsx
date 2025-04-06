@@ -226,14 +226,28 @@ export default function FeaturedSlider({ featuredMovies=[] }) {
                         </div>
                         {/* Movie Data Visualization */}
                         <div className="mt-8 grid grid-cols-3 gap-10 max-w-md">
-                            
-                            {currentMovie.popularity && formatPopularityBar(currentMovie.popularity)}
-
+                            {currentMovie.popularity && (
+                                <div className="space-y-1">
+                                    <div className="text-xs text-slate-500 font-light tracking-wider">
+                                        POPULARITY
+                                    </div>
+                                    <p className="text-xs text-slate-300 font-light tracking-wide mb-1">
+                                        {formatPopularityBar(currentMovie.popularity)}
+                                    </p>
+                                    <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
+                                        <div
+                                            className="h-full bg-gradient-to-r from-cyan-200 to-blue-500"
+                                            style={{
+                                                width: formatPopularityBar(currentMovie.popularity),
+                                            }}
+                                        ></div>
+                                    </div>
+                                </div>
+                            )}
                             {currentMovie.runtime && (
                                 <div className="space-y-1">
-                                    <div className="text-xs text-slate-500 font-light  tracking-wider">RUNTIME</div>
+                                    <div className="text-xs text-slate-500 font-light tracking-wider">RUNTIME</div>
                                     <div className="text-slate-300 text-sm font-light">
-                                        {/* Convert runtime from minutes to hours and minutes */}
                                         {Math.floor(currentMovie.runtime / 60)}H {currentMovie.runtime % 60}M
                                     </div>
                                 </div>
