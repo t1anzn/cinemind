@@ -38,21 +38,14 @@ export function formatVoteBadge(vote_average){
   return 'bg-red-500/50 text-white';
 };
 
-export function formatPopularityBar(popularity){
-  if(!popularity) return null;
-
-  const width = Math.min(100, popularity / 10); // cap at 100%
-
-  return (
-    <div className="space-y-1">
-      <div className="text-xs text-slate-500 font-light tracking-wider">POPULARITY:</div>  
-      <p className="text-xs text-slate-300 font-light tracking-wide">{Math.floor(width)}%</p>
-      <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
-        <div className="h-full bg-gradient-to-r from-cyan-200 to-blue-500" style={{ width: `${width}%`}}></div>
-      </div>
-    </div>
-  );
-};
+export function formatPopularityBar(popularity) {
+  if (typeof popularity !== "number" || popularity < 0) {
+    console.error("Invalid popularity value:", popularity);
+    return "0%";
+  }
+  const width = Math.min(100, Math.floor(popularity / 10)); // Cap at 100%
+  return `${width}%`;
+}
 
 // Format budget and revenue to USD
 export function formatMoney(amount){
