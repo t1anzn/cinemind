@@ -30,7 +30,7 @@ export function formatRuntime(minutes){
 export function formatVoteBadge(vote_average){
   if(!vote_average) return 'bg-gray-400 text-gray-200';
 
-  const vote = parseFloat(vote_average.toString());
+  const vote = parseFloat(vote_average.toFixed(1)); // Format to 1 decimal point
 
   if (vote >= 8) return 'bg-green-400/70 text-white';
   if (vote >= 7) return 'bg-cyan-600 text-white';
