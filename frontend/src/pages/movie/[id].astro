@@ -1,19 +1,17 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import MoviePoster from "../../components/MoviePoster";
 import * as movieDisplayUtils from "../../utils/movieDisplayUtils.jsx";
+import { useState } from "react";
 
 export async function getStaticPaths() {
   try {
     const res = await fetch("http://127.0.0.1:5000/movies/ids");
     const data = await res.json();
 
-    console.log("Fetched movie IDs:", data); // <-- Add this
-
     const paths = data.map((movie: { id: number }) => ({
       params: { id: movie.id.toString() },
     }));
-
-    console.log("Generated static paths:", paths); // <-- Add this too
 
     return paths;
   } catch (error) {
@@ -107,10 +105,7 @@ const width = Math.min(100, movie.popularity / 10); // cap at 100%
       <div class="content-wrapper relative h-full flex items-end pb-16 z-10">
         <div class="flex flex-col md:flex-row gap-8">
           <div class="hidden md:block w-64 flex-shrink-0">
-            <img
-              class="w-full rounded-md shadow-xl overflow-hidden"
-              src={movie.poster_url}
-            />
+            <MoviePoster movie={movie} />
           </div>
 
           <!-- Title -->
@@ -325,7 +320,7 @@ const width = Math.min(100, movie.popularity / 10); // cap at 100%
 
             <!-- For some reason, the movieDisplayUtils.formatPopularityBar() does not work here, the function code is rewritten here to make it show -->
             <p class="text-xs text-slate-300 font-light tracking-wide mb-1">
-              {Math.floor(width)}%
+              {movieDisplayUtils.formatPopularityBar(movie.popularity)}
             </p>
             <div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
               <div
