@@ -42,6 +42,12 @@ export default function SearchBar() {
         }
     };
 
+    // Handle click on suggestion to search
+    const handleSuggestionClick = (movie) => {
+        setSearchTerm(movie.title); // Set the clicked movie's title
+        handleSubmit(new Event('submit')); // Trigger the form submission manually
+    };
+
     return (
         <div className="relative mx-auto max-w-xl mb-8">
             <form onSubmit={handleSubmit} className="relative">
@@ -87,7 +93,7 @@ export default function SearchBar() {
                     {suggestions.map(movie => (
                         <li 
                             key={movie.id} 
-                            onClick={() => setSearchTerm(movie.title)}
+                            onClick={() => handleSuggestionClick(movie)} // Trigger search on click
                             className="px-4 py-2 hover:bg-gray-700 cursor-pointer"
                         >
                             {movie.title}
@@ -98,4 +104,5 @@ export default function SearchBar() {
         </div>
     );
 }
+
 
