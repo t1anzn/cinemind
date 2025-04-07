@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql.expression import func
 from flask_cors import CORS
 import os
 
@@ -217,6 +218,20 @@ def get_popular():
             'poster_url': movie.poster_url,
         })
     return jsonify(popular_movies)
+
+@app.route('/explore', methods=['GET'])
+def get_explore():
+    movies = Movie.query.order_by(func.random()).limit(10).all()
+    explore_movies = []
+    for movie in movies:
+        explore_movies.append({
+            'id': movie.id,
+            'title': movie.title,
+            'release_date': movie.release_date,
+            'vote_average': movie.vote_average,
+            'poster_url': movie.poster_url,
+        })
+    return jsonify(explore_movies)
 
     
 @app.route('/movies/<int:id>', methods=['GET'])
