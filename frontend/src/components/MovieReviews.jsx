@@ -6,6 +6,8 @@ import {
   XMarkIcon,
   ArrowTopRightOnSquareIcon,
 } from "@heroicons/react/24/solid";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw"; // Import the plugin
 
 export default function MovieReviews({ movie }) {
   if (!movie?.reviews) {
@@ -113,9 +115,22 @@ export default function MovieReviews({ movie }) {
 
             {/* Review Content - Scrollable content for long reviews */}
             <div className="mb-8 max-h-[60vh] overflow-y-auto pr-2">
-              <p className="text-gray-200 whitespace-pre-line font-light leading-relaxed">
+              <ReactMarkdown
+                rehypePlugins={[rehypeRaw]} // Enable HTML parsing
+                components={{
+                  p: ({ node, ...props }) => (
+                    <p
+                      {...props}
+                      className="text-gray-200 whitespace-pre-line font-light leading-relaxed"
+                    />
+                  ),
+                  em: ({ node, ...props }) => (
+                    <em {...props} className="italic text-gray-300" />
+                  ),
+                }}
+              >
                 {currentReview.content}
-              </p>
+              </ReactMarkdown>
             </div>
 
             {/* Navigation footer of focus container */}
@@ -184,9 +199,22 @@ export default function MovieReviews({ movie }) {
           </div>
 
           {/* Review Text */}
-          <p className="text-slate-200 font-light whitespace-pre-line leading-relaxed">
+          <ReactMarkdown
+            rehypePlugins={[rehypeRaw]} // Enable HTML parsing
+            components={{
+              p: ({ node, ...props }) => (
+                <p
+                  {...props}
+                  className="text-slate-200 font-light whitespace-pre-line leading-relaxed"
+                />
+              ),
+              em: ({ node, ...props }) => (
+                <em {...props} className="italic text-slate-300" />
+              ),
+            }}
+          >
             {isExpanded ? currentReview.content : previewText}
-          </p>
+          </ReactMarkdown>
 
           {/* Read More / Show Less button */}
           {isLongReview && (
@@ -220,7 +248,7 @@ export default function MovieReviews({ movie }) {
       <div className="flex justify-center mt-4 gap-1">
         {splitReviews.map((_, idx) => (
           <span
-            key={idx}
+            key={`pagination-dot-${idx}`} // Add a unique key for each child in the list
             className={`h-1.5 rounded-full transition-all ${
               idx === currentIndex ? "w-4 bg-blue-500" : "w-1.5 bg-gray-400"
             }`}
