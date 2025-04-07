@@ -1,14 +1,17 @@
 import MoviePoster from "./MoviePoster";
 import * as movieDisplayUtils from "../utils/movieDisplayUtils";
 
-export default function MovieHeader({ movie }){
+export default function MovieHeader({ movie }) {
+  // Split string of URLs into an array
+  const backdropUrls = movie.backdrop_url.split(",");
+
   return (
     <div className="relative h-[70vh]">
       <div className="absolute inset-0 bg-black">
         <div className="w-full h-full">
           <img
             className="w-full h-full object-cover overflow-hidden"
-            src={movie.backdrop_url}
+            src={backdropUrls[1].trim()}
             alt={movie.title}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black to-black/60"></div>
@@ -35,7 +38,9 @@ export default function MovieHeader({ movie }){
               )}
               {movie.vote_count && <span>({movie.vote_count} votes)</span>}
               {movie.release_date && (
-                <span>{movieDisplayUtils.getReleaseYear(movie.release_date)}</span>
+                <span>
+                  {movieDisplayUtils.getReleaseYear(movie.release_date)}
+                </span>
               )}
               {movie.runtime && (
                 <span>{movieDisplayUtils.formatRuntime(movie.runtime)}</span>
@@ -46,5 +51,4 @@ export default function MovieHeader({ movie }){
       </div>
     </div>
   );
-};
-
+}

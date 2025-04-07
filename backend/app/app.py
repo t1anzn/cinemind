@@ -51,9 +51,9 @@ class Movie(db.Model):
     vote_count = db.Column(db.Integer)
     original_language = db.Column(db.String(50))
     homepage = db.Column(db.String(255))
-    poster_url = db.Column(db.String(255))
-    backdrop_url = db.Column(db.String(255))
-    video_url = db.Column(db.String(255))
+    poster_url = db.Column(db.Text)
+    backdrop_url = db.Column(db.Text)
+    video_url = db.Column(db.Text)
     reviews = db.Column(db.Text)
 
 class MovieGenre(db.Model):
