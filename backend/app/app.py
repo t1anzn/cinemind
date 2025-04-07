@@ -54,6 +54,7 @@ class Movie(db.Model):
     poster_url = db.Column(db.String(255))
     backdrop_url = db.Column(db.String(255))
     video_url = db.Column(db.String(255))
+    reviews = db.Column(db.Text)
 
 class MovieGenre(db.Model):
     __tablename__ = 'movie_genre'
@@ -114,6 +115,7 @@ def get_movies():
         languages = SpokenLanguages.query.join(MovieSpokenLanguages).filter(MovieSpokenLanguages.movie_id == movie.id).all()
         language_names = [language.language_name for language in languages]
 
+
         movie_data.append({
             'id': movie.id,
             'title': movie.title,
@@ -127,8 +129,9 @@ def get_movies():
             'poster_url': movie.poster_url,
             'backdrop_url': movie.backdrop_url,
             'video_url': movie.video_url,
-            'production_countries': country_names,  # Add production countries to the response
-            'spoken_languages': language_names,    # Add spoken languages to the response
+            'production_countries': country_names,  
+            'spoken_languages': language_names,
+            'reviews': movie.reviews,    
         })
 
     return jsonify({
@@ -215,6 +218,7 @@ def get_popular():
         })
     return jsonify(popular_movies)
 
+    
 @app.route('/movies/<int:id>', methods=['GET'])
 def get_movie_by_id(id):
     print(f"Received request for movie with ID {id}")  # Debugging statement
@@ -267,6 +271,7 @@ def get_movie_by_id(id):
         'poster_url': movie.poster_url,
         'backdrop_url': movie.backdrop_url,
         'video_url': movie.video_url,
+        'reviews': movie.reviews,
     }
 
     return jsonify(movie_data)

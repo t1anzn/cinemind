@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import MovieGrid from "./MovieGrid";  // Assuming MovieGrid is another React component
-import Pagination from "./Pagination"; // Assuming Pagination is another React component
+import MovieGrid from "./MovieGrid"; 
+import Pagination from "./Pagination"; 
 import SearchBar from "./SearchBar";
 
 export default function MoviePage() {
