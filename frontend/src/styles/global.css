@@ -14,3 +14,21 @@ body {
     box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
+/* Style the scrollbar */
+.overflow-y-auto::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+  }
+  
+  .overflow-y-auto::-webkit-scrollbar-track {
+    background: rgba(148, 163, 184, 0.1); /* Track background */
+    border-radius: 4px; /* Rounded corners */
+  }
+  
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: rgba(37, 99, 235, 0.6); /* Thumb color */
+    border-radius: 4px; /* Rounded corners */
+  }
+  
+  .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 123, 255, 0.8); /* Thumb color on hover */
+  }
