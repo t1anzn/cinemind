@@ -46,6 +46,10 @@ export default function MovieHeader({ movie }) {
                 <span>{movieDisplayUtils.formatRuntime(movie.runtime)}</span>
               )}
             </div>
+            {/* Movie Tagline */}
+            <div class="text-slate-300 text-xl pt-2 tracking-wide">
+              {movie.tagline}
+            </div>
           </div>
         </div>
       </div>
