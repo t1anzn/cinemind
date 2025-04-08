@@ -7,6 +7,15 @@ export default function SearchBar() {
     const [isFocused, setIsFocused] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
+    const [selectedGenre, setSelectedGenre] = useState('');
+    const [genres, setGenres] = useState([]);
+
+    // Fetch genres for the genre filter
+    useEffect(() => {
+        fetch('http://127.0.0.1:5000/genres')
+            .then(res => res.json())
+            .then(setGenres);
+    }, []);
 
     // Fetch suggestions as user types
     useEffect(() => {
@@ -48,6 +57,15 @@ export default function SearchBar() {
         handleSubmit(new Event('submit')); // Trigger the form submission manually
     };
 
+    // Handle change in genre filter
+    const handleGenreChange = (e) => {
+        setSelectedGenre(e.target.value);
+        onFilterChange({
+            genre_id: e.target.value,
+            title: searchTerm
+        });
+    };
+
     return (
         <div className="relative mx-auto max-w-xl mb-8">
             <form onSubmit={handleSubmit} className="relative">
@@ -87,6 +105,24 @@ export default function SearchBar() {
                 </div>
             </form>
 
+            {/* Genre Dropdown */}
+            <div className="flex items-center mt-4">
+                <label htmlFor="genre" className="text-white">Genre:</label>
+                <select
+                    id="genre"
+                    className="ml-2 bg-gray-700 text-white p-2 rounded"
+                    value={selectedGenre}
+                    onChange={handleGenreChange}
+                >
+                    <option value="">All Genres</option>
+                    {genres.map((genre) => (
+                        <option key={genre.id} value={genre.id}>
+                            {genre.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            
             {/* Suggestions dropdown */}
             {suggestions.length > 0 && (
                 <ul className="absolute z-10 bg-gradient-to-b from-gray-900/10 to-gray-900 backdrop-blur-sm text-white w-full mt-1 rounded max-h-48 overflow-y-auto">
