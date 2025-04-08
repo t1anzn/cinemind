@@ -325,8 +325,14 @@ export default function MovieMedia({ movie }) {
       </TabGroup>
 
       {isTheaterMode && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center">
-          <div className="relative w-full max-w-7xl aspect-video">
+        <div
+          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center"
+          onClick={closeTheaterMode} // Close theater mode when clicking on the background
+        >
+          <div
+            className="relative w-full max-w-7xl aspect-video"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when interacting with the video
+          >
             <YouTubePlayer
               videoId={extractYouTubeId(trailerUrls[currentTrailerIndex])}
               start={0}
@@ -340,17 +346,23 @@ export default function MovieMedia({ movie }) {
             />
             <button
               onClick={closeTheaterMode}
-              className="absolute top-4 right-4 bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75"
+              className="absolute top-4 right-4 bg-black bg-opacity-50 p-2 rounded-full hover:bg-blue-500/30 hover:text-cyan-500 text-white hover:bg-opacity-75 transition-all duration-300"
             >
-              <XMarkIcon className="h-6 w-6" />
+              <XMarkIcon className="h-6 w-6 " />
             </button>
           </div>
         </div>
       )}
 
       {isPosterFocusMode && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-start justify-center p-4 overflow-auto">
-          <div className="relative w-full max-w-4xl md:max-w-3xl mt-30">
+        <div
+          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-start justify-center p-4 overflow-auto"
+          onClick={closePosterFocusMode} // Close focus mode when clicking on the background
+        >
+          <div
+            className="relative w-full max-w-4xl md:max-w-3xl mt-30"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the poster
+          >
             <img
               src={posterUrls[focusedPosterIndex]}
               alt={`Focused Poster ${focusedPosterIndex + 1}`}
@@ -367,8 +379,14 @@ export default function MovieMedia({ movie }) {
       )}
 
       {isBackdropFocusMode && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-start justify-center p-4 overflow-auto">
-          <div className="relative w-full max-w-4/5 mt-30">
+        <div
+          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-start justify-center p-4 overflow-auto"
+          onClick={closeBackdropFocusMode} // Close focus mode when clicking on the background
+        >
+          <div
+            className="relative w-full max-w-4/5 mt-30"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the poster
+          >
             <img
               src={backdropUrls[focusedBackdropIndex]}
               alt={`Focused Backdrop ${focusedBackdropIndex + 1}`}
