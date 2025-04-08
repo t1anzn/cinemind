@@ -10,9 +10,15 @@ export default function SearchBar({ onSearch }) {
   const [isFocused, setIsFocused] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
+  const [isSuggestionClicked, setIsSuggestionClicked] = useState(false);
 
   // Fetch suggestions as user types
   useEffect(() => {
+    if (isSuggestionClicked) {
+      setIsSuggestionClicked(false); // Reset the flag
+      return; // Skip fetching suggestions
+    }
+
     if (searchTerm.length > 1) {
       setIsTyping(true);
       fetch(`http://127.0.0.1:5000/movies/suggest?query=${searchTerm}`)
@@ -35,6 +41,8 @@ export default function SearchBar({ onSearch }) {
     if (onSearch) {
       onSearch(searchTerm); // Call onSearch only when the submit button is pressed
     }
+    setIsSuggestionClicked(true); // Clear suggestions when submitting
+    setSuggestions([]); //Reset the suggestion clicked flag
     const match = suggestions.find(
       (m) => m.title.toLowerCase() === searchTerm.toLowerCase()
     );
@@ -43,15 +51,15 @@ export default function SearchBar({ onSearch }) {
 
     if (match) {
       setIsSearching(true);
-      // Native navigation works best with Astro
-      // window.location.href = `/movie/${match.id}`;
     }
   };
 
-  // Handle click on suggestion to search
+  // Complete query when suggestion is clicked
   const handleSuggestionClick = (movie) => {
     setSearchTerm(movie.title); // Set the clicked movie's title
-    handleSubmit(new Event("submit")); // Trigger the form submission manually
+    setSuggestions([]); // Clear suggestions after the click event is processed
+    setIsSuggestionClicked(true);
+    // handleSubmit(new Event("submit")); // Trigger the form submission manually
   };
 
   return (
@@ -102,7 +110,10 @@ export default function SearchBar({ onSearch }) {
 
       {/* Suggestions dropdown */}
       {suggestions.length > 0 && (
-        <ul className="absolute z-10 bg-gradient-to-b from-gray-900/10 to-gray-900 backdrop-blur-sm text-white w-full mt-1 rounded max-h-48 overflow-y-auto">
+        <ul
+          className="absolute z-10 bg-gradient-to-b from-gray-900/10 to-gray-900 backdrop-blur-sm text-white w-full mt-1 rounded max-h-48 overflow-y-auto"
+          onMouseDown={(e) => e.preventDefault()} // Prevent input blur when clicking on suggestions
+        >
           {suggestions.map((movie) => (
             <li
               key={movie.id}
