@@ -1,30 +1,8 @@
 import { FilmIcon } from '@heroicons/react/24/solid';
-import { useState, useEffect } from 'react';
 import MovieCard from './MovieCard';
 
-export default function MovieGrid({filters}){
-    const [movies, setMovies] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        setIsLoading(true);
-        const { genre_id, title } = filters;
-        let url = `http://127.0.0.1:5000/movies/search?`;
-
-        if (title) url += `&title=${title}`;
-        if (genre_id) url += `&genre_id=${genre_id}`;
-
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                setMovies(data);
-                setIsLoading(false);
-            });
-    }, [filters]);
-
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
+export default function MovieGrid({title, movies}){
+    
     return (
         <>
             <div className="py-8 relative space-y-8 ">
