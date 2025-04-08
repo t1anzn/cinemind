@@ -109,7 +109,7 @@ export default function YouTubePlayer({
       <div id="youtube-player" className={containerClassName}></div>
       <button
         onClick={toggleMute}
-        className="absolute bottom-15 right-15 p-3 bg-black/50 text-white hover:text-cyan-500 hover:bg-black border border-slate-700/30 hover:border-cyan-700 hover:border-2 backdrop-blur-sm rounded-full transition-all duration-300 z-50"
+        className="absolute bottom-15 right-5 p-3 bg-black/50 text-white hover:text-cyan-500 hover:bg-black border border-slate-700/30 hover:border-cyan-700 hover:border-2 backdrop-blur-sm rounded-full transition-all duration-300 z-50"
       >
         {isMuted ? (
           <SpeakerXMarkIcon className="h-6 w-6" />
