@@ -7,10 +7,6 @@ export default function MoviePage() {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [filters, setFilters] = useState({
-    title: '',
-    genre_id: ''
-});
 
   const fetchMovies = async (page) => {
     const response = await fetch(`http://127.0.0.1:5000/movies?page=${page}&limit=20`);
@@ -29,20 +25,13 @@ export default function MoviePage() {
     window.scrollTo(0, 150); // Scroll to the top
   }
 
-  const handleFilterChange = (newFilters) => {
-    setFilters(prevFilters => ({
-        ...prevFilters,
-        ...newFilters
-    }));
-};
-
   return (
     <div className="content-wrapper py-10">
       <h1 className="text-3xl text-white font-bold mb-8 md:text-4xl">
         Browse Movies
       </h1>
-      <SearchBar onFilterChange={handleFilterChange} />
-      <MovieGrid title="Search Movies" movies={movies} filters={filters} />
+      <SearchBar client:only />
+      <MovieGrid title="Search Movies" movies={movies} />
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
