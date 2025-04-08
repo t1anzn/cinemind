@@ -11,8 +11,12 @@ export default function MovieCard({ movie }) {
     }
   };
 
-  // Split string of URLs into an array and limit to a reasonable number
-  const posterUrls = movie.poster_url.split(",").slice(0, 10); // Limit to the first 10 URLs
+  const posterUrl = movie.poster_url
+    ? movie.poster_url.split(",")[0].trim() // Get the first link and trim it
+    : ""; // Default to an empty string if poster_url is null or undefined
+
+  // Log the final poster URL
+  //console.log("Final Poster URL (first link):", posterUrl);
 
   return (
     <>
@@ -29,7 +33,7 @@ export default function MovieCard({ movie }) {
           Movie Poster
           <div className="h-[350px] w-full relative bg-slate-900">
             <img
-              src={posterUrls[0].trim()}
+              src={posterUrl}
               alt="Movie Poster"
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             />

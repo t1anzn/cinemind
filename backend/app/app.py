@@ -356,6 +356,55 @@ def suggest_movies():
     movies = Movie.query.filter(Movie.title.ilike(f"%{query}%")).limit(5).all()
     return jsonify([{"id": movie.id, "title": movie.title} for movie in movies])
 
+# Endpoint made to create results when user searches for movies to display on the movie grid
+@app.route('/results', methods=['GET'])
+def results_movies():
+    # Pagination parameters from query string, with default values
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 20, type=int)
+    query = request.args.get('query', '')
+
+    # Filter movies by title and paginate the results
+    base_query = Movie.query
+    if query:
+        base_query = base_query.filter(Movie.title.ilike(f"%{query}%"))
+
+    # Paginate the query
+    pagination = base_query.order_by(Movie.popularity.desc()).paginate(page=page, per_page=per_page, error_out=False)
+    movies = pagination.items
+
+    # Prepare the movie data
+    movie_data = []
+    for movie in movies:
+        movie_data.append({
+            'id': movie.id,
+            'title': movie.title,
+            'vote_average': movie.vote_average,
+            'release_date': movie.release_date,
+            'original_language': movie.original_language,
+            'runtime': movie.runtime,
+            'popularity': movie.popularity,
+            'homepage': movie.homepage,
+            'status': movie.status,
+            'poster_url': movie.poster_url,
+            'backdrop_url': movie.backdrop_url,
+            'video_url': movie.video_url,
+            'reviews': movie.reviews,
+        })
+
+    # Return the paginated results
+    return jsonify({
+        'total': pagination.total,
+        'page': page,
+        'per_page': per_page,
+        'total_pages': pagination.pages,
+        'has_next': pagination.has_next,
+        'has_prev': pagination.has_prev,
+        'movies': movie_data
+    })
+    
+    
+
 
 # default message to test API is connected
 @app.route('/')
