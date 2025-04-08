@@ -2,8 +2,12 @@ import MoviePoster from "./MoviePoster";
 import * as movieDisplayUtils from "../utils/movieDisplayUtils";
 
 export default function MovieHeader({ movie }) {
-  // Split string of URLs into an array
-  const backdropUrls = movie.backdrop_url.split(",");
+  // Handle null or singular link in the string
+  const backdropUrls = movie.backdrop_url
+    ? movie.backdrop_url.includes(",")
+      ? movie.backdrop_url.split(",")
+      : [movie.backdrop_url]
+    : [];
 
   return (
     <div className="relative h-[70vh]">
@@ -11,7 +15,7 @@ export default function MovieHeader({ movie }) {
         <div className="w-full h-full">
           <img
             className="w-full h-full object-cover overflow-hidden"
-            src={backdropUrls[1].trim()}
+            src={backdropUrls[0].trim()}
             alt={movie.title}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black to-black/60"></div>

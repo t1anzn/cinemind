@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { extractYouTubeId } from "../utils/youtubeUtils";
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/solid";
+import YouTubePlayer from "./YouTubePlayer.jsx";
 import {
   getReleaseYear,
   formatVoteBadge,
@@ -35,151 +36,23 @@ export default function FeaturedSlider({ featuredMovies = [] }) {
     );
   };
 
-  // Load YouTube Iframe API if not already loaded
-  useEffect(() => {
-    if (!window.YT) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      const firstScriptTag = document.getElementsByTagName("script")[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    }
-
-    // Clean up player when component unmounts
-    return () => {
-      if (playerRef.current) {
-        playerRef.current.destroy();
-        playerRef.current = null;
-      }
-    };
-  }, []);
-
-  // Function to initialize the player
-  const initializePlayer = () => {
-    const start = currentMovie.snippetStart || 10;
-    const end = currentMovie.snippetEnd || 50;
-
-    // Destroy previous player if it exists
-    if (playerRef.current) {
-      playerRef.current.destroy();
-    }
-
-    // Create a new player instance
-    playerRef.current = new window.YT.Player("player", {
-      videoId: currentMovieId,
-      playerVars: {
-        autoplay: 1,
-        controls: 0,
-        showinfo: 0,
-        rel: 0,
-        modestbranding: 1,
-        start: start,
-        end: end,
-        mute: isMuted ? 1 : 0, //Mute if isMuted is true
-        enablejsapi: 1,
-        iv_load_policy: 3,
-        cc_load_policy: 0,
-        fs: 0,
-        origin: "https://www.youtube.com",
-      },
-      events: {
-        onReady: (event) => {
-          event.target.playVideo();
-          if (isMuted) {
-            event.target.mute();
-          } else {
-            event.target.unMute();
-          }
-
-          event.target.setVolume(40);
-
-          // Set up the interval to loop the video
-          intervalRef.current = setInterval(() => {
-            const currentTime = event.target.getCurrentTime();
-            if (currentTime >= end) {
-              event.target.seekTo(start); // Loop back to start
-            }
-          }, 50);
-        },
-      },
-    });
-  };
-
-  // Effect to handle movie change and YouTube API readiness
-  useEffect(() => {
-    const checkYTReady = () => {
-      if (window.YT && window.YT.Player) {
-        initializePlayer();
-      } else {
-        setTimeout(checkYTReady, 100); // Retry if not ready
-      }
-    };
-
-    checkYTReady(); // Run the check to initialize the player
-
-    // Cleanup when the movie changes or component unmounts
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-      if (playerRef.current) {
-        playerRef.current.destroy(); // Destroy player instance on unmount
-      }
-    };
-  }, [currentMovie]);
-
-  // Mute Toggle whilst playing
-  const toggleMute = () => {
-    if (playerRef.current) {
-      const player = playerRef.current;
-      if (isMuted) {
-        player.unMute();
-      } else {
-        player.mute();
-      }
-    }
-    setIsMuted(!isMuted); // Toggle mute state
-  };
-
   return (
     <>
       <div className="relative h-[75vh] overflow-hidden">
         {/* Slider Background */}
         <div className="absolute inset-0 z-10 transition-opacity duration-1000">
           <div className="relative w-full h-full overflow-hidden">
-            {/* Backdrop Image */}
-            {/* <img
-                    src={"https://cdn2.nbcuni.com/NBCUniversal/2024-07/dm4-blogroll-1719790355961.jpg?VersionId=o81CDkGmYnsyvA6FTQlECKrTeIOuISdk"}
-                    alt={`${currentMovie.title} Backdrop Image`}
-                    className={"w-full h-full object-cover scale-110"}
-                    /> */}
-            {/* <iframe
-                            width="100%"
-                            height="100%"
-                            src="https://www.youtube.com/watch?v=-9HT0l9HV4c"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            className="w-full h-full object-cover"
-                            title="Movie Trailer"
-                        ></iframe> */}
-
-            {/* <iframe
-                            width="100%"
-                            height="100%" 
-                            src="https://www.youtube.com/embed/jc86EFjLFV4?start=10&autoplay=1&loop=1&playlist=jc86EFjLFV4&rel=0&modestbranding=1&controls=0&showinfo=0"
-                            title="YouTube video player"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture;"
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            className="w-full h-full object-cover scale-140"
-                            allowfullscreen>
-                        </iframe> */}
-
-            <div
-              id="player"
-              ref={playerContainerRef}
-              className="w-full h-full scale-150"
-            ></div>
+            <YouTubePlayer
+              videoId={currentMovieId}
+              start={currentMovie.snippetStart || 10}
+              end={currentMovie.snippetEnd || 50}
+              isMuted={isMuted}
+              setIsMuted={setIsMuted}
+              containerClassName="w-full h-full scale-150"
+              rel={0}
+              controls={1}
+              fs={0}
+            />
 
             {/* Background Effects */}
             <div className="absolute inset-0 z-0 bg-gradient-to-b from-black-30 via-transparent to-black/50"></div>
@@ -305,7 +178,7 @@ export default function FeaturedSlider({ featuredMovies = [] }) {
           ❯
         </button>
 
-        {/* Toggle Mute Button */}
+        {/* Toggle Mute Button
         <button
           onClick={toggleMute}
           className="absolute bottom-5 right-5 p-3 bg-black/50 text-white hover:text-cyan-500 hover:bg-black border border-slate-700/30 hover:border-cyan-700 hover:border-2 backdrop-blur-sm rounded-full transition-all duration:300 z-50"
@@ -315,7 +188,7 @@ export default function FeaturedSlider({ featuredMovies = [] }) {
           ) : (
             <SpeakerWaveIcon className="h-6 w-6" />
           )}
-        </button>
+        </button> */}
       </div>
     </>
   );
