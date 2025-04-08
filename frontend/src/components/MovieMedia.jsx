@@ -18,6 +18,8 @@ import YouTubePlayer from "./YouTubePlayer";
 export default function MovieMedia({ movie }) {
   const [currentTrailerIndex, setCurrentTrailerIndex] = useState(0);
   const [isTheaterMode, setIsTheaterMode] = useState(false);
+  const [isPosterFocusMode, setIsPosterFocusMode] = useState(false);
+  const [focusedPosterIndex, setFocusedPosterIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true); // Shared mute state
   const [isLoading, setIsLoading] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
@@ -27,6 +29,8 @@ export default function MovieMedia({ movie }) {
   const [backdropPage, setBackdropPage] = useState(1);
   const [isPostersExpanded, setIsPostersExpanded] = useState(false);
   const [isBackdropsExpanded, setIsBackdropsExpanded] = useState(false);
+  const [isBackdropFocusMode, setIsBackdropFocusMode] = useState(false);
+  const [focusedBackdropIndex, setFocusedBackdropIndex] = useState(0);
 
   const VIDEOS_PER_PAGE = 8;
   const IMAGES_PER_PAGE = 12;
@@ -63,6 +67,24 @@ export default function MovieMedia({ movie }) {
 
   const closeTheaterMode = () => {
     setIsTheaterMode(false);
+  };
+
+  const openPosterFocusMode = (index) => {
+    setFocusedPosterIndex(index);
+    setIsPosterFocusMode(true);
+  };
+
+  const closePosterFocusMode = () => {
+    setIsPosterFocusMode(false);
+  };
+
+  const openBackdropFocusMode = (index) => {
+    setFocusedBackdropIndex(index);
+    setIsBackdropFocusMode(true);
+  };
+
+  const closeBackdropFocusMode = () => {
+    setIsBackdropFocusMode(false);
   };
 
   const paginatedVideos = useMemo(() => {
@@ -224,6 +246,7 @@ export default function MovieMedia({ movie }) {
                 {paginatedPosters.map((url, index) => (
                   <button
                     key={url}
+                    onClick={() => openPosterFocusMode(index)}
                     className="group relative aspect-[2/3] bg-slate-900 rounded-lg overflow-hidden"
                   >
                     <img
@@ -264,6 +287,7 @@ export default function MovieMedia({ movie }) {
                 {paginatedBackdrops.map((url, index) => (
                   <button
                     key={url}
+                    onClick={() => openBackdropFocusMode(index)}
                     className="group relative aspect-video bg-slate-900 rounded-lg overflow-hidden"
                   >
                     <img
@@ -317,6 +341,42 @@ export default function MovieMedia({ movie }) {
             <button
               onClick={closeTheaterMode}
               className="absolute top-4 right-4 bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75"
+            >
+              <XMarkIcon className="h-6 w-6" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isPosterFocusMode && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-start justify-center p-4 overflow-auto">
+          <div className="relative w-full max-w-4xl md:max-w-3xl mt-30">
+            <img
+              src={posterUrls[focusedPosterIndex]}
+              alt={`Focused Poster ${focusedPosterIndex + 1}`}
+              className="w-full h-auto object-contain"
+            />
+            <button
+              onClick={closePosterFocusMode}
+              className="absolute top-4 right-4 md:top-6 md:right-6 bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75"
+            >
+              <XMarkIcon className="h-6 w-6" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isBackdropFocusMode && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-start justify-center p-4 overflow-auto">
+          <div className="relative w-full max-w-4/5 mt-30">
+            <img
+              src={backdropUrls[focusedBackdropIndex]}
+              alt={`Focused Backdrop ${focusedBackdropIndex + 1}`}
+              className="w-full h-auto object-contain"
+            />
+            <button
+              onClick={closeBackdropFocusMode}
+              className="absolute top-4 right-4 md:top-6 md:right-6 bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75"
             >
               <XMarkIcon className="h-6 w-6" />
             </button>
