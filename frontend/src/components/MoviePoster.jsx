@@ -1,8 +1,15 @@
 import React from "react";
 
 export default function MoviePoster({ movie }) {
-  // Split string of URLs into an array and limit to a reasonable number
-  const posterUrls = movie.poster_url.split(","); // Limit to the first 10 URLs
+  // Handle null, single entry, or multiple poster_url values
+  const posterUrls = movie.poster_url
+    ? movie.poster_url.includes(",")
+      ? movie.poster_url
+          .split(",")
+          .map((url) => url.trim())
+          .slice(0, 10)
+      : [movie.poster_url.trim()] // Wrap single entry in an array
+    : [];
 
   return (
     <>

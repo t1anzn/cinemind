@@ -6,6 +6,7 @@ import MovieDetails from "../../components/MovieDetails";
 import MovieTags from "../../components/MovieTags";
 import MovieReviews from "../../components/MovieReviews";
 import FinancialOverview from "../../components/FinancialOverview";
+import MovieMedia from "../../components/MovieMedia.jsx";
 import * as movieDisplayUtils from "../../utils/movieDisplayUtils.jsx";
 import { useState } from "react";
 
@@ -93,16 +94,17 @@ try {
   <>
     <MovieHeader movie={movie} />
 
-    <div class="content-wrapper relative h-full w-full">
+    <div class="content-wrapper relative h-full w-full py-16">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <!-- Left Column -->
+        {/* Left Column */}
         <div class="col-span-1 md:col-span-2">
           <MovieOverview movie={movie} />
+          <MovieMedia movie={movie} client:load />
           <FinancialOverview movie={movie} />
           <MovieReviews movie={movie} client:load />
         </div>
 
-        <!-- Right Column -->
+        {/* Right Column */}
         <div class="col-span-1">
           <MovieDetails movie={movie} />
           <MovieTags movie={movie} />

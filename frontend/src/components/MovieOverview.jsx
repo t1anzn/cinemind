@@ -1,4 +1,4 @@
-export default function MovieOverview({ movie }){
+export default function MovieOverview({ movie }) {
   return (
     <div className="col-span-1 md:col-span-2">
       <h2 className="text-2xl text-white font-bold mb-4">Overview</h2>
@@ -6,7 +6,7 @@ export default function MovieOverview({ movie }){
       <h3 className="text-xl text-white font-bold mb-4">Cast</h3>
       <div className="flex flex-wrap gap-2">
         {movie.cast &&
-          movie.cast.map((actor, index) => (
+          movie.cast.slice(0, 10).map((actor, index) => (
             <span
               key={index}
               className="inline-flex items-center justify-center bg-gradient-to-b from-slate-800/50 to-transparent text-white text-sm font-light py-1 px-3 rounded-lg border-1 border-gray-600"
@@ -43,4 +43,4 @@ export default function MovieOverview({ movie }){
       </div>
     </div>
   );
-};
+}
