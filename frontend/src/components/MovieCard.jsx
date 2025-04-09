@@ -14,9 +14,6 @@ export default function MovieCard({ movie }) {
   // Use keyposter_url instead of parsing poster_url
   const posterUrl = movie.keyposter_url || ""; // Default to empty string if keyposter_url is null/undefined
 
-  // Log the final poster URL
-  //console.log("Final Poster URL (first link):", posterUrl);
-
   return (
     <>
       <a
