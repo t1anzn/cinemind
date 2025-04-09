@@ -19,6 +19,9 @@ export default function SearchBar({ onSearch }) {
   const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
 
+  const [sortField, setSortField] = useState("popularity");
+  const [sortOrder, setSortOrder] = useState("desc");
+
   // Fetch genres
   useEffect(() => {
     fetch("http://127.0.0.1:5000/genres")
@@ -63,6 +66,8 @@ export default function SearchBar({ onSearch }) {
         query: searchTerm,
         genres: selectedGenres,
         language: selectedLanguage,
+        sort_by: sortField,
+        order: sortOrder,
       });
     }
     setIsSuggestionClicked(true);
@@ -89,14 +94,16 @@ export default function SearchBar({ onSearch }) {
 
   const clearLanguage = () => setSelectedLanguage("");
 
-  // Auto-update grid on filter change
+  // Auto-update grid on filter/sort change
   useEffect(() => {
     onSearch({
       query: searchTerm,
       genres: selectedGenres,
       language: selectedLanguage,
+      sort_by: sortField,
+      order: sortOrder,
     });
-  }, [selectedGenres, selectedLanguage]);
+  }, [selectedGenres, selectedLanguage, sortField, sortOrder]);
 
   return (
     <div className="relative mx-auto max-w-xl mb-8 space-y-4">
@@ -164,6 +171,30 @@ export default function SearchBar({ onSearch }) {
               )
           )}
         </select>
+
+        {/* Sort By + Order */}
+        <div className="grid grid-cols-2 gap-3">
+          <select
+            className="w-full px-4 py-2 bg-black/60 text-white border border-slate-700 rounded-lg"
+            value={sortField}
+            onChange={(e) => setSortField(e.target.value)}
+          >
+            <option value="popularity">Popularity</option>
+            <option value="vote_count">Vote Count</option>
+            <option value="runtime">Runtime</option>
+            <option value="release_date">Release Year</option>
+            <option value="title">Alphabetical</option>
+          </select>
+
+          <select
+            className="w-full px-4 py-2 bg-black/60 text-white border border-slate-700 rounded-lg"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
+            <option value="desc">Descending</option>
+            <option value="asc">Ascending</option>
+          </select>
+        </div>
       </form>
 
       {/* Pills for selected filters */}
