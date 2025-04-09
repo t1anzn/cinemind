@@ -34,10 +34,11 @@ export default function MovieHeader({ movie }) {
               {movie.vote_average && (
                 <div
                   className={`inline-flex items-center text-[15px] px-1.5 py-0.5 font-extrabold tracking-wide ${movieDisplayUtils.formatVoteBadge(
-                    movie.vote_average
+                    parseFloat(movie.vote_average)
                   )}`}
                 >
-                  {movie.vote_average}
+                  {parseFloat(movie.vote_average).toFixed(1)}{" "}
+                  {/* Format display to 1 decimal */}
                 </div>
               )}
               {movie.vote_count && <span>({movie.vote_count} votes)</span>}

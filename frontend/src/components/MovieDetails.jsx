@@ -29,10 +29,10 @@ export default function MovieDetails({ movie }) {
         {movie?.vote_average && (
           <div
             class={`inline-flex items-center text-[15px] px-1.5 py-0.5 font-extrabold tracking-wide mb-4 ${movieDisplayUtils.formatVoteBadge(
-              movie.vote_average
+              parseFloat(movie.vote_average)
             )}`}
           >
-            {movie.vote_average}
+            {parseFloat(movie.vote_average).toFixed(1)}{" "}
           </div>
         )}
         <h3 class="text-sm text-slate-400 font-normal tracking-wider mb-1">
