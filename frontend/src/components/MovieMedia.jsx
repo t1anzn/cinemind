@@ -21,7 +21,6 @@ export default function MovieMedia({ movie }) {
   const [isPosterFocusMode, setIsPosterFocusMode] = useState(false);
   const [focusedPosterIndex, setFocusedPosterIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true); // Shared mute state
-  const [isLoading, setIsLoading] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
   const [isVideosExpanded, setIsVideosExpanded] = useState(false);
   const [videoPage, setVideoPage] = useState(1);
@@ -33,7 +32,7 @@ export default function MovieMedia({ movie }) {
   const [focusedBackdropIndex, setFocusedBackdropIndex] = useState(0);
 
   const VIDEOS_PER_PAGE = 8;
-  const IMAGES_PER_PAGE = 12;
+  const IMAGES_PER_PAGE = 8;
   const INITIAL_ITEMS = 4;
 
   const trailerUrls = useMemo(
@@ -61,7 +60,8 @@ export default function MovieMedia({ movie }) {
   );
 
   const openTheaterMode = (index) => {
-    setCurrentTrailerIndex(index);
+    const actualIndex = (videoPage - 1) * VIDEOS_PER_PAGE + index; // Map to the full array index
+    setCurrentTrailerIndex(actualIndex);
     setIsTheaterMode(true);
   };
 
@@ -70,7 +70,8 @@ export default function MovieMedia({ movie }) {
   };
 
   const openPosterFocusMode = (index) => {
-    setFocusedPosterIndex(index);
+    const actualIndex = (posterPage - 1) * IMAGES_PER_PAGE + index; // Map to the full array index
+    setFocusedPosterIndex(actualIndex);
     setIsPosterFocusMode(true);
   };
 
@@ -79,7 +80,8 @@ export default function MovieMedia({ movie }) {
   };
 
   const openBackdropFocusMode = (index) => {
-    setFocusedBackdropIndex(index);
+    const actualIndex = (backdropPage - 1) * IMAGES_PER_PAGE + index; // Map to the full array index
+    setFocusedBackdropIndex(actualIndex);
     setIsBackdropFocusMode(true);
   };
 
@@ -211,7 +213,7 @@ export default function MovieMedia({ movie }) {
                         url
                       )}/maxresdefault.jpg`}
                       alt={`Trailer ${index + 1}`}
-                      className="w-full h-full object-cover opacity-50 group-hover:opacity-75 transition-opacity duration-300"
+                      className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-300"
                     />
                   </button>
                 ))}
@@ -370,7 +372,7 @@ export default function MovieMedia({ movie }) {
             />
             <button
               onClick={closePosterFocusMode}
-              className="absolute top-4 right-4 md:top-6 md:right-6 bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75"
+              className="absolute top-4 right-4 md:top-6 md:right-6 bg-black bg-opacity-50 p-2 rounded-full hover:bg-blue-500/30 hover:text-cyan-500 text-white hover:bg-opacity-75 transition-all duration-300"
             >
               <XMarkIcon className="h-6 w-6" />
             </button>
@@ -394,7 +396,7 @@ export default function MovieMedia({ movie }) {
             />
             <button
               onClick={closeBackdropFocusMode}
-              className="absolute top-4 right-4 md:top-6 md:right-6 bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75"
+              className="absolute top-4 right-4 md:top-6 md:right-6 bg-black bg-opacity-50 p-2 rounded-full hover:bg-blue-500/30 hover:text-cyan-500 text-white hover:bg-opacity-75 transition-all duration-300"
             >
               <XMarkIcon className="h-6 w-6" />
             </button>
