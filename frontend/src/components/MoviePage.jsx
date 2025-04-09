@@ -5,15 +5,15 @@ import SearchBar from "./SearchBar";
 
 export default function MoviePage() {
   const [movies, setMovies] = useState([]);
-  const [queryParams, setQueryParams] = useState({ query: "", genre: "", language: ""  });
+  const [queryParams, setQueryParams] = useState({ query: "", genres: "", language: ""  });
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   // Fetch movies with optional query and genre
-  const fetchMovies = async (query = "", genre = "", language = "", page = 1) => {
+  const fetchMovies = async (query = "", genres = [], language = "", page = 1) => {
     const url = new URL("http://127.0.0.1:5000/results");
     url.searchParams.set("query", query);
-    url.searchParams.set("genre", genre);
+    genres.forEach((g) => url.searchParams.append("genre", g)); // support multiple genres
     url.searchParams.set("language", language);
     url.searchParams.set("page", page);
     url.searchParams.set("per_page", 20);
@@ -28,12 +28,12 @@ export default function MoviePage() {
 
   // Fetch movies whenever query/genre/page changes
   useEffect(() => {
-    fetchMovies(queryParams.query, queryParams.genre, queryParams.language, currentPage);
+    fetchMovies(queryParams.query, queryParams.genres, queryParams.language, currentPage);
   }, [queryParams, currentPage]);
 
   // When search or genre changes
-  const handleSearch = ({ query, genre, language }) => {
-    setQueryParams({ query, genre, language }); // Update query
+  const handleSearch = ({ query, genres, language }) => {
+    setQueryParams({ query, genres, language }); // Update query
     setCurrentPage(1);
     
     console.log("Fetching Movies for Query" + query);
