@@ -13,6 +13,9 @@ export default function SearchBar({ onSearch }) {
   const [isSuggestionClicked, setIsSuggestionClicked] = useState(false);
   const [genres, setGenres] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("");
+  const [languages, setLanguages] = useState([]);
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+
 
   // Fetch genres on mount
   useEffect(() => {
@@ -20,6 +23,15 @@ export default function SearchBar({ onSearch }) {
       .then((res) => res.json())
       .then((data) =>
         setGenres([{ id: "", name: "All Genres" }, ...data])
+      );
+  }, []);
+
+  // Fetch spoken languages
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/spoken_languages")
+      .then((res) => res.json())
+      .then((data) =>
+        setLanguages([{ id: "", name: "All Languages" }, ...data])
       );
   }, []);
 
@@ -50,7 +62,7 @@ export default function SearchBar({ onSearch }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (onSearch) {
-      onSearch({ query: searchTerm, genre: selectedGenre }); // Call onSearch only when the submit button is pressed seaching title and genre
+      onSearch({ query: searchTerm, genre: selectedGenre, language: selectedLanguage, }); // Call onSearch only when the submit button is pressed seaching title, genre, language
     }
     setIsSuggestionClicked(true); // Clear suggestions when submitting
     setSuggestions([]); //Reset the suggestion clicked flag
@@ -68,6 +80,15 @@ export default function SearchBar({ onSearch }) {
     setIsSuggestionClicked(true);
     // handleSubmit(new Event("submit")); // Trigger the form submission manually
   };
+
+  // Auto-update grid on dropdown change
+  useEffect(() => {
+    onSearch({
+      query: searchTerm,
+      genre: selectedGenre,
+      language: selectedLanguage,
+    });
+  }, [selectedGenre, selectedLanguage]);
 
   return (
     <div className="relative mx-auto max-w-xl mb-8 space-y-4">
@@ -117,6 +138,19 @@ export default function SearchBar({ onSearch }) {
           {genres.map((genre) => (
             <option key={genre.id} value={genre.id}>
               {genre.name}
+            </option>
+          ))}
+        </select>
+
+        {/* Language Dropdown */}
+        <select
+          className="w-full px-4 py-2 bg-black/60 text-white border border-slate-700 rounded-lg focus:outline-none"
+          value={selectedLanguage}
+          onChange={(e) => setSelectedLanguage(e.target.value)}
+        >
+          {languages.map((lang) => (
+            <option key={lang.id} value={lang.id}>
+              {lang.name}
             </option>
           ))}
         </select>
