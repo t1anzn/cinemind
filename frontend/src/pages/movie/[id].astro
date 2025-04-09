@@ -100,7 +100,7 @@ try {
         <div class="col-span-1 md:col-span-2">
           <MovieOverview movie={movie} />
           <MovieMedia movie={movie} client:load />
-          <FinancialOverview movie={movie} />
+
           <MovieReviews movie={movie} client:load />
         </div>
 
@@ -108,6 +108,7 @@ try {
         <div class="col-span-1">
           <MovieDetails movie={movie} />
           <MovieTags movie={movie} />
+          <FinancialOverview movie={movie} />
         </div>
       </div>
     </div>

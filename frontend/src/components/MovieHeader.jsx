@@ -18,7 +18,7 @@ export default function MovieHeader({ movie }) {
             src={backdropUrls[0].trim()}
             alt={movie.title}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black to-black/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
         </div>
       </div>
       <div className="content-wrapper relative h-full flex items-end pb-16 z-10">
@@ -37,8 +37,7 @@ export default function MovieHeader({ movie }) {
                     parseFloat(movie.vote_average)
                   )}`}
                 >
-                  {parseFloat(movie.vote_average).toFixed(1)}{" "}
-                  {/* Format display to 1 decimal */}
+                  {parseFloat(movie.vote_average).toFixed(1)}
                 </div>
               )}
               {movie.vote_count && <span>({movie.vote_count} votes)</span>}

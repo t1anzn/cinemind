@@ -56,6 +56,8 @@ class Movie(db.Model):
     backdrop_url = db.Column(db.Text)
     video_url = db.Column(db.Text)
     reviews = db.Column(db.Text)
+    keyposter_url = db.Column(db.Text)
+    keyvideo_url = db.Column(db.Text)
 
 class MovieGenre(db.Model):
     __tablename__ = 'movie_genre'
@@ -132,7 +134,9 @@ def get_movies():
             'video_url': movie.video_url,
             'production_countries': country_names,  
             'spoken_languages': language_names,
-            'reviews': movie.reviews,    
+            'reviews': movie.reviews,
+            'keyposter_url': movie.keyposter_url,  
+            'keyvideo_url': movie.keyvideo_url, 
         })
 
     return jsonify({
@@ -199,7 +203,8 @@ def get_featured():
             'popularity': movie.popularity,
             'homepage': movie.homepage,
             'video_url': movie.video_url,
-            'genres': genre_names  # Include genre names in the response
+            'keyvideo_url': movie.keyvideo_url,
+            'genres': genre_names
         })
 
     return jsonify(featured_movies)
@@ -216,6 +221,7 @@ def get_popular():
             'release_date': movie.release_date,
             'vote_average': movie.vote_average,
             'poster_url': movie.poster_url,
+            'keyposter_url': movie.keyposter_url,
         })
     return jsonify(popular_movies)
 
@@ -230,6 +236,7 @@ def get_explore():
             'release_date': movie.release_date,
             'vote_average': movie.vote_average,
             'poster_url': movie.poster_url,
+            'keyposter_url': movie.keyposter_url,
         })
     return jsonify(explore_movies)
 
@@ -287,6 +294,8 @@ def get_movie_by_id(id):
         'backdrop_url': movie.backdrop_url,
         'video_url': movie.video_url,
         'reviews': movie.reviews,
+        'keyposter_url': movie.keyposter_url,
+        'keyvideo_url': movie.keyvideo_url,
     }
 
     return jsonify(movie_data)
@@ -406,6 +415,8 @@ def results_movies():
             'backdrop_url': movie.backdrop_url,
             'video_url': movie.video_url,
             'reviews': movie.reviews,
+            'keyposter_url': movie.keyposter_url,
+            'keyvideo_url': movie.keyvideo_url,
         })
 
     return jsonify({
