@@ -363,11 +363,20 @@ def results_movies():
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 20, type=int)
     query = request.args.get('query', '')
+    genre_id = request.args.get('genre', '')
+    language_id = request.args.get('language', '')
 
     # Filter movies by title and paginate the results
     base_query = Movie.query
     if query:
         base_query = base_query.filter(Movie.title.ilike(f"%{query}%"))
+
+    if genre_id:
+        base_query = base_query.join(MovieGenre).filter(MovieGenre.genre_id == genre_id)
+
+    if language_id:
+        base_query = base_query.join(MovieSpokenLanguages).filter(MovieSpokenLanguages.language_id == language_id)
+
 
     # Paginate the query
     pagination = base_query.order_by(Movie.popularity.desc()).paginate(page=page, per_page=per_page, error_out=False)
