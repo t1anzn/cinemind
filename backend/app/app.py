@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
+from sqlalchemy import func
 from flask_cors import CORS
 import os
 
@@ -366,39 +367,50 @@ def suggest_movies():
     return jsonify([{"id": movie.id, "title": movie.title} for movie in movies])
 
 # Endpoint made to create results when user searches for movies to display on the movie grid
-from sqlalchemy import func
-
 @app.route('/results', methods=['GET'])
 def results_movies():
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 20, type=int)
     query = request.args.get('query', '')
-    genre_ids = request.args.getlist('genre')  # multiple genre IDs
+    genre_ids = request.args.getlist('genre')
     language = request.args.get('language', '')
+    sort_by = request.args.get('sort_by', 'popularity')
+    order = request.args.get('order', 'desc')
 
     base_query = Movie.query
 
-    # Search by title
+    # Filter by title
     if query:
         base_query = base_query.filter(Movie.title.ilike(f"%{query}%"))
 
-    # Filter by original_language
+    # Filter by original language
     if language:
         base_query = base_query.filter(Movie.original_language == language)
 
-    # AND-filter by multiple genres (movie must have ALL of them)
+    # AND-filter by genres (must match all)
     if genre_ids:
-        genre_ids = list(map(int, genre_ids))  # convert to integers
+        genre_ids = list(map(int, genre_ids))
         base_query = base_query.join(MovieGenre).filter(MovieGenre.genre_id.in_(genre_ids))
         base_query = base_query.group_by(Movie.id).having(func.count(MovieGenre.genre_id) == len(genre_ids))
 
+    # Sorting
+    sortable_columns = {
+        "popularity": Movie.popularity,
+        "vote_count": Movie.vote_count,
+        "runtime": Movie.runtime,
+        "release_date": Movie.release_date,
+        "title": Movie.title,
+    }
+    sort_column = sortable_columns.get(sort_by, Movie.popularity)
+    if order == "asc":
+        base_query = base_query.order_by(sort_column.asc())
+    else:
+        base_query = base_query.order_by(sort_column.desc())
+
     # Pagination
-    pagination = base_query.order_by(Movie.popularity.desc()).paginate(
-        page=page, per_page=per_page, error_out=False
-    )
+    pagination = base_query.paginate(page=page, per_page=per_page, error_out=False)
     movies = pagination.items
 
-    # Format results
     movie_data = []
     for movie in movies:
         movie_data.append({
@@ -428,6 +440,7 @@ def results_movies():
         'has_prev': pagination.has_prev,
         'movies': movie_data
     })
+
 
     
     
