@@ -51,11 +51,11 @@ export default function MovieCard({ movie }) {
           <div
             className={`inline-flex items-center text-[10px] px-1.5 py-0.5 font-extrabold tracking-wide
                             ${movieDisplayUtils.formatVoteBadge(
-                              movie.vote_average
+                              parseFloat(movie.vote_average)
                             )}
                                 `}
           >
-            {movie.vote_average}
+            {movie.vote_average.toFixed(1)}
           </div>
           <span>
             <p className="inline-flex ml-2 text-sm font-light text-slate-400/80 tracking-wider">

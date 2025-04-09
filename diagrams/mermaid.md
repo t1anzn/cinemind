@@ -16,6 +16,9 @@ erDiagram
         int vote_count
         string original_language
         string homepage
+        string poster_url
+        string backdrop_url
+        string video_url
     }
 
     GENRES {
