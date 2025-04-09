@@ -11,9 +11,8 @@ export default function MovieCard({ movie }) {
     }
   };
 
-  const posterUrl = movie.poster_url
-    ? movie.poster_url.split(",")[0].trim() // Get the first link and trim it
-    : ""; // Default to an empty string if poster_url is null or undefined
+  // Use keyposter_url instead of parsing poster_url
+  const posterUrl = movie.keyposter_url || ""; // Default to empty string if keyposter_url is null/undefined
 
   // Log the final poster URL
   //console.log("Final Poster URL (first link):", posterUrl);
