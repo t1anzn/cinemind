@@ -11,6 +11,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   XMarkIcon,
+  PlayIcon,
 } from "@heroicons/react/24/solid";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import YouTubePlayer from "./YouTubePlayer";
@@ -215,6 +216,9 @@ export default function MovieMedia({ movie }) {
                       alt={`Trailer ${index + 1}`}
                       className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-300"
                     />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <PlayIcon className="h-15 w-15 text-white/30 group-hover:text-white transition-all duration-300" />
+                    </div>
                   </button>
                 ))}
               </div>
