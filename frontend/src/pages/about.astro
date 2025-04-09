@@ -1,0 +1,177 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
+---
+
+<Layout title="About | CineMind">
+  <main class="flex-grow">
+    <div class="content-wrapper relative py-20">
+      {/* Hero Section */}
+      <div class="text-center mb-16 relative">
+        <a
+          href="/"
+          class="inline-block text-5xl font-light tracking-widest text-white relative group mb-8"
+        >
+          <span
+            class="bg-gradient-to-r from-cyan-200 to-blue-400 bg-clip-text text-transparent hover:from-blue-400 hover:to-cyan-200 transition-all duration-500"
+          >
+            CINE<span class="font-bold">MIND</span>
+          </span>
+        </a>
+        <p
+          class="text-slate-400 text-xl font-light max-w-2xl mx-auto animate-fade-in"
+        >
+          Your intelligent companion for exploring the world of cinema
+        </p>
+      </div>
+
+      {/* About Sections */}
+      <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+        <div
+          class="group bg-gradient-to-b from-slate-800/30 to-transparent hover:from-slate-800/40 transition-all duration-300
+                    shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-8 relative overflow-hidden"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-cyan-200/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
+          </div>
+          <h2 class="text-2xl text-white font-bold mb-4 relative">
+            About The Project
+          </h2>
+          <p class="text-slate-300 font-light leading-relaxed relative">
+            CineMind is a modern movie exploration platform that combines the
+            power of data analytics with an intuitive user interface. Built with
+            React and Python, it offers detailed insights into movies, including
+            financial performance, audience reception, and curated reviews.
+          </p>
+        </div>
+
+        <div
+          class="group bg-gradient-to-b from-slate-800/30 to-transparent hover:from-slate-800/40 transition-all duration-300
+                    shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-8 relative overflow-hidden"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-cyan-200/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
+          </div>
+          <h2 class="text-2xl text-white font-bold mb-4 relative">Features</h2>
+          <ul
+            class="text-slate-300 font-light leading-relaxed space-y-3 relative"
+          >
+            <li
+              class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
+            >
+              <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
+              <span>Comprehensive movie information and statistics</span>
+            </li>
+            <li
+              class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
+            >
+              <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
+              <span>Financial performance metrics and analysis</span>
+            </li>
+            <li
+              class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
+            >
+              <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
+              <span>Curated reviews and ratings</span>
+            </li>
+            <li
+              class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
+            >
+              <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
+              <span>Advanced search and filtering capabilities</span>
+            </li>
+            <li
+              class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
+            >
+              <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
+              <span>Responsive and modern user interface</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Technology Stack */}
+      <div class="mt-12 max-w-4xl mx-auto">
+        <div
+          class="group bg-gradient-to-b from-slate-800/30 to-transparent hover:from-slate-800/40 transition-all duration-300
+                    shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-8"
+        >
+          <h2 class="text-2xl text-white font-bold mb-8 text-center">
+            Technology Stack
+          </h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div
+              class="text-center transform hover:scale-105 transition-transform duration-300"
+            >
+              <div
+                class="w-25 h-25 mx-auto mb-4 rounded-xl bg-gradient-to-br from-cyan-200/20 to-blue-400/20
+                          flex items-center justify-center border border-blue-100/20"
+              >
+                <h3 class="text-cyan-400 font-semibold">Frontend</h3>
+              </div>
+              <p class="text-slate-300 font-light tracking-wide">
+                React + Astro
+              </p>
+            </div>
+            <div
+              class="text-center transform hover:scale-105 transition-transform duration-300"
+            >
+              <div
+                class="w-25 h-25 mx-auto mb-4 rounded-xl bg-gradient-to-br from-cyan-200/20 to-blue-400/20
+                          flex items-center justify-center border border-blue-100/20"
+              >
+                <h3 class="text-cyan-400 font-semibold">Backend</h3>
+              </div>
+              <p class="text-slate-300 font-light tracking-wide">
+                Python Flask
+              </p>
+            </div>
+            <div
+              class="text-center transform hover:scale-105 transition-transform duration-300"
+            >
+              <div
+                class="w-25 h-25 mx-auto mb-4 rounded-xl bg-gradient-to-br from-cyan-200/20 to-blue-400/20
+                          flex items-center justify-center border border-blue-100/20"
+              >
+                <h3 class="text-cyan-400 font-semibold">Styling</h3>
+              </div>
+              <p class="text-slate-300 font-light tracking-wide">
+                Tailwind CSS
+              </p>
+            </div>
+            <div
+              class="text-center transform hover:scale-105 transition-transform duration-300"
+            >
+              <div
+                class="w-25 h-25 mx-auto mb-4 rounded-xl bg-gradient-to-br from-cyan-200/20 to-blue-400/20
+                          flex items-center justify-center border border-blue-100/20"
+              >
+                <h3 class="text-cyan-400 font-semibold">Database</h3>
+              </div>
+              <p class="text-slate-300 font-light tracking-wide">SQLite</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+</style>
