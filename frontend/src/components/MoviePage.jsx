@@ -18,12 +18,19 @@ export default function MoviePage() {
     url.searchParams.set("page", page);
     url.searchParams.set("per_page", 20);
 
-    const response = await fetch(url);
-    const data = await response.json();
-    //console.log("Fetched Movies:", data); // Debugging statement
-    setMovies(data.movies); // Ensure movies is always an array
-    setTotalPages(data.total_pages); // Update total pages from API response
-    //console.log("Data.totalPages" + data.total_pages);
+      // Add minimum loading time with Promise.all
+      const [data] = await Promise.all([
+        fetch(url).then((res) => res.json()),
+        new Promise((resolve) => setTimeout(resolve, 100)), // minimum loading time
+      ]);
+
+      setMovies(data.movies);
+      setTotalPages(data.total_pages);
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    } finally {
+      setIsLoading(false); // Set loading false after fetch completes
+    }
   };
 
   // Fetch movies whenever query/genre/page changes
@@ -33,16 +40,17 @@ export default function MoviePage() {
 
   // When search or genre changes
   const handleSearch = ({ query, genres, language }) => {
+    setIsLoading(true); // Set loading true before fetch
     setQueryParams({ query, genres, language }); // Update query
     setCurrentPage(1);
-    
+
     console.log("Fetching Movies for Query" + query);
   };
 
   const handlePageChange = (pageNum) => {
     setCurrentPage(pageNum); // Update the currentPage state
-    fetchMovies(query, pageNum);
-    window.scrollTo(0, 150); // Scroll to the top
+    // fetchMovies(query, pageNum);
+    window.scrollTo({ top: 300, behavior: "smooth" });
     console.log("Page Change Triggered:" + pageNum);
   };
 
@@ -52,7 +60,7 @@ export default function MoviePage() {
         Browse Movies
       </h1>
       <SearchBar onSearch={handleSearch} />
-      <MovieGrid title="Search Movies" movies={movies} />
+      <MovieGrid title="Search Movies" movies={movies} isLoading={isLoading} />
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -61,4 +69,3 @@ export default function MoviePage() {
     </div>
   );
 }
-

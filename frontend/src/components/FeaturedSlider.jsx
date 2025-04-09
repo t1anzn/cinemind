@@ -21,8 +21,9 @@ export default function FeaturedSlider({ featuredMovies = [] }) {
   }
 
   const currentMovie = featuredMovies[currentIndex];
-  const videoUrls = currentMovie.video_url.split(","); // Split video_url into an array
-  const currentMovieId = extractYouTubeId(videoUrls[0].trim()); // Use the first valid YouTube ID
+  const currentMovieId = currentMovie?.keyvideo_url
+    ? extractYouTubeId(currentMovie.keyvideo_url)
+    : null;
 
   // Button handlers
   const goToPrev = () => {
