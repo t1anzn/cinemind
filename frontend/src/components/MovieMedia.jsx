@@ -352,7 +352,7 @@ export default function MovieMedia({ movie }) {
             />
             <button
               onClick={closeTheaterMode}
-              className="absolute top-4 right-4 bg-black bg-opacity-50 p-2 rounded-full hover:bg-blue-500/30 hover:text-cyan-500 text-white hover:bg-opacity-75 transition-all duration-300"
+              className="absolute top-8 right-4 bg-black bg-opacity-50 p-2 rounded-full hover:bg-white/30 text-white hover:text-black hover:bg-opacity-75 transition-all duration-300"
             >
               <XMarkIcon className="h-6 w-6 " />
             </button>
@@ -376,7 +376,7 @@ export default function MovieMedia({ movie }) {
             />
             <button
               onClick={closePosterFocusMode}
-              className="absolute top-4 right-4 md:top-6 md:right-6 bg-black bg-opacity-50 p-2 rounded-full hover:bg-blue-500/30 hover:text-cyan-500 text-white hover:bg-opacity-75 transition-all duration-300"
+              className="absolute top-4 right-4 md:top-6 md:right-6 bg-black bg-opacity-50 p-2 rounded-full hover:bg-white/30 hover:text-black text-white hover:bg-opacity-75 transition-all duration-300"
             >
               <XMarkIcon className="h-6 w-6" />
             </button>
@@ -400,7 +400,7 @@ export default function MovieMedia({ movie }) {
             />
             <button
               onClick={closeBackdropFocusMode}
-              className="absolute top-4 right-4 md:top-6 md:right-6 bg-black bg-opacity-50 p-2 rounded-full hover:bg-blue-500/30 hover:text-cyan-500 text-white hover:bg-opacity-75 transition-all duration-300"
+              className="absolute top-4 right-4 md:top-6 md:right-6 bg-black bg-opacity-50 p-2 rounded-full hover:bg-white/30 hover:text-black text-white hover:bg-opacity-75 transition-all duration-300"
             >
               <XMarkIcon className="h-6 w-6" />
             </button>
