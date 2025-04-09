@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import {
   MagnifyingGlassIcon,
   ChevronRightIcon,
-} from "@heroicons/react/20/solid";
+} from "@heroicons/react/20/solid"; // Heroicons
 
 export default function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,11 +23,11 @@ export default function SearchBar({ onSearch }) {
       );
   }, []);
 
-  // Fetch suggestions
+  // Fetch suggestions as user types
   useEffect(() => {
     if (isSuggestionClicked) {
-      setIsSuggestionClicked(false);
-      return;
+      setIsSuggestionClicked(false); // Reset the flag
+      return; // Skip fetching suggestions
     }
 
     if (searchTerm.length > 1) {
@@ -41,17 +41,19 @@ export default function SearchBar({ onSearch }) {
     }
   }, [searchTerm]);
 
+  // Handle input change
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (onSearch) {
-      onSearch({ query: searchTerm, genre: selectedGenre });
+      onSearch({ query: searchTerm, genre: selectedGenre }); // Call onSearch only when the submit button is pressed seaching title and genre
     }
-    setIsSuggestionClicked(true);
-    setSuggestions([]);
+    setIsSuggestionClicked(true); // Clear suggestions when submitting
+    setSuggestions([]); //Reset the suggestion clicked flag
     const match = suggestions.find(
       (m) => m.title.toLowerCase() === searchTerm.toLowerCase()
     );
@@ -59,10 +61,12 @@ export default function SearchBar({ onSearch }) {
     if (match) setIsSearching(true);
   };
 
+  // Complete query when suggestion is clicked
   const handleSuggestionClick = (movie) => {
-    setSearchTerm(movie.title);
-    setSuggestions([]);
+    setSearchTerm(movie.title); // Set the clicked movie's title
+    setSuggestions([]); // Clear suggestions after the click event is processed
     setIsSuggestionClicked(true);
+    // handleSubmit(new Event("submit")); // Trigger the form submission manually
   };
 
   return (
@@ -122,12 +126,12 @@ export default function SearchBar({ onSearch }) {
       {suggestions.length > 0 && (
         <ul
           className="absolute z-10 bg-gradient-to-b from-gray-900/10 to-gray-900 backdrop-blur-sm text-white w-full mt-1 rounded max-h-48 overflow-y-auto"
-          onMouseDown={(e) => e.preventDefault()}
+          onMouseDown={(e) => e.preventDefault()} // Prevent input blur when clicking on suggestions
         >
           {suggestions.map((movie) => (
             <li
               key={movie.id}
-              onClick={() => handleSuggestionClick(movie)}
+              onClick={() => handleSuggestionClick(movie)} // Trigger search on click
               className="px-4 py-2 hover:bg-gray-700 cursor-pointer"
             >
               {movie.title}

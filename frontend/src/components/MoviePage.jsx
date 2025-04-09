@@ -19,8 +19,10 @@ export default function MoviePage() {
 
     const response = await fetch(url);
     const data = await response.json();
-    setMovies(data.movies);
-    setTotalPages(data.total_pages);
+    //console.log("Fetched Movies:", data); // Debugging statement
+    setMovies(data.movies); // Ensure movies is always an array
+    setTotalPages(data.total_pages); // Update total pages from API response
+    //console.log("Data.totalPages" + data.total_pages);
   };
 
   // Fetch movies whenever query/genre/page changes
@@ -30,13 +32,17 @@ export default function MoviePage() {
 
   // When search or genre changes
   const handleSearch = ({ query, genre }) => {
-    setQueryParams({ query, genre });
+    setQueryParams({ query, genre }); // Update query
     setCurrentPage(1);
+    fetchMovies(searchTerm, 1);
+    console.log("Fetching Movies for Query" + query);
   };
 
   const handlePageChange = (pageNum) => {
-    setCurrentPage(pageNum);
-    window.scrollTo(0, 150);
+    setCurrentPage(pageNum); // Update the currentPage state
+    fetchMovies(query, pageNum);
+    window.scrollTo(0, 150); // Scroll to the top
+    console.log("Page Change Triggered:" + pageNum);
   };
 
   return (
