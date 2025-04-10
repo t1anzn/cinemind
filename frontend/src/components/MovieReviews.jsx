@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import {
-  ChevronRightIcon,
-  ChevronLeftIcon,
-  XMarkIcon,
-  ArrowTopRightOnSquareIcon,
+  SparklesIcon,
   HandThumbUpIcon,
   HandThumbDownIcon,
 } from "@heroicons/react/24/solid";
@@ -42,13 +39,15 @@ export default function MovieReviews({ movie, sentiment }) {
         </p>
         {sentiment && (
           <div className="mt-4 p-4 bg-gradient-to-b from-blue-600/20 to-transparent rounded-xl">
-            <h3 className="text-white font-bold text-2xl pt-2 pb-5">
-              Overall Sentiment
+            <h3 className="text-white font-normal tracking-normal text-2xl pt-2">
+              <SparklesIcon className="w-5 h-5 inline mr-1 text-white mb-2" />
+              Smart Review
             </h3>
-            <p className="text-slate-300 font-light text-lg">{sentiment}</p>
-            <p className="text-md font-light pt-5 text-slate-500 italic mt-2">
-              * This sentiment analysis is powered by AI technology.
+
+            <p className="text-sm font-light text-cyan-400/80 border-b border-blue-500/20 pb-4  mb-2">
+              powered by Gemini AI
             </p>
+            <p className="text-slate-300 font-light text-md">{sentiment}</p>
           </div>
         )}
       </div>
@@ -65,7 +64,6 @@ export default function MovieReviews({ movie, sentiment }) {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
                   <h3 className="text-white font-medium">{review.author}</h3>
-                  <span className="text-slate-400 text-sm">•</span>
                 </div>
 
                 <div className="text-white mb-4 tracking-wide font-light">
