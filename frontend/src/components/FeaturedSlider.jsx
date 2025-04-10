@@ -108,7 +108,7 @@ export default function FeaturedSlider({ featuredMovies = [] }) {
             <div className="flex space-x-4">
               <a
                 href={`/movie/${currentMovie.id}`}
-                className="group relative inline-flex items-center text-white text-md font-light tracking-wider px-4 py-2 bg-gradient-to-r from-cyan-900/80 to-blue-900/80 rounded-sm border border-cyan-800/50 hover:from-cyan-700/90 hover:to-blue-800/80 transition-colors duration-300 overflow-hidden"
+                className="group relative inline-flex items-center text-white text-md font-light tracking-wider px-4 py-2 bg-gradient-to-r from-cyan-900 to-blue-900 rounded-sm border border-cyan-800/50 hover:from-cyan-600 hover:to-blue-700 transition-colors duration-300 overflow-hidden"
               >
                 <span>VIEW DETAILS</span>
               </a>

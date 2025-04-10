@@ -3,20 +3,34 @@ import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 import { useEffect } from "react";
 
-export default function MovieGrid({ title, movies = [], isLoading = false }) {
+export default function MovieGrid({
+  title,
+  tagline,
+  movies = [],
+  isLoading = false,
+}) {
   const skeletonArray = Array(20).fill(null);
 
   return (
     <>
       <div className="py-8 relative space-y-8">
         {title && (
-          <div className="relative">
-            <h2 className="text-2xl font-light tracking-wider text-white/90 pb-4 border-b border-cyan-900/30 flex items-center">
-              <span className="bg-cyan-500/10 text-cyan-400 w-8 h-8 inline-flex items-center justify-center rounded-full mr-3 shadow-inner shadow-cyan-900/10">
-                <FilmIcon className="h-4 w-4" />
+          <div className="relative space-y-2">
+            <h2 className="text-2xl font-light tracking-wider text-white/90 flex items-center">
+              <span
+                className="bg-gradient-to-br from-cyan-600 to-blue-500 text-white
+              w-10 h-10 inline-flex items-center justify-center rounded-full mr-3 
+              shadow-lg shadow-cyan-900/20 backdrop-blur-sm"
+              >
+                <FilmIcon className="h-5 w-5" />
               </span>
               {title}
             </h2>
+            {tagline && (
+              <p className="text-slate-400 text-sm ml-11 pb-4 border-b border-cyan-900/30 font-light tracking-wide">
+                {tagline}
+              </p>
+            )}
           </div>
         )}
 
