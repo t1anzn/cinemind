@@ -280,7 +280,7 @@ export default function SearchBar({ onSearch }) {
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         @keyframes fadeSlideIn {
           from {
             opacity: 0;
