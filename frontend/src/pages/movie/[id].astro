@@ -73,6 +73,7 @@ let movie: {
 };
 
 let error = null;
+let sentiment = null;
 
 try {
   // Fetch movie by ID
@@ -81,6 +82,17 @@ try {
     throw new Error("Movie not found");
   }
   movie = await response.json();
+
+  // Fetch sentiment analysis for the movie
+  const sentimentResponse = await fetch(
+    `http://127.0.0.1:5000/movies/${id}/sentiment`
+  );
+  if (sentimentResponse.ok) {
+    const sentimentData = await sentimentResponse.json();
+    sentiment = sentimentData.sentiment_analysis;
+  } else {
+    console.error("Failed to fetch sentiment analysis");
+  }
 } catch (e) {
   error = e instanceof Error ? e.message : "An unknown error occurred";
 }
@@ -101,7 +113,8 @@ try {
           <MovieOverview movie={movie} />
           <MovieMedia movie={movie} client:load />
 
-          <MovieReviews movie={movie} client:load />
+          {/* Pass sentiment as a prop */}
+          <MovieReviews movie={movie} sentiment={sentiment} client:load />
         </div>
 
         {/* Right Column */}

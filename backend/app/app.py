@@ -4,6 +4,9 @@ from sqlalchemy.sql.expression import func
 from sqlalchemy import func
 from flask_cors import CORS
 import os
+from google import genai  # Import the Gemini AI library
+from dotenv import load_dotenv
+from pathlib import Path
 
 app = Flask(__name__)
 CORS(app) # Enable CORS for all routes
@@ -18,6 +21,40 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the database connection
 db = SQLAlchemy(app)
+
+# Load environment variables
+def load_environment():
+    """Load environment variables from multiple possible locations"""
+    possible_paths = [
+        Path('.env'),  # Current directory
+        Path('../.env'),  # One level up
+        Path('../../frontend/.env'),  # Frontend directory
+        Path('../../../.env'),  # Project root
+        Path('../../.env'),  # Project root alternative
+    ]
+
+    for path in possible_paths:
+        if path.exists():
+            print(f"Loading .env from: {path.absolute()}")
+            load_dotenv(path)
+            api_key = os.getenv("GEMINI_API_KEY")
+            if api_key:
+                print("✓ API key loaded successfully")
+                return True
+
+    print("⚠ No valid .env file found with API key!")
+    print("\nTry creating .env file in one of these locations:")
+    for path in possible_paths:
+        print(f"- {path.absolute()}")
+    return False
+
+# Ensure environment variables are loaded
+if not load_environment():
+    raise EnvironmentError("Failed to load GEMINI_API_KEY from .env file")
+
+# Now use the API key
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 # Defining Models
 class Cast(db.Model):
@@ -441,15 +478,39 @@ def results_movies():
         'movies': movie_data
     })
 
+@app.route('/movies/<int:id>/sentiment', methods=['GET'])
+def analyze_movie_sentiment(id):
+    movie = Movie.query.get(id)
 
-    
-    
+    if not movie:
+        return jsonify({'error': f'Movie with ID {id} not found'}), 404
 
+    if not movie.reviews:
+        return jsonify({'error': 'No reviews available for this movie'}), 400
+
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.0-flash-lite",  # Replace with the specific model name
+            contents=(
+                "Analyze the sentiment of the following movie reviews and provide a single plain-text summary of the overall sentiment. "
+                "Do not include any titles, headings, author names, or individual review analysis. Focus only on the overall sentiment "
+                "and key points expressed collectively in the reviews:\n\n"
+                f"{movie.reviews}"
+            )
+        )
+        sentiment_analysis = response.text.strip()
+        return jsonify({
+            'movie_id': movie.id,
+            'title': movie.title,
+            'sentiment_analysis': sentiment_analysis
+        })
+    except Exception as e:
+        return jsonify({'error': f'Failed to analyze sentiment: {str(e)}'}), 500
 
 # default message to test API is connected
 @app.route('/')
 def index():
-    return jsonify({'message': 'Connected to Flask API'})
+    return jsonify({'message': 'Connected to CineMind Flask API'})
 
 if __name__ == '__main__':
     app.run(debug=True)
