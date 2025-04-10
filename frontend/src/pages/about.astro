@@ -4,28 +4,29 @@ import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 ---
 
+<div
+  class="floating-background fixed inset-0 w-full h-full overflow-hidden pointer-events-none"
+>
+  <p
+    class="floating-text-1 text-[12vw] font-bold opacity-[0.03] absolute whitespace-nowrap"
+  >
+    PLS GIVE US A JOB
+  </p>
+  <p
+    class="floating-text-2 text-[12vw] font-bold opacity-[0.03] absolute whitespace-nowrap"
+  >
+    PLS GIVE US A JOB
+  </p>
+  <p
+    class="floating-text-3 text-[12vw] font-bold opacity-[0.03] absolute whitespace-nowrap"
+  >
+    PLS GIVE US A JOB
+  </p>
+</div>
+
 <Layout title="About | CineMind">
   <main class="flex-grow">
     <div class="content-wrapper relative py-20">
-      <div
-        class="absolute inset-0 overflow-hidden pointer-events-none select-none"
-      >
-        <p
-          class="floating-text-1 text-8xl font-bold text-slate-600/10 absolute whitespace-nowrap"
-        >
-          PLS GIVE US A JOB
-        </p>
-        <p
-          class="floating-text-2 text-8xl font-bold text-blue-500/10 absolute whitespace-nowrap"
-        >
-          PLS GIVE US A JOB
-        </p>
-        <p
-          class="floating-text-3 text-8xl font-bold text-cyan-400/10 absolute whitespace-nowrap"
-        >
-          PLS GIVE US A JOB
-        </p>
-      </div>
       {/* Hero Section */}
       <div class="text-center mb-16 relative">
         <a
@@ -364,48 +365,56 @@ import Footer from "../components/Footer";
   .animate-fade-in {
     animation: fade-in 0.8s ease-out forwards;
   }
+  .floating-background {
+    z-index: 0;
+    background: transparent;
+  }
+
   .floating-text-1 {
-    animation: float1 15s linear infinite;
-    top: 20%;
-    left: -50%;
+    animation: float1 60s linear infinite;
+    top: 10%;
+    left: -100%;
+    color: rgb(203 213 225);
   }
 
   .floating-text-2 {
-    animation: float2 20s linear infinite;
-    top: 50%;
-    left: -30%;
+    animation: float2 75s linear infinite;
+    top: 40%;
+    left: -150%;
+    color: rgb(96 165 250);
   }
 
   .floating-text-3 {
-    animation: float3 25s linear infinite;
-    top: 80%;
-    left: -40%;
+    animation: float3 90s linear infinite;
+    top: 70%;
+    left: -120%;
+    color: rgb(34 211 238);
   }
 
   @keyframes float1 {
     from {
-      transform: translateX(0) rotate(-20deg);
+      transform: translateX(0);
     }
     to {
-      transform: translateX(200%) rotate(-20deg);
+      transform: translateX(300%);
     }
   }
 
   @keyframes float2 {
     from {
-      transform: translateX(0) rotate(-10deg);
+      transform: translateX(0);
     }
     to {
-      transform: translateX(200%) rotate(-10deg);
+      transform: translateX(300%);
     }
   }
 
   @keyframes float3 {
     from {
-      transform: translateX(0) rotate(-30deg);
+      transform: translateX(0);
     }
     to {
-      transform: translateX(200%) rotate(-30deg);
+      transform: translateX(300%);
     }
   }
 </style>
