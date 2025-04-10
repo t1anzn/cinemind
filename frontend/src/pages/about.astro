@@ -7,6 +7,25 @@ import Footer from "../components/Footer";
 <Layout title="About | CineMind">
   <main class="flex-grow">
     <div class="content-wrapper relative py-20">
+      <div
+        class="absolute inset-0 overflow-hidden pointer-events-none select-none"
+      >
+        <p
+          class="floating-text-1 text-8xl font-bold text-slate-600/10 absolute whitespace-nowrap"
+        >
+          PLS GIVE US A JOB
+        </p>
+        <p
+          class="floating-text-2 text-8xl font-bold text-blue-500/10 absolute whitespace-nowrap"
+        >
+          PLS GIVE US A JOB
+        </p>
+        <p
+          class="floating-text-3 text-8xl font-bold text-cyan-400/10 absolute whitespace-nowrap"
+        >
+          PLS GIVE US A JOB
+        </p>
+      </div>
       {/* Hero Section */}
       <div class="text-center mb-16 relative">
         <a
@@ -40,10 +59,15 @@ import Footer from "../components/Footer";
             About The Project
           </h2>
           <p class="text-slate-300 font-light leading-relaxed relative">
-            CineMind is a modern movie exploration platform that combines the
-            power of data analytics with an intuitive user interface. Built with
-            React and Python, it offers detailed insights into movies, including
-            financial performance, audience reception, and curated reviews.
+            CineMind is basically when two CS students decide to make just
+            another movie website but with some data stuff thrown in cause thats
+            what our professors wanted or whatever. We built it with React +
+            Tailwind (cause Tim got tired of writing CSS and discovered the joy
+            of copy-pasting utility classes) and Python + Flask (because
+            honestly, it's the only backend stack we know right now, and hey, at
+            least it works). We spent quite a bit of time on this project, so it
+            would be great if we got good grades for it, but if not, at least it
+            looks kinda nice on the outside, right?
           </p>
         </div>
 
@@ -75,7 +99,13 @@ import Footer from "../components/Footer";
               class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
             >
               <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
-              <span>Curated reviews and ratings</span>
+              <span>'Curated' reviews and ratings</span>
+            </li>
+            <li
+              class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
+            >
+              <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
+              <span>Movie Data Visualisations </span>
             </li>
             <li
               class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
@@ -156,6 +186,166 @@ import Footer from "../components/Footer";
           </div>
         </div>
       </div>
+
+      {/* Credits Section */}
+      <div class="mt-12 max-w-4xl mx-auto">
+        <div
+          class="group bg-gradient-to-b from-slate-800/30 to-transparent hover:from-slate-800/40 transition-all duration-300
+                    shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-8"
+        >
+          <h2 class="text-2xl text-white font-bold mb-8 text-center">
+            Developers
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+              class="p-6 rounded-lg bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-cyan-500/10
+                        hover:border-cyan-500/30 transition-all duration-300 group/card relative overflow-hidden"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-cyan-200/10 to-blue-400/10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"
+              >
+              </div>
+              <div class="relative z-10">
+                <div class="text-center mb-4">
+                  <div
+                    class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20
+                           border-2 border-cyan-500/20 overflow-hidden"
+                  >
+                    <img
+                      src="https://api.dicebear.com/9.x/notionists/svg?seed=Luis&scale=150&bodyIconProbability=100&brows=variant02,variant03,variant04,variant05,variant06,variant07,variant08,variant09,variant10,variant11,variant12,variant13,variant01&gestureProbability=40&glasses=variant03&hair=variant04,variant12&lips=variant05,variant04,variant10,variant09,variant01,variant06,variant07,variant03,variant02,variant08,variant11,variant12,variant13,variant14,variant15,variant16,variant17,variant18,variant19,variant20&nose=variant01,variant02,variant03,variant04,variant05,variant06,variant07,variant08,variant09,variant10,variant11,variant12,variant13,variant14,variant15,variant16,variant17,variant18,variant20"
+                      alt="Timothy"
+                      class="w-full h-full"
+                    />
+                  </div>
+                  <h3 class="text-xl text-cyan-400 font-medium mb-1">
+                    Timothy Chen
+                  </h3>
+                  <p class="text-slate-400 font-light text-sm mb-2">
+                    Full Stack Developer
+                  </p>
+                  <div class="space-y-1.5">
+                    <p class="text-slate-300 text-sm">
+                      BSc Computer Science Student
+                    </p>
+                    <p class="text-slate-400 text-xs">
+                      University of the Arts London (UAL)
+                    </p>
+                    <p class="text-slate-400/80 text-xs italic mt-2">
+                      "i might have worked on this project.. maybe"
+                    </p>
+                  </div>
+                </div>
+                <div class="flex justify-center gap-4 mt-4">
+                  <a
+                    href="https://github.com/t1anzn"
+                    class="text-slate-400 hover:text-cyan-400 transition-colors"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                      ></path>
+                    </svg>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/timothy-chen-0a2900286/"
+                    class="text-slate-400 hover:text-cyan-400 transition-colors"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="p-6 rounded-lg bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-cyan-500/10
+                        hover:border-cyan-500/30 transition-all duration-300 group/card relative overflow-hidden"
+            >
+              >
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-cyan-200/10 to-blue-400/10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"
+              >
+              </div>
+              <div class="relative z-10">
+                <div class="text-center mb-4">
+                  <div
+                    class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20
+                           border-2 border-cyan-500/20 overflow-hidden"
+                  >
+                    <img
+                      src="https://api.dicebear.com/9.x/notionists/svg?seed=Brooklynn&flip=true&scale=150&glasses=variant03&hair=variant24,variant12&backgroundColor=transparent"
+                      alt="Balmee"
+                      class="w-full h-full"
+                    />
+                  </div>
+                  <h3 class="text-xl text-cyan-400 font-medium mb-1">
+                    Balmee Hunumunt
+                  </h3>
+                  <p class="text-slate-400 font-light text-sm mb-2">
+                    Back End Developer
+                  </p>
+                  <div class="space-y-1.5">
+                    <p class="text-slate-300 text-sm">
+                      BSc Computer Science Student
+                    </p>
+                    <p class="text-slate-400 text-xs">
+                      University of the Arts London (UAL)
+                    </p>
+                    <p class="text-slate-400/80 text-xs italic mt-2">
+                      "I did some backend stuff, I guess"
+                    </p>
+                  </div>
+                </div>
+                <div class="flex justify-center gap-4 mt-4">
+                  <a
+                    href="https://github.com/Balmee"
+                    class="text-slate-400 hover:text-cyan-400 transition-colors"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                      ></path>
+                    </svg>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/balmee-hunumunt-87080429a/"
+                    class="text-slate-400 hover:text-cyan-400 transition-colors"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </Layout>
@@ -173,5 +363,49 @@ import Footer from "../components/Footer";
   }
   .animate-fade-in {
     animation: fade-in 0.8s ease-out forwards;
+  }
+  .floating-text-1 {
+    animation: float1 15s linear infinite;
+    top: 20%;
+    left: -50%;
+  }
+
+  .floating-text-2 {
+    animation: float2 20s linear infinite;
+    top: 50%;
+    left: -30%;
+  }
+
+  .floating-text-3 {
+    animation: float3 25s linear infinite;
+    top: 80%;
+    left: -40%;
+  }
+
+  @keyframes float1 {
+    from {
+      transform: translateX(0) rotate(-20deg);
+    }
+    to {
+      transform: translateX(200%) rotate(-20deg);
+    }
+  }
+
+  @keyframes float2 {
+    from {
+      transform: translateX(0) rotate(-10deg);
+    }
+    to {
+      transform: translateX(200%) rotate(-10deg);
+    }
+  }
+
+  @keyframes float3 {
+    from {
+      transform: translateX(0) rotate(-30deg);
+    }
+    to {
+      transform: translateX(200%) rotate(-30deg);
+    }
   }
 </style>
