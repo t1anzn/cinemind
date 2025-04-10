@@ -30,7 +30,7 @@ export default function MovieHeader({ movie }) {
             <h1 className="text-4xl md:text-5xl font-bold mb-2 text-white">
               {movie.title}
             </h1>
-            <div className="flex flex-wrap items-center gap-4 text-slate-400 mb-4">
+            <div className="flex flex-wrap items-center gap-4 text-slate-200 mb-4">
               {movie.vote_average && (
                 <div
                   className={`inline-flex items-center text-[15px] px-1.5 py-0.5 font-extrabold tracking-wide ${movieDisplayUtils.formatVoteBadge(

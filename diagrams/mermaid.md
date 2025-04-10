@@ -44,7 +44,7 @@ erDiagram
 
     SPOKEN_LANGUAGES {
         int language_id PK
-        string name
+        string language_name
         string iso_code
     }
 
