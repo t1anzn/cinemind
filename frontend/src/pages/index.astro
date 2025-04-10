@@ -29,7 +29,17 @@ const exploreMovies = exploreMoviesData || [];
   <FeaturedSlider client:load featuredMovies={featuredMovies} />
 
   <div class="content-wrapper py-10">
-    <MovieGrid client:visible title="Popular Movies" movies={popularMovies} />
-    <MovieGrid client:visible title="Explore" movies={exploreMovies} />
+    <MovieGrid
+      client:visible
+      title="Popular Movies"
+      tagline="Top rated films loved by our community"
+      movies={popularMovies}
+    />
+    <MovieGrid
+      client:visible
+      title="Explore"
+      tagline="Find your next favorite movie"
+      movies={exploreMovies}
+    />
   </div>
 </Layout>

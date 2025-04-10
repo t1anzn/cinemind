@@ -19,6 +19,9 @@ erDiagram
         string poster_url
         string backdrop_url
         string video_url
+        string reviews
+        string keyposter_url
+        string keyvideo_url
     }
 
     GENRES {
@@ -44,7 +47,7 @@ erDiagram
 
     SPOKEN_LANGUAGES {
         int language_id PK
-        string name
+        string language_name
         string iso_code
     }
 
@@ -95,6 +98,12 @@ erDiagram
 | **vote_count**        | The total number of votes the movie received.                      |
 | **original_language** | The original language of the movie.                                |
 | **homepage**          | The official homepage URL of the movie.                            |
+| **poster_url**        | The URLs for all of the movie's posters                            |
+| **backdrop_url**      | The URLs for all of the movie's backdrops                          |
+| **video_url**         | The URLs for all of the movie's videos                             |
+| **reviews**           | A list of all the reviews of the movie                             |
+| **keyposter_url**     | The URL for the movie's main poster                                |
+| **keyvideo_url**      | The URL for the movies main trailer                                |
 
 ---
 

@@ -11,13 +11,10 @@ import {
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw"; // Import the plugin
 
-export default function MovieReviews({ movie }) {
+export default function MovieReviews({ movie, sentiment }) {
   if (!movie?.reviews) {
     return <p className="text-gray-500 italic">No reviews available.</p>;
   }
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFocusMode, setIsFocusMode] = useState(false);
 
   // Separate author name from review content, returning an object
   const parseReview = (review) => {
@@ -38,11 +35,22 @@ export default function MovieReviews({ movie }) {
   return (
     <div className="bg-gradient-to-b from-slate-800/30 to-transparent shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg">
       <div className="p-6 border-b border-slate-700/50">
-        <h2 className="text-lg font-semibold text-white">Reviews</h2>
+        <h2 className="text-2xl font-semibold text-white">Reviews</h2>
         <p className="text-slate-400 text-sm">
           {splitReviews.length}{" "}
           {splitReviews.length === 1 ? "review" : "reviews"}
         </p>
+        {sentiment && (
+          <div className="mt-4 p-4 bg-gradient-to-b from-blue-600/20 to-transparent rounded-xl">
+            <h3 className="text-white font-bold text-2xl pt-2 pb-5">
+              Overall Sentiment
+            </h3>
+            <p className="text-slate-300 font-light text-lg">{sentiment}</p>
+            <p className="text-md font-light pt-5 text-slate-500 italic mt-2">
+              * This sentiment analysis is powered by AI technology.
+            </p>
+          </div>
+        )}
       </div>
 
       <div className="max-h-[600px] overflow-y-auto">

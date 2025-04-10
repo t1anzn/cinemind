@@ -3,7 +3,10 @@ import {
   MagnifyingGlassIcon,
   ChevronRightIcon,
   XMarkIcon,
+  ArrowUpIcon,
+  ArrowDownIcon,
 } from "@heroicons/react/20/solid";
+import CustomSelect from "./CustomSelect";
 
 export default function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -37,7 +40,14 @@ export default function SearchBar({ onSearch }) {
         const uniqueLangs = [
           ...new Set(data.movies.map((m) => m.original_language)),
         ].filter(Boolean);
-        setLanguages(["", ...uniqueLangs]);
+        const languageOptions = [
+          { value: "", label: "All Languages" },
+          ...uniqueLangs.map((lang) => ({
+            value: lang,
+            label: lang.toUpperCase(),
+          })),
+        ];
+        setLanguages(languageOptions);
       });
   }, []);
 
@@ -81,10 +91,9 @@ export default function SearchBar({ onSearch }) {
   };
 
   const toggleGenre = (id) => {
-    const updated =
-      selectedGenres.includes(id)
-        ? selectedGenres.filter((g) => g !== id)
-        : [...selectedGenres, id];
+    const updated = selectedGenres.includes(id)
+      ? selectedGenres.filter((g) => g !== id)
+      : [...selectedGenres, id];
     setSelectedGenres(updated);
   };
 
@@ -93,6 +102,14 @@ export default function SearchBar({ onSearch }) {
   };
 
   const clearLanguage = () => setSelectedLanguage("");
+
+  const resetFilters = () => {
+    setSearchTerm("");
+    setSelectedGenres([]);
+    clearLanguage();
+    setSortField("popularity");
+    setSortOrder("desc");
+  };
 
   // Auto-update grid on filter/sort change
   useEffect(() => {
@@ -105,9 +122,30 @@ export default function SearchBar({ onSearch }) {
     });
   }, [selectedGenres, selectedLanguage, sortField, sortOrder]);
 
+  const sortOrderOptions = [
+    {
+      value: "desc",
+      label: "Descending",
+      icon: <ArrowDownIcon className="h-4 w-4 text-slate-400" />,
+    },
+    {
+      value: "asc",
+      label: "Ascending",
+      icon: <ArrowUpIcon className="h-4 w-4 text-slate-400" />,
+    },
+  ];
+
+  const sortFieldOptions = [
+    { value: "popularity", label: "Popularity" },
+    { value: "vote_count", label: "Vote Count" },
+    { value: "runtime", label: "Runtime" },
+    { value: "release_date", label: "Release Year" },
+    { value: "title", label: "Alphabetical" },
+  ];
+
   return (
-    <div className="relative mx-auto max-w-xl mb-8 space-y-4">
-      <form onSubmit={handleSubmit} className="space-y-3">
+    <div className="relative mx-auto max-w-full mb-8 space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Search input */}
         <div className="relative group">
           <input
@@ -138,90 +176,130 @@ export default function SearchBar({ onSearch }) {
           </button>
         </div>
 
-        {/* Multi-select Genres */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          {genres.map((genre) => (
-            <label
-              key={genre.id}
-              className={`cursor-pointer text-sm px-3 py-1 rounded-full border transition-all ${
-                selectedGenres.includes(genre.id)
-                  ? "bg-cyan-600 text-white border-cyan-600"
-                  : "bg-slate-800 text-slate-300 border-slate-700"
-              }`}
-              onClick={() => toggleGenre(genre.id)}
+        {/* Filters Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-gradient-to-b from-slate-800/30 to-transparent shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-6 ">
+          {/* Genre Selection */}
+          <div className="space-y-3">
+            <h3 className="text-slate-300 text-sm font-medium uppercase tracking-wider">
+              Genres
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {genres.map((genre) => (
+                <button
+                  type="button"
+                  key={genre.id}
+                  onClick={() => toggleGenre(genre.id)}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 
+                hover:-translate-y-0.5 ${
+                  selectedGenres.includes(genre.id)
+                    ? "bg-cyan-600 text-white shadow-lg shadow-cyan-900/50"
+                    : "bg-slate-800/80 text-slate-400 hover:bg-slate-700/80 hover:text-slate-200"
+                }`}
+                >
+                  {genre.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Sort & Language Controls */}
+          <div className="space-y-3">
+            <h3 className="text-slate-300 text-sm font-medium uppercase tracking-wider">
+              Sort & Filter
+            </h3>
+            <div className="space-y-3">
+              <CustomSelect
+                value={selectedLanguage}
+                onChange={setSelectedLanguage}
+                options={languages}
+              />
+
+              <div className="grid grid-cols-2 gap-3">
+                <CustomSelect
+                  value={sortField}
+                  onChange={setSortField}
+                  options={sortFieldOptions}
+                />
+
+                <CustomSelect
+                  value={sortOrder}
+                  onChange={setSortOrder}
+                  options={sortOrderOptions}
+                />
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="text-xs text-slate-400 font-light tracking-wide hover:text-blue-400 hover:-translate-y-0.5 transition-all duration-200"
             >
-              {genre.name}
-            </label>
-          ))}
-        </div>
-
-        {/* Language Dropdown */}
-        <select
-          className="w-full px-4 py-2 bg-black/60 text-white border border-slate-700 rounded-lg focus:outline-none"
-          value={selectedLanguage}
-          onChange={(e) => setSelectedLanguage(e.target.value)}
-        >
-          <option value="">All Languages</option>
-          {languages.map(
-            (lang) =>
-              lang && (
-                <option key={lang} value={lang}>
-                  {lang.toUpperCase()}
-                </option>
-              )
-          )}
-        </select>
-
-        {/* Sort By + Order */}
-        <div className="grid grid-cols-2 gap-3">
-          <select
-            className="w-full px-4 py-2 bg-black/60 text-white border border-slate-700 rounded-lg"
-            value={sortField}
-            onChange={(e) => setSortField(e.target.value)}
-          >
-            <option value="popularity">Popularity</option>
-            <option value="vote_count">Vote Count</option>
-            <option value="runtime">Runtime</option>
-            <option value="release_date">Release Year</option>
-            <option value="title">Alphabetical</option>
-          </select>
-
-          <select
-            className="w-full px-4 py-2 bg-black/60 text-white border border-slate-700 rounded-lg"
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-          >
-            <option value="desc">Descending</option>
-            <option value="asc">Ascending</option>
-          </select>
+              Reset Filters
+            </button>
+          </div>
         </div>
       </form>
 
-      {/* Pills for selected filters */}
-      <div className="flex flex-wrap gap-2 pt-2">
-        {selectedGenres.map((id) => {
-          const genre = genres.find((g) => g.id === id);
-          return (
+      {/* Active Filters */}
+      {(selectedGenres.length > 0 || selectedLanguage) && (
+        <div className="flex flex-wrap items-center gap-2 pt-2 animate-[fadeIn_0.2s_ease-in-out]">
+          <span className="text-xs text-slate-400 font-medium uppercase tracking-wider opacity-0 animate-[fadeSlideIn_0.3s_ease-out_0.1s_forwards]">
+            Active Filters:
+          </span>
+          {selectedGenres.map((id, index) => {
+            const genre = genres.find((g) => g.id === id);
+            return (
+              <span
+                key={id}
+                className="bg-blue-800/40 hover:bg-blue-500 text-slate-200 text-xs px-3 py-1.5 rounded-full 
+                flex items-center gap-2 border border-cyan-500/20 transition-all duration-300
+                opacity-0 scale-95 animate-[fadeSlideIn_0.3s_ease-out_forwards] hover:-translate-y-0.5"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {genre?.name}
+                <XMarkIcon
+                  className="h-3.5 w-3.5 cursor-pointer hover:text-white hover:scale-110 transition-transform duration-200"
+                  onClick={() => removeGenre(id)}
+                />
+              </span>
+            );
+          })}
+          {selectedLanguage && (
             <span
-              key={id}
-              className="bg-cyan-700 text-white text-xs px-3 py-1 rounded-full flex items-center gap-2"
+              className="bg-cyan-900/50 hover:bg-cyan-800 text-cyan-100 text-xs px-3 py-1.5 rounded-full 
+              flex items-center gap-2 border border-cyan-500/20 transition-all duration-300
+              opacity-0 scale-95 animate-[fadeSlideIn_0.3s_ease-out_forwards] hover:-translate-y-0.5"
+              style={{ animationDelay: `${selectedGenres.length * 0.1}s` }}
             >
-              {genre?.name}
+              {selectedLanguage.toUpperCase()}
               <XMarkIcon
-                className="h-4 w-4 cursor-pointer"
-                onClick={() => removeGenre(id)}
+                className="h-3.5 w-3.5 cursor-pointer hover:text-white hover:scale-110 transition-transform duration-200"
+                onClick={clearLanguage}
               />
             </span>
-          );
-        })}
+          )}
+        </div>
+      )}
 
-        {selectedLanguage && (
-          <span className="bg-cyan-700 text-white text-xs px-3 py-1 rounded-full flex items-center gap-2">
-            {selectedLanguage.toUpperCase()}
-            <XMarkIcon className="h-4 w-4 cursor-pointer" onClick={clearLanguage} />
-          </span>
-        )}
-      </div>
+      <style jsx>{`
+        @keyframes fadeSlideIn {
+          from {
+            opacity: 0;
+            transform: translateY(-5px) scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+      `}</style>
 
       {/* Suggestions dropdown */}
       {suggestions.length > 0 && (
