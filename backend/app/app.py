@@ -434,6 +434,7 @@ def results_movies():
     sortable_columns = {
         "popularity": Movie.popularity,
         "vote_count": Movie.vote_count,
+        "vote_average": Movie.vote_average,
         "runtime": Movie.runtime,
         "release_date": Movie.release_date,
         "title": Movie.title,
@@ -478,6 +479,7 @@ def results_movies():
         'movies': movie_data
     })
 
+# Endpoint to analyze movie sentiment using Gemini AI
 @app.route('/movies/<int:id>/sentiment', methods=['GET'])
 def analyze_movie_sentiment(id):
     movie = Movie.query.get(id)

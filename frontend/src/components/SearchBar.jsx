@@ -138,6 +138,7 @@ export default function SearchBar({ onSearch }) {
   const sortFieldOptions = [
     { value: "popularity", label: "Popularity" },
     { value: "vote_count", label: "Vote Count" },
+    { value: "vote_average", label: "Rating" },
     { value: "runtime", label: "Runtime" },
     { value: "release_date", label: "Release Year" },
     { value: "title", label: "Alphabetical" },
