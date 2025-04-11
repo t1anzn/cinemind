@@ -43,7 +43,7 @@ export function formatPopularityBar(popularity) {
     console.error("Invalid popularity value:", popularity);
     return "0%";
   }
-  const width = Math.min(100, Math.floor(popularity / 10)); // Cap at 100%
+  const width = Math.min(100, Math.floor(popularity / 5)); // Cap at 100%
   return `${width}%`;
 }
 
