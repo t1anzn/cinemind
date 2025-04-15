@@ -22,8 +22,8 @@ import Footer from "../components/Footer.jsx";
     <script src="https://www.youtube.com/iframe_api"></script>
   </head>
   <body>
-    <div class="min-h-screen flex flex-col bg-black">
-      <Navigation />
+    <div class="min-h-screen flex flex-col overflow-x-hidden bg-black">
+      <Navigation client:load />
       <slot />
       <Footer />
     </div>
