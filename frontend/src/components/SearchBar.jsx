@@ -145,7 +145,7 @@ export default function SearchBar({ onSearch }) {
   ];
 
   return (
-    <div className="relative mx-auto max-w-full mb-8 space-y-6">
+    <div className="relative mx-auto w-full max-w-full mb-8 space-y-6 overflow-x-auto">
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Search input */}
         <div className="relative group">

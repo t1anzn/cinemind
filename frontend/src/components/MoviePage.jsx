@@ -16,6 +16,7 @@ export default function MoviePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  console.log();
   // Fetch movies with optional query and genre
   const fetchMovies = async (page = 1) => {
     setIsLoading(true);
@@ -63,12 +64,18 @@ export default function MoviePage() {
   };
 
   return (
-    <div className="content-wrapper py-10">
+    <div className="content-wrapper w-full max-w-full py-10">
       <h1 className="text-3xl text-white font-bold mb-8 md:text-4xl">
         Browse Movies
       </h1>
       <SearchBar onSearch={handleSearch} />
-      <MovieGrid title="Search Movies" movies={movies} isLoading={isLoading} />
+      <div className="w-full max-w-full overflow-x-auto">
+        <MovieGrid
+          title="Search Movies"
+          movies={movies}
+          isLoading={isLoading}
+        />
+      </div>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
