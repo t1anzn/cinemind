@@ -62,6 +62,7 @@ class Cast(db.Model):
     actor_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     gender = db.Column(db.String(50))
+    popularity = db.Column(db.Float)  # Adding popularity to cast name
 
 class Genres(db.Model):
     __tablename__ = 'genres'
@@ -296,7 +297,7 @@ def get_movie_by_id(id):
     keyword_names = [keyword.keyword_name for keyword in keywords]
 
     # Query the cast of the movie
-    cast_members = Cast.query.join(MovieCast).filter(MovieCast.movie_id == movie.id).all()
+    cast_members = Cast.query.join(MovieCast).filter(MovieCast.movie_id == movie.id).order_by(Cast.popularity.desc().nullslast()).all() # Updated to rank with popularity
     cast_names = [cast.name for cast in cast_members]
 
     # Query the production countries of the movie
