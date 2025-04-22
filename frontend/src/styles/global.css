@@ -32,3 +32,14 @@ body {
   .overflow-y-auto::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 123, 255, 0.8); /* Thumb color on hover */
   }
+
+  /* Add to your CSS file */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+  
