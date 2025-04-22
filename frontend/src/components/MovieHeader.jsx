@@ -2,12 +2,43 @@ import MoviePoster from "./MoviePoster";
 import * as movieDisplayUtils from "../utils/movieDisplayUtils";
 
 export default function MovieHeader({ movie }) {
-  // Handle null or singular link in the string
+  console.log("MovieHeader received movie data:", movie); // Debug log
+
+  // Check if movie object is valid
+  if (!movie || typeof movie !== "object") {
+    console.error("Invalid movie object received:", movie);
+    return (
+      <div className="relative h-[70vh] bg-slate-900">
+        <div className="content-wrapper relative h-full flex items-center justify-center z-10">
+          <div className="text-center">
+            <h1 className="text-3xl text-white font-bold">
+              Movie Data Unavailable
+            </h1>
+            <p className="text-slate-300 mt-2">
+              Could not load movie information
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Handle null or singular link in the string with proper fallback
   const backdropUrls = movie.backdrop_url
     ? movie.backdrop_url.includes(",")
       ? movie.backdrop_url.split(",")
       : [movie.backdrop_url]
     : [];
+
+  // Default backdrop image to use if none is available
+  const defaultBackdrop =
+    "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=";
+
+  // Safely get the first backdrop URL with trimming and fallback
+  const backdropUrl =
+    backdropUrls.length > 0 && backdropUrls[0]
+      ? backdropUrls[0].trim()
+      : defaultBackdrop;
 
   return (
     <div className="relative h-[70vh]">
@@ -15,12 +46,29 @@ export default function MovieHeader({ movie }) {
         <div className="w-full h-full">
           <img
             className="w-full h-full object-cover overflow-hidden"
-            src={backdropUrls[0].trim()}
-            alt={movie.title}
+            src={backdropUrl}
+            alt={movie.title || "Movie backdrop"}
+            onError={(e) => {
+              console.log("Image load error, using fallback");
+              e.target.src = defaultBackdrop;
+              e.target.onerror = null; // Prevent infinite error loop
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
         </div>
       </div>
+
+      {/* Debug information (hidden in production) */}
+      {process.env.NODE_ENV === "development" && (
+        <div className="absolute top-0 right-0 bg-black/75 text-xs text-white p-2 z-50">
+          <div>Movie ID: {movie.id || "Unknown"}</div>
+          <div>
+            Data Status:{" "}
+            {Object.keys(movie).length ? "Data present" : "Empty object"}
+          </div>
+        </div>
+      )}
+
       <div className="content-wrapper relative h-full flex items-end pb-16 z-10">
         <div className="flex flex-col md:flex-row gap-8">
           <div className="hidden md:block w-64 flex-shrink-0">
