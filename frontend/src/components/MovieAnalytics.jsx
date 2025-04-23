@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"; // Add useEffect
 import YearDistributionChart from "./YearDistributionChart";
 import GenreDistributionChart from "./GenreDistributionChart";
+import FinancialPerformanceChart from "./FinancialPerformanceChart";
 
 export default function MovieAnalytics({
   analyticsData,
@@ -12,11 +13,19 @@ export default function MovieAnalytics({
       groupByDecade: true,
       maxBars: 20,
       height: "400px",
+      showDataLabels: false,
     },
     genreChart: {
       maxGenres: 10,
       height: "400px",
       sortBy: "count", // Add sort option (count or alphabetical)
+      showDataLabels: false,
+    },
+    financialChart: {
+      maxMovies: 15,
+      metric: "revenue", // revenue, budget, profit, roi
+      height: "400px",
+      showDataLabels: false,
     },
   });
 
@@ -110,6 +119,30 @@ export default function MovieAnalytics({
                     <option value={100}>100</option>
                   </select>
                 </div>
+
+                <div className="flex">
+                  <button
+                    onClick={() =>
+                      setChartOptions({
+                        ...chartOptions,
+                        yearChart: {
+                          ...chartOptions.yearChart,
+                          showDataLabels:
+                            !chartOptions.yearChart.showDataLabels,
+                        },
+                      })
+                    }
+                    className={`text-sm px-3 py-1 rounded-md ${
+                      chartOptions.yearChart.showDataLabels
+                        ? "bg-blue-600 hover:bg-blue-700"
+                        : "bg-gray-700 hover:bg-gray-600"
+                    } transition-colors`}
+                  >
+                    {chartOptions.yearChart.showDataLabels
+                      ? "Hide Labels"
+                      : "Show Labels"}
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -119,6 +152,7 @@ export default function MovieAnalytics({
                 groupByDecade={chartOptions.yearChart.groupByDecade}
                 maxBars={chartOptions.yearChart.maxBars}
                 height={chartOptions.yearChart.height}
+                showDataLabels={chartOptions.yearChart.showDataLabels}
               />
             </div>
           </div>
@@ -177,6 +211,30 @@ export default function MovieAnalytics({
                     <option value="popularity">Popularity</option>
                   </select>
                 </div>
+
+                <div className="flex">
+                  <button
+                    onClick={() =>
+                      setChartOptions({
+                        ...chartOptions,
+                        genreChart: {
+                          ...chartOptions.genreChart,
+                          showDataLabels:
+                            !chartOptions.genreChart.showDataLabels,
+                        },
+                      })
+                    }
+                    className={`text-sm px-3 py-1 rounded-md ${
+                      chartOptions.genreChart.showDataLabels
+                        ? "bg-blue-600 hover:bg-blue-700"
+                        : "bg-gray-700 hover:bg-gray-600"
+                    } transition-colors`}
+                  >
+                    {chartOptions.genreChart.showDataLabels
+                      ? "Hide Labels"
+                      : "Show Labels"}
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -187,6 +245,104 @@ export default function MovieAnalytics({
                 height={chartOptions.genreChart.height}
                 sortBy={chartOptions.genreChart.sortBy}
                 genreMap={genreMap}
+                showDataLabels={chartOptions.genreChart.showDataLabels}
+              />
+            </div>
+          </div>
+
+          {/* Financial Performance Chart */}
+          <div className="mb-8 mt-10">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-semibold">Financial Performance</h3>
+              <p className="text-sm text-gray-400 font-light">
+                Top {chartOptions.financialChart.maxMovies} movies by{" "}
+                {chartOptions.financialChart.metric === "revenue"
+                  ? "box office revenue"
+                  : chartOptions.financialChart.metric === "budget"
+                  ? "production budget"
+                  : chartOptions.financialChart.metric === "profit"
+                  ? "profit margin"
+                  : "return on investment"}
+              </p>
+
+              {/* Financial Chart Controls */}
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center">
+                  <label className="text-sm text-gray-300 mr-2">Metric:</label>
+                  <select
+                    value={chartOptions.financialChart.metric}
+                    onChange={(e) =>
+                      setChartOptions({
+                        ...chartOptions,
+                        financialChart: {
+                          ...chartOptions.financialChart,
+                          metric: e.target.value,
+                        },
+                      })
+                    }
+                    className="bg-gray-800 text-white text-sm rounded px-2 py-1 border border-gray-700"
+                  >
+                    <option value="revenue">Revenue</option>
+                    <option value="budget">Budget</option>
+                    <option value="profit">Profit</option>
+                    <option value="roi">ROI</option>
+                  </select>
+                </div>
+
+                <div className="flex items-center">
+                  <label className="text-sm text-gray-300 mr-2">Show:</label>
+                  <select
+                    value={chartOptions.financialChart.maxMovies}
+                    onChange={(e) =>
+                      setChartOptions({
+                        ...chartOptions,
+                        financialChart: {
+                          ...chartOptions.financialChart,
+                          maxMovies: Number(e.target.value),
+                        },
+                      })
+                    }
+                    className="bg-gray-800 text-white text-sm rounded px-2 py-1 border border-gray-700"
+                  >
+                    <option value={10}>Top 10</option>
+                    <option value={15}>Top 15</option>
+                    <option value={20}>Top 20</option>
+                  </select>
+                </div>
+
+                <div className="flex">
+                  <button
+                    onClick={() =>
+                      setChartOptions({
+                        ...chartOptions,
+                        financialChart: {
+                          ...chartOptions.financialChart,
+                          showDataLabels:
+                            !chartOptions.financialChart.showDataLabels,
+                        },
+                      })
+                    }
+                    className={`text-sm px-3 py-1 rounded-md ${
+                      chartOptions.financialChart.showDataLabels
+                        ? "bg-blue-600 hover:bg-blue-700"
+                        : "bg-gray-700 hover:bg-gray-600"
+                    } transition-colors`}
+                  >
+                    {chartOptions.financialChart.showDataLabels
+                      ? "Hide Labels"
+                      : "Show Labels"}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-b from-slate-800/30 to-transparent shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-4">
+              <FinancialPerformanceChart
+                movies={analyticsData}
+                metric={chartOptions.financialChart.metric}
+                maxMovies={chartOptions.financialChart.maxMovies}
+                height={chartOptions.financialChart.height}
+                showDataLabels={chartOptions.financialChart.showDataLabels}
               />
             </div>
           </div>
