@@ -11,6 +11,7 @@ export default function GenreDistributionChart({
   height = "400px",
   sortBy = "count",
   genreMap = {},
+  showDataLabels = false,
 }) {
   // Extract and count genres from movies
   const genreData = useMemo(() => {
@@ -204,6 +205,24 @@ export default function GenreDistributionChart({
             const percentage = ((value / total) * 100).toFixed(1);
             return `${label}: ${value} movies (${percentage}%)`;
           },
+        },
+      },
+      datalabels: {
+        display: showDataLabels,
+        color: "#fff",
+        formatter: (value, context) => {
+          // Get the corresponding genre name from labels array
+          return context.chart.data.labels[context.dataIndex];
+        },
+        // Only show labels on segments that are large enough to be readable
+        display: (context) => {
+          if (!showDataLabels) return false; // Don't show if labels are turned off
+
+          const index = context.dataIndex;
+          const value = context.dataset.data[index];
+          const total = context.dataset.data.reduce((a, b) => a + b, 0);
+          // Only show labels for segments that are at least 4% of the total
+          return value / total > 0.02; // Threshold for label display
         },
       },
     },

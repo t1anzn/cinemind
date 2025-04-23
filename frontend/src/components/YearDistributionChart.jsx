@@ -24,6 +24,7 @@ export default function YearDistributionChart({
   groupByDecade = false,
   maxBars = 20,
   height = "300px",
+  showDataLabels = false,
 }) {
   const chartData = useMemo(() => {
     if (!movies || movies.length === 0) {
@@ -126,6 +127,10 @@ export default function YearDistributionChart({
       },
       tooltip: {
         backgroundColor: "rgba(0, 0, 0, 0.7)",
+      },
+      datalabels: {
+        display: showDataLabels,
+        color: "rgba(255, 255, 255, 1)",
       },
     },
   };

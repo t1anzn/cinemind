@@ -504,7 +504,9 @@ def results_movies():
             'reviews': movie.reviews,
             'keyposter_url': movie.keyposter_url,
             'keyvideo_url': movie.keyvideo_url,
-            'genres': genre_names,  # Add genres to the response
+            'genres': genre_names,  
+            'budget': movie.budget, 
+            'revenue': movie.revenue  
         })
 
     return jsonify({
