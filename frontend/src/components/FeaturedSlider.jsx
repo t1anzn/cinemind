@@ -62,9 +62,9 @@ export default function FeaturedSlider({ featuredMovies = [] }) {
         </div>
 
         {/* Movie Content */}
-        <div className="content-wrapper relative h-full flex items-end pb-20 md:pb-1 z-20">
-          <div className="p-6 rounded-lg max-w-2xl">
-            <h1 className="text-5xl md:text-4xl font-extralight text-white mb-3 tracking-wider">
+        <div className="content-wrapper relative h-full flex items-end pb-25 md:pb-20 sm:pb-15 z-20">
+          <div className="p-6 md:p-3 sm:p-2 rounded-lg max-w-2xl sm:max-w-md">
+            <h1 className="text-3xl lg:text-5xl whitespace-pre md:text-4xl font-extralight text-white mb-3 tracking-wider">
               {currentMovie.title}
             </h1>
 
@@ -100,7 +100,7 @@ export default function FeaturedSlider({ featuredMovies = [] }) {
                   </span>
                 ))}
             </div>
-            <p className="text-slate-300/90 mb-6 text-sm md:text-xs max-w-2xl tracking-wide font-light leading-relaxed line-clamp-3">
+            <p className="text-slate-300/90 mb-6 text-sm md:text-sm lg:text-md max-w-2xl tracking-wide font-light leading-relaxed line-clamp-3">
               {currentMovie.overview}
             </p>
 
