@@ -144,12 +144,10 @@ export default function CastSlider({ cast }) {
               <motion.div
                 key={index}
                 className="flex-none w-[138px] py-2" // Added py-2 to create space for scaling
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
                 draggable="false" // Prevent dragging of the element
               >
                 <div
-                  className="bg-gradient-to-b from-blue-500 to-transparent rounded-lg overflow-hidden shadow-lg border border-slate-800 hover:border-slate-200 hover:border-slate-100 transition-all duration-300"
+                  className="bg-gradient-to-b from-blue-500 to-transparent rounded-lg overflow-hidden border hover:scale-110 border-slate-800 hover:border-slate-100 transition-all duration-500"
                   draggable="false" // Also prevent dragging at this level
                 >
                   {/* Actor image */}

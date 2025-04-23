@@ -79,7 +79,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
     <div className="flex justify-center mt-8 items-center gap-4">
       <button
         onClick={() => goToPage(currentPage - 1)}
-        disabled={currentPage === 1}
+        disabled={currentPage === 1 ? true : false}
         className="px-4 py-2 bg-transparent text-white rounded-lg tracking-widest border border-blue-400/0 hover:border-blue-400 hover:text-blue-400 shadow hover:shadow-sm hover:shadow-cyan-400 transition-all duration-300 disabled:opacity-50"
       >
         <ChevronLeftIcon className="w-6 h-6" />
@@ -89,7 +89,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
       </div>
       <button
         onClick={() => goToPage(currentPage + 1)}
-        disabled={currentPage === totalPages}
+        disabled={currentPage === totalPages ? true : false}
         className="px-4 py-2 bg-transparent text-white rounded-lg tracking-widest border border-blue-400/0 hover:border-blue-400 hover:text-blue-400 shadow hover:shadow-sm hover:shadow-cyan-400 transition-all duration-300 disabled:opacity-50"
       >
         <ChevronRightIcon className="w-6 h-6" />

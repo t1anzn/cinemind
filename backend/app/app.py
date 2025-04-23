@@ -484,6 +484,10 @@ def results_movies():
 
     movie_data = []
     for movie in movies:
+        # Get genres for this movie
+        genres = Genres.query.join(MovieGenre).filter(MovieGenre.movie_id == movie.id).all()
+        genre_names = [genre.genre_name for genre in genres]
+        
         movie_data.append({
             'id': movie.id,
             'title': movie.title,
@@ -500,6 +504,7 @@ def results_movies():
             'reviews': movie.reviews,
             'keyposter_url': movie.keyposter_url,
             'keyvideo_url': movie.keyvideo_url,
+            'genres': genre_names,  # Add genres to the response
         })
 
     return jsonify({
