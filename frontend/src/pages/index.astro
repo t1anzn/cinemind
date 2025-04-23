@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import FeaturedSlider from "../components/FeaturedSlider";
 import MovieGrid from "../components/MovieGrid";
+import YearDistributionChart from "../components/YearDistributionChart";
 
 // Fetch featured movies from the backend
 const featuredMoviesResponse = await fetch("http://127.0.0.1:5000/featured");
@@ -35,6 +36,17 @@ const exploreMovies = exploreMoviesData || [];
       tagline="Top rated films loved by our community"
       movies={popularMovies}
     />
+    <div class="my-16">
+      <h2 class="text-2xl font-bold mb-4">Movie Releases Across Time</h2>
+      <p class="text-gray-500 mb-6">
+        Explore the distribution of our movie collection by year
+      </p>
+      <YearDistributionChart
+        client:visible
+        movies={[...popularMovies, ...exploreMovies, ...featuredMovies]}
+      />
+    </div>
+
     <MovieGrid
       client:visible
       title="Explore"
