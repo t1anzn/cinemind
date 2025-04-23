@@ -90,6 +90,20 @@ export default function MovieMedia({ movie }) {
     setIsBackdropFocusMode(false);
   };
 
+  useEffect(() => {
+    // When any modal is open, prevent background scrolling
+    if (isTheaterMode || isPosterFocusMode || isBackdropFocusMode) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    // Cleanup function to restore scrolling when component unmounts
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isTheaterMode, isPosterFocusMode, isBackdropFocusMode]);
+
   const paginatedVideos = useMemo(() => {
     if (!isVideosExpanded) {
       return trailerUrls.slice(0, INITIAL_ITEMS);
@@ -362,17 +376,17 @@ export default function MovieMedia({ movie }) {
 
       {isPosterFocusMode && (
         <div
-          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-start justify-center p-4 overflow-auto"
-          onClick={closePosterFocusMode} // Close focus mode when clicking on the background
+          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4 overflow-y-auto"
+          onClick={closePosterFocusMode}
         >
           <div
-            className="relative w-full max-w-4xl md:max-w-3xl mt-30"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the poster
+            className="relative w-full max-w-4xl md:max-w-3xl max-h-[90vh] my-8"
+            onClick={(e) => e.stopPropagation()}
           >
             <img
               src={posterUrls[focusedPosterIndex]}
               alt={`Focused Poster ${focusedPosterIndex + 1}`}
-              className="w-full h-auto object-contain"
+              className="w-full h-auto object-contain max-h-[85vh]"
             />
             <button
               onClick={closePosterFocusMode}
@@ -386,17 +400,17 @@ export default function MovieMedia({ movie }) {
 
       {isBackdropFocusMode && (
         <div
-          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-start justify-center p-4 overflow-auto"
-          onClick={closeBackdropFocusMode} // Close focus mode when clicking on the background
+          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4 overflow-y-auto"
+          onClick={closeBackdropFocusMode}
         >
           <div
-            className="relative w-full max-w-4/5 mt-30"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the poster
+            className="relative w-full max-w-5xl max-h-[90vh] my-8"
+            onClick={(e) => e.stopPropagation()}
           >
             <img
               src={backdropUrls[focusedBackdropIndex]}
               alt={`Focused Backdrop ${focusedBackdropIndex + 1}`}
-              className="w-full h-auto object-contain"
+              className="w-full h-auto object-contain max-h-[85vh]"
             />
             <button
               onClick={closeBackdropFocusMode}

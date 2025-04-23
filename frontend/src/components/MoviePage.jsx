@@ -117,7 +117,7 @@ export default function MoviePage() {
       url.searchParams.set("sort_by", "vote_average"); // Sort by rating
       url.searchParams.set("order", "desc"); // Highest rated first
       url.searchParams.set("page", 1); // First page
-      url.searchParams.set("per_page", 500); // Get 1000 results
+      url.searchParams.set("per_page", 1000); // Get 1000 results
 
       const response = await fetch(url);
       const data = await response.json();
