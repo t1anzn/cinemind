@@ -62,7 +62,9 @@ class Cast(db.Model):
     actor_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     gender = db.Column(db.String(50))
-    popularity = db.Column(db.Float)  # Adding popularity to cast name
+    popularity = db.Column(db.Float)
+    profile_path = db.Column(db.Text)
+    biography = db.Column(db.Text)
 
 class Genres(db.Model):
     __tablename__ = 'genres'
@@ -130,10 +132,16 @@ class MovieSpokenLanguages(db.Model):
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'), primary_key=True)
     language_id = db.Column(db.Integer, db.ForeignKey('spoken_languages.language_id'), primary_key=True)
 
+class Characters(db.Model):
+    __tablename__ = 'characters'
+    character_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)  # Changed from character_name to name
+
 class MovieCast(db.Model):
     __tablename__ = 'movies_cast'
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'), primary_key=True)
     actor_id = db.Column(db.Integer, db.ForeignKey('cast.actor_id'), primary_key=True)
+    character_id = db.Column(db.Integer, db.ForeignKey('characters.character_id'), primary_key=True)
 
 # Endpoints
 @app.route('/movies', methods=['GET'])
@@ -296,8 +304,31 @@ def get_movie_by_id(id):
     keywords = Keywords.query.join(MovieKeywords).filter(MovieKeywords.movie_id == movie.id).all()
     keyword_names = [keyword.keyword_name for keyword in keywords]
 
-    # Query the cast of the movie
-    cast_members = Cast.query.join(MovieCast).filter(MovieCast.movie_id == movie.id).order_by(Cast.popularity.desc().nullslast()).all() # Updated to rank with popularity
+    # Query enhanced cast details with profile images and more information
+    cast_members = Cast.query.join(MovieCast).filter(MovieCast.movie_id == movie.id).order_by(Cast.popularity.desc().nullslast()).all()
+
+    # Create detailed cast information incl. profile images and character names
+    cast_details = []
+    for cast in cast_members:
+        # Get the character name from MovieCast and Characters tables
+        movie_cast = MovieCast.query.filter_by(movie_id=movie.id, actor_id=cast.actor_id).first()
+        character_name = None
+        if movie_cast and movie_cast.character_id:
+            character = Characters.query.get(movie_cast.character_id)
+            if character:
+                character_name = character.name  # Changed from character.character_name to character.name
+    
+        cast_details.append({
+            'id': cast.actor_id,
+            'name': cast.name,
+            'character': character_name,
+            'gender': cast.gender, 
+            'popularity': cast.popularity,
+            'profile_path': cast.profile_path if hasattr(cast, 'profile_path') else None,
+            'biography': (cast.biography[:150] + '...') if hasattr(cast, 'biography') and cast.biography else None
+        })
+
+    # Simple cast names list (for backward compatibility)
     cast_names = [cast.name for cast in cast_members]
 
     # Query the production countries of the movie
@@ -317,6 +348,7 @@ def get_movie_by_id(id):
         'genres': genre_names,
         'keywords': keyword_names,
         'cast': cast_names,
+        'cast_details': cast_details,
         'budget': movie.budget,
         'revenue': movie.revenue,
         'runtime': movie.runtime,
@@ -452,6 +484,10 @@ def results_movies():
 
     movie_data = []
     for movie in movies:
+        # Get genres for this movie
+        genres = Genres.query.join(MovieGenre).filter(MovieGenre.movie_id == movie.id).all()
+        genre_names = [genre.genre_name for genre in genres]
+        
         movie_data.append({
             'id': movie.id,
             'title': movie.title,
@@ -468,6 +504,9 @@ def results_movies():
             'reviews': movie.reviews,
             'keyposter_url': movie.keyposter_url,
             'keyvideo_url': movie.keyvideo_url,
+            'genres': genre_names,  
+            'budget': movie.budget, 
+            'revenue': movie.revenue  
         })
 
     return jsonify({
@@ -509,6 +548,8 @@ def analyze_movie_sentiment(id):
         })
     except Exception as e:
         return jsonify({'error': f'Failed to analyze sentiment: {str(e)}'}), 500
+    
+
 
 # default message to test API is connected
 @app.route('/')

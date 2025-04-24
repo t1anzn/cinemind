@@ -1,19 +1,13 @@
+import CastSlider from "./CastSlider";
+
 export default function MovieOverview({ movie }) {
   return (
     <div className="col-span-1 md:col-span-2">
       <h2 className="text-2xl text-white font-bold mb-4">Overview</h2>
       <p className="text-white text-lg font-light mb-4">{movie.overview}</p>
-      <h3 className="text-xl text-white font-bold mb-4">Cast</h3>
+      <h3 className="text-xl text-white font-bold mb-0 mt-8">Cast</h3>
       <div className="flex flex-wrap gap-2">
-        {movie.cast &&
-          movie.cast.slice(0, 10).map((actor, index) => (
-            <span
-              key={index}
-              className="inline-flex items-center justify-center bg-gradient-to-b from-slate-800/50 to-transparent text-white text-sm font-light py-1 px-3 rounded-lg border-1 border-gray-600"
-            >
-              {actor}
-            </span>
-          ))}
+        <CastSlider cast={movie.cast_details || []} client:only />
       </div>
       <div className="flex flex-nowrap items-start space-x-16 text-slate-400 mt-6 mb-4">
         <div>

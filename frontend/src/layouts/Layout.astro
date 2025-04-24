@@ -9,6 +9,7 @@ import "../styles/global.css";
 import "@fontsource-variable/inter";
 import Navigation from "../components/Navigation.jsx";
 import Footer from "../components/Footer.jsx";
+import SmoothScroll from "../components/SmoothScroll";
 ---
 
 <!doctype html>
@@ -22,19 +23,21 @@ import Footer from "../components/Footer.jsx";
     <script src="https://www.youtube.com/iframe_api"></script>
   </head>
   <body>
-    <div class="min-h-screen flex flex-col overflow-x-hidden bg-black">
-      <Navigation client:load />
-      <slot />
-      <Footer />
-    </div>
+    <SmoothScroll client:load>
+      <div class="min-h-screen flex flex-col overflow-x-hidden bg-black">
+        <Navigation client:load />
+        <slot />
+        <Footer />
+      </div>
 
-    <style>
-      html,
-      body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-      }
-    </style>
+      <style>
+        html,
+        body {
+          margin: 0;
+          width: 100%;
+          height: 100%;
+        }
+      </style>
+    </SmoothScroll>
   </body>
 </html>
