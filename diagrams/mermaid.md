@@ -79,6 +79,8 @@ erDiagram
     KEYWORDS ||--o{ MOVIE_KEYWORDS : contains
 ```
 
+ Requires the Markdown Preview Mermaid Support to view the mermaid diagram
+
 ### Movies Table
 
 | Field                 | Description                                                        |
