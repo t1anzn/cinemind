@@ -74,56 +74,112 @@ let movie: {
 
 let error = null;
 let sentiment = null;
+let debugInfo = null;
 
 try {
+  console.log(`Fetching movie with ID: ${id}`);
+
   // Fetch movie by ID
   const response = await fetch(`http://127.0.0.1:5000/movies/${id}`);
+  const responseStatus = response.status;
+
+  // Store debug info
+  debugInfo = {
+    status: responseStatus,
+    statusText: response.statusText,
+    url: response.url,
+  };
+
   if (!response.ok) {
-    throw new Error("Movie not found");
+    throw new Error(`Movie not found - Status: ${responseStatus}`);
   }
-  movie = await response.json();
+
+  const responseData = await response.json();
+  console.log("Movie data received:", responseData);
+
+  // Make sure the response data is valid
+  if (!responseData || typeof responseData !== "object") {
+    throw new Error("Invalid response data format");
+  }
+
+  movie = responseData;
 
   // Fetch sentiment analysis for the movie
-  const sentimentResponse = await fetch(
-    `http://127.0.0.1:5000/movies/${id}/sentiment`
-  );
-  if (sentimentResponse.ok) {
-    const sentimentData = await sentimentResponse.json();
-    sentiment = sentimentData.sentiment_analysis;
-  } else {
-    console.error("Failed to fetch sentiment analysis");
+  try {
+    const sentimentResponse = await fetch(
+      `http://127.0.0.1:5000/movies/${id}/sentiment`
+    );
+    if (sentimentResponse.ok) {
+      const sentimentData = await sentimentResponse.json();
+      sentiment = sentimentData.sentiment_analysis;
+    } else {
+      console.error("Failed to fetch sentiment analysis");
+    }
+  } catch (sentimentError) {
+    console.error("Error fetching sentiment:", sentimentError);
+    // Don't let sentiment error break the whole page
   }
 } catch (e) {
+  console.error("Error fetching movie:", e);
   error = e instanceof Error ? e.message : "An unknown error occurred";
 }
 ---
 
 <Layout
-  title={movie
+  title={movie && movie.title
     ? `${movie.title} - (${movieDisplayUtils.getReleaseYear(movie.release_date)}) - CineMind`
     : "Movie Not Found"}
 >
   <>
-    <MovieHeader movie={movie} />
-
-    <div class="content-wrapper relative h-full w-full py-16">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        {/* Left Column */}
-        <div class="col-span-1 md:col-span-2">
-          <MovieOverview movie={movie} />
-          <MovieMedia movie={movie} client:load />
-
-          {/* Pass sentiment as a prop */}
-          <MovieReviews movie={movie} sentiment={sentiment} client:load />
+    {
+      error ? (
+        <div class="content-wrapper py-20">
+          <div class="bg-slate-800/50 border border-red-500/20 rounded-lg p-8 text-center">
+            <h1 class="text-3xl text-white font-bold mb-4">
+              Error Loading Movie
+            </h1>
+            <p class="text-red-400 mb-6">{error}</p>
+            {debugInfo && (
+              <div class="text-left bg-slate-900/50 p-4 rounded-md max-w-md mx-auto text-sm text-slate-400">
+                <p>
+                  Status: {debugInfo.status} {debugInfo.statusText}
+                </p>
+                <p>URL: {debugInfo.url}</p>
+              </div>
+            )}
+            <a
+              href="/"
+              class="inline-block mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
+            >
+              Return to Home
+            </a>
+          </div>
         </div>
+      ) : (
+        <>
+          <MovieHeader movie={movie} />
 
-        {/* Right Column */}
-        <div class="col-span-1">
-          <MovieDetails movie={movie} />
-          <MovieTags movie={movie} />
-          <FinancialOverview movie={movie} />
-        </div>
-      </div>
-    </div>
+          <div class="content-wrapper relative h-full w-full py-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+              {/* Left Column */}
+              <div class="col-span-1 md:col-span-2">
+                <MovieOverview movie={movie} client:only />
+                <MovieMedia movie={movie} client:load />
+
+                {/* Pass sentiment as a prop */}
+                <MovieReviews movie={movie} sentiment={sentiment} client:load />
+              </div>
+
+              {/* Right Column */}
+              <div class="col-span-1">
+                <MovieDetails movie={movie} />
+                <MovieTags movie={movie} />
+                <FinancialOverview movie={movie} />
+              </div>
+            </div>
+          </div>
+        </>
+      )
+    }
   </>
 </Layout>
