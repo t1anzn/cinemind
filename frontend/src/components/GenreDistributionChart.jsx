@@ -208,7 +208,6 @@ export default function GenreDistributionChart({
         },
       },
       datalabels: {
-        display: showDataLabels,
         color: "#fff",
         formatter: (value, context) => {
           // Get the corresponding genre name from labels array
