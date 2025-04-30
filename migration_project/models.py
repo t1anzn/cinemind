@@ -45,6 +45,16 @@ class Movie(db.Model):
     keyposter_url = db.Column(db.Text)
     keyvideo_url = db.Column(db.Text)
 
+    genres = db.relationship('Genres', secondary='movie_genre', backref='movies')
+    keywords = db.relationship('Keywords', secondary='movie_keywords', backref='movies')
+    production_countries = db.relationship('ProductionCountries', secondary='movie_production_countries', backref='movies')
+    spoken_languages = db.relationship('SpokenLanguages', secondary='movie_spoken_languages', backref='movies')
+
+    cast_members = db.relationship('Cast', secondary='movies_cast', backref='movie_appearances')
+    characters = db.relationship('Characters', secondary='movies_cast', backref='movie_appearances')
+    
+
+
 # Join tables
 class MovieGenre(db.Model):
     __tablename__ = 'movie_genre'
