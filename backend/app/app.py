@@ -13,7 +13,8 @@ CORS(app) # Enable CORS for all routes
 
 # Path to your existing cinemind.db database
 basedir = os.path.abspath(os.path.dirname(__file__))
-db_path = os.path.join(os.path.dirname(basedir), 'models', 'cinemind.db')
+#db_path = os.path.join(os.path.dirname(basedir), 'models', 'cinemind.db')
+db_path = os.path.join(os.path.dirname(basedir), '..', 'migration_project', 'cinema_migrations.db')
 
 # Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
