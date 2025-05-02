@@ -11,6 +11,8 @@ class Cast(db.Model):
     profile_path = db.Column(db.Text)
     biography = db.Column(db.Text)
 
+    characters_played = db.relationship('Characters', secondary='movies_cast', backref='actors')
+
 class Genres(db.Model):
     __tablename__ = 'genres'
     genre_id = db.Column(db.Integer, primary_key=True)
@@ -98,3 +100,7 @@ class MovieCast(db.Model):
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'), primary_key=True)
     actor_id = db.Column(db.Integer, db.ForeignKey('cast.actor_id'), primary_key=True)
     character_id = db.Column(db.Integer, db.ForeignKey('characters.character_id'), primary_key=True)
+
+    movie = db.relationship('Movie', foreign_keys=[movie_id], overlaps="cast_members,characters,movie_appearances")
+    actor = db.relationship('Cast', foreign_keys=[actor_id], overlaps="characters_played,movie_appearances")
+    character = db.relationship('Characters', foreign_keys=[character_id], overlaps="actors,movie_appearances")
