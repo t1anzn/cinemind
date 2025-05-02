@@ -66,6 +66,26 @@ erDiagram
         int keyword_id FK
     }
 
+    CAST {
+        int actor_id PK
+        string name
+        int gender
+        float popularity
+        string biography
+        string profile_path
+    }
+
+    MOVIES_CAST {
+        int movie_id FK
+        int actor_id FK
+        int character_id FK
+    }
+
+    CHARACTERS {
+        int character_id PK
+        string name
+    }
+
     MOVIES ||--o{ MOVIE_GENRE : has
     GENRES ||--o{ MOVIE_GENRE : contains
 
@@ -77,9 +97,15 @@ erDiagram
 
     MOVIES ||--o{ MOVIE_KEYWORDS : has
     KEYWORDS ||--o{ MOVIE_KEYWORDS : contains
+
+    MOVIES ||--o{ MOVIES_CAST : has
+    CAST ||--o{ MOVIES_CAST : contains
+
+    MOVIES ||--o{ MOVIES_CAST : has
+    CHARACTERS ||--o{ MOVIES_CAST : contains
 ```
 
- Requires the Markdown Preview Mermaid Support to view the mermaid diagram
+Requires the Markdown Preview Mermaid Support to view the mermaid diagram
 
 ### Movies Table
 
@@ -118,7 +144,7 @@ erDiagram
 
 ---
 
-### Movie_Genre Table (Join Table for Many-to-Many Relationship between Movies and Genres)
+### Movie_Genre Table
 
 | Field                      | Description                                                              |
 | -------------------------- | ------------------------------------------------------------------------ |
@@ -199,11 +225,18 @@ erDiagram
 
 ### Movies_Cast Table
 
-| Field                      | Description                                                             |
-| -------------------------- | ----------------------------------------------------------------------- |
-| **movie_id** (Foreign Key) | References the `id` from the Movies table                               |
-| **actor_id** (Foreign Key) | References the `actor_id` from the Cast table                           |
-| **character**              | The character played by the actor                                       |
-| **PRIMARY KEY**            | Composite primary key of `movie_id` and `actor_id` to ensure uniqueness |
+| Field                          | Description                                                                            |
+| ------------------------------ | -------------------------------------------------------------------------------------- |
+| **movie_id** (Foreign Key)     | References the `id` from the Movies table                                              |
+| **actor_id** (Foreign Key)     | References the `actor_id` from the Cast table                                          |
+| **character_id** (Foreign Key) | References the `character_id` from the Characters table                                |
+| **PRIMARY KEY**                | Composite primary key of `movie_id`,`actor_id` and `character_id` to ensure uniqueness |
 
 ---
+
+### Characters Table
+
+| Field                          | Description                          |
+| ------------------------------ | ------------------------------------ |
+| **character_id** (Primary Key) | Unique identifier for each character |
+| **name**                       | Name of the actor                    |
