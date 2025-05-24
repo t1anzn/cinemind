@@ -163,7 +163,7 @@ try {
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
               {/* Left Column */}
               <div class="col-span-1 md:col-span-2">
-                <MovieOverview movie={movie} client:only />
+                <MovieOverview movie={movie} client:load />
                 <MovieMedia movie={movie} client:load />
 
                 {/* Pass sentiment as a prop */}
