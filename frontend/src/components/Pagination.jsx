@@ -4,7 +4,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 export default function Pagination({ currentPage, totalPages, onPageChange }) {
   //console.log("Pagination Props:", { currentPage, totalPages });
   const goToPage = (pageNum) => {
-    if (pageNum >= 1 && pageNum <= totalPages) {
+    if (pageNum >= 1 && pageNum <= totalPages && pageNum !== currentPage) {
       onPageChange(pageNum);
     }
   };
