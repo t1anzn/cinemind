@@ -175,6 +175,24 @@ export default function SearchBar({ onSearch }) {
             <span>Search</span>
             <ChevronRightIcon className="h-4 w-4 ml-1.5" />
           </button>
+
+          {/* Suggestions dropdown */}
+          {suggestions.length > 0 && (
+            <ul
+              className="absolute z-10 bg-gradient-to-b from-gray-900/10 to-gray-900 backdrop-blur-sm text-white w-full mt-1 rounded max-h-48 overflow-y-auto"
+              onMouseDown={(e) => e.preventDefault()}
+            >
+              {suggestions.map((movie) => (
+                <li
+                  key={movie.id}
+                  onClick={() => handleSuggestionClick(movie)}
+                  className="px-4 py-2 hover:bg-gray-700 cursor-pointer"
+                >
+                  {movie.title}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* Filters Section */}
@@ -301,24 +319,6 @@ export default function SearchBar({ onSearch }) {
           }
         }
       `}</style>
-
-      {/* Suggestions dropdown */}
-      {suggestions.length > 0 && (
-        <ul
-          className="absolute z-10 bg-gradient-to-b from-gray-900/10 to-gray-900 backdrop-blur-sm text-white w-full mt-1 rounded max-h-48 overflow-y-auto"
-          onMouseDown={(e) => e.preventDefault()}
-        >
-          {suggestions.map((movie) => (
-            <li
-              key={movie.id}
-              onClick={() => handleSuggestionClick(movie)}
-              className="px-4 py-2 hover:bg-gray-700 cursor-pointer"
-            >
-              {movie.title}
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 }
