@@ -27,6 +27,7 @@ export default function MoviePage() {
   // Fetch movies with optional query and genre
   const fetchMovies = async (page = 1) => {
     setIsLoading(true);
+
     try {
       const url = new URL("http://127.0.0.1:5000/results");
       url.searchParams.set("query", queryParams.query);
@@ -49,6 +50,13 @@ export default function MoviePage() {
       console.error("Error fetching movies:", error);
     } finally {
       setIsLoading(false); // Set loading false after fetch completes
+    }
+
+    // Scroll at the start of loading
+    if (page !== 1) {
+      setTimeout(() => {
+        window.scrollTo({ top: 300, behavior: "smooth" });
+      }, 100); // Delay to ensure DOM is updated
     }
   };
 
@@ -152,9 +160,9 @@ export default function MoviePage() {
     setQueryParams(params); // Update all query params at once
   };
 
+  // Handle page change from pagination component
   const handlePageChange = (pageNum) => {
     setCurrentPage(pageNum); // Update the currentPage state
-    window.scrollTo({ top: 300, behavior: "smooth" });
     console.log("Page Change Triggered:" + pageNum);
   };
 
