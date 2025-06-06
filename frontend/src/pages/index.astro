@@ -1,4 +1,19 @@
 ---
+/**
+ * Homepage
+ *
+ * Main landing page showcasing featured movies and popular collections.
+ * Features:
+ * - Server-side data fetching from Flask API endpoints (/featured, /popular, /explore)
+ * - Hero section with FeaturedSlider displaying top 3 movies with trailers
+ * - Multiple MovieGrid sections with curated content
+ * - Client-side hydration for interactive components
+ * - Responsive layout with content wrapper
+ * - Error handling with fallback empty arrays
+ *
+ * Used as the main entry point and discovery page for the application.
+ */
+
 import Layout from "../layouts/Layout.astro";
 import FeaturedSlider from "../components/FeaturedSlider";
 import MovieGrid from "../components/MovieGrid";
@@ -20,9 +35,6 @@ const exploreMoviesResponse = await fetch("http://127.0.0.1:5000/explore");
 const exploreMoviesData = await exploreMoviesResponse.json();
 const exploreMovies = exploreMoviesData || [];
 //console.log("Fetched explore movies", exploreMovies);
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout title="CineMind">

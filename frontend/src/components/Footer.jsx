@@ -1,3 +1,17 @@
+/**
+ * Footer Component
+ *
+ * Simple footer with copyright information and branding.
+ * Features:
+ * - Responsive layout with flexbox design
+ * - Backdrop blur and border styling for visual depth
+ * - Consistent content wrapper for alignment
+ * - Typography styling with tracking and font weights
+ * - Automatic bottom positioning with mt-auto
+ *
+ * Used site-wide as part of the main layout structure.
+ */
+
 export default function Footer() {
   return (
     <>

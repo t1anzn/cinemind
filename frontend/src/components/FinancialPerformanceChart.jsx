@@ -1,4 +1,21 @@
-import React, { useMemo } from "react";
+/**
+ * FinancialPerformanceChart Component
+ *
+ * Horizontal bar chart for visualizing movie financial performance metrics.
+ * Features:
+ * - Displays revenue, budget, profit, or ROI data using Chart.js
+ * - Configurable metric selection (revenue/budget/profit/ROI)
+ * - Adjustable number of top movies to display (10-20)
+ * - Smart number formatting for large values (B/M/K suffixes)
+ * - Optional data labels with toggle control
+ * - Color-coded bars based on selected metric
+ * - Responsive design with proper chart scaling
+ * - Handles missing financial data gracefully
+ *
+ * Used in MovieAnalytics component for financial data visualization.
+ */
+
+import { useMemo } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,

@@ -1,4 +1,20 @@
-import React, { useMemo, useEffect } from "react";
+/**
+ * GenreDistributionChart Component
+ *
+ * Pie chart visualization for displaying movie genre distribution using Chart.js.
+ * Features:
+ * - Interactive pie chart with hover effects and tooltips
+ * - Configurable sorting options (count, alphabetical, popularity)
+ * - Adjustable number of genres to display (5-20)
+ * - Dynamic color generation with predefined palette
+ * - Optional data labels with display thresholds
+ * - Popularity-based sorting using average vote ratings
+ * - Debug logging and fallback UI for missing data
+ *
+ * Used in MovieAnalytics component for genre trend visualization.
+ */
+
+import { useMemo, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 

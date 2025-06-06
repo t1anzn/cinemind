@@ -1,6 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+/**
+ * FeaturedSlider Component
+ *
+ * Hero section carousel for displaying featured movies with embedded YouTube trailers.
+ * Features:
+ * - Auto-cycling slideshow of top 3 most popular movies
+ * - Embedded YouTube Player API with mute/unmute controls
+ * - Navigation arrows for manual slide control
+ * - Movie metadata display (title, rating, genres, runtime, language)
+ * - Gradient overlays and backdrop effects for readability
+ * - Responsive design with mobile-optimized layouts
+ * - Action buttons for movie details and similar recommendations
+ * - Visual popularity indicators and data visualization
+ *
+ * Used on homepage to showcase featured content with immersive video backgrounds.
+ */
+
+import { useState, useRef } from "react";
 import { extractYouTubeId } from "../utils/youtubeUtils";
-import { SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/solid";
 import YouTubePlayer from "./YouTubePlayer.jsx";
 import {
   getReleaseYear,
@@ -10,11 +26,7 @@ import {
 
 export default function FeaturedSlider({ featuredMovies = [] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const playerRef = useRef(null);
-  const playerContainerRef = useRef(null);
-  const intervalRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
-  const [volume, setVolume] = useState(100);
 
   if (featuredMovies.length === 0) {
     return <h1> Loading...</h1>;

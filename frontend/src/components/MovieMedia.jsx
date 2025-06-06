@@ -1,10 +1,20 @@
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-  useMemo,
-} from "react";
+/**
+ * MovieMedia Component
+ *
+ * Tabbed media gallery for displaying movie trailers, posters, and backdrops.
+ * Features:
+ * - Three-tab interface (Videos, Posters, Backdrops) with Headless UI
+ * - YouTube trailer integration with theater mode fullscreen
+ * - Pagination controls for large media collections (8 items per page)
+ * - Expandable view with "Show All" functionality
+ * - Focus mode for fullscreen image viewing with navigation
+ * - Responsive grid layouts (2x2 videos, 4x1 posters, 2x1 backdrops)
+ * - Modal overlays with click-outside closing and scroll prevention
+ *
+ * Used in movie detail pages to showcase comprehensive media content.
+ */
+
+import { useEffect, useState, useMemo } from "react";
 import { extractYouTubeId } from "../utils/youtubeUtils";
 import {
   ChevronDownIcon,

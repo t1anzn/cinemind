@@ -1,7 +1,22 @@
+/**
+ * MovieGrid Component
+ *
+ * Responsive grid layout for displaying collections of movie cards.
+ * Features:
+ * - Responsive grid system (2-5 columns based on screen size)
+ * - Optional title and tagline headers with icon styling
+ * - Loading state support with skeleton placeholders
+ * - Consistent spacing and minimum height constraints
+ * - Gradient styling for section headers and borders
+ * - Automatic grid adjustment for different screen sizes
+ * - Support for both loading and populated states
+ *
+ * Used throughout the app to display movie collections (popular, featured, search results).
+ */
+
 import { FilmIcon } from "@heroicons/react/24/solid";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSkeleton";
-import { useEffect } from "react";
 
 export default function MovieGrid({
   title,

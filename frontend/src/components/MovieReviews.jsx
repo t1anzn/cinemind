@@ -1,4 +1,19 @@
-import { useState, useEffect } from "react";
+/**
+ * MovieReviews Component
+ *
+ * Displays movie reviews with AI-powered sentiment analysis.
+ * Features:
+ * - Parses review strings into structured author/content objects
+ * - AI sentiment analysis integration using Gemini API
+ * - ReactMarkdown rendering with HTML support for review content
+ * - Scrollable review container with hover effects
+ * - Interactive thumb up/down buttons for user feedback
+ * - Review count display and loading state handling
+ * - Gradient styling with card layout and borders
+ *
+ * Used in movie detail pages to showcase user reviews and AI insights.
+ */
+
 import { FaUserCircle } from "react-icons/fa";
 import {
   SparklesIcon,

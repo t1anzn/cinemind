@@ -1,4 +1,20 @@
-import React, { useEffect, useRef } from "react";
+/**
+ * YouTubePlayer Component
+ *
+ * Custom YouTube iframe player with enhanced controls and loop functionality.
+ * Features:
+ * - YouTube IFrame Player API integration with dynamic script loading
+ * - Custom mute/unmute toggle button with icon indicators
+ * - Video looping between specified start/end times
+ * - Configurable player parameters (controls, related videos, fullscreen)
+ * - Automatic player cleanup and reinitialization on prop changes
+ * - Shared mute state management across multiple player instances
+ * - Volume control and autoplay functionality
+ *
+ * Used in FeaturedSlider and MovieMedia components for trailer playback.
+ */
+
+import { useEffect, useRef } from "react";
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/solid";
 
 export default function YouTubePlayer({
