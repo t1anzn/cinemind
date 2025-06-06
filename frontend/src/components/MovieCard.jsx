@@ -1,3 +1,20 @@
+/**
+ * MovieCard Component
+ *
+ * Individual movie card displaying poster, title, rating, and release year.
+ * Features:
+ * - Responsive poster image with 2:3 aspect ratio
+ * - Hover effects with scale transitions and color changes
+ * - Color-coded rating badges using utility functions
+ * - Gradient overlay effects on hover
+ * - Truncated title display with overflow handling
+ * - Navigation to individual movie detail pages
+ * - Fallback handling for missing poster images
+ * - Shadow and border styling with hover states
+ *
+ * Used in MovieGrid components to display movie collections.
+ */
+
 import * as movieDisplayUtils from "../../src/utils/movieDisplayUtils";
 
 export default function MovieCard({ movie }) {

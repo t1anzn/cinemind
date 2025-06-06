@@ -1,3 +1,19 @@
+/**
+ * MoviePage Component
+ *
+ * Main page component for movie browsing with search and analytics functionality.
+ * Features:
+ * - Dual-tab interface (Movies/Analytics) with state management
+ * - Includes the Advanced SearchBar component for robust filtering
+ * - Includes the MovieGrid for displaying search results
+ * - Includes the MovieAnalytics component with Chart.js graphs
+ * - Flask API integration for movie data, genres, and search results
+ * - URL parameter handling for search queries and pagination
+ * - Smooth scrolling and loading animations between page changes
+ *
+ * Used as the main browsing interface accessible via /movies route.
+ */
+
 import { useEffect, useState } from "react";
 import MovieGrid from "./MovieGrid";
 import Pagination from "./Pagination";
@@ -39,6 +55,7 @@ export default function MoviePage() {
       url.searchParams.set("per_page", 20);
 
       // Add minimum loading time with Promise.all
+      // This ensures the skeleton loader is shown for at least 700ms
       const [data] = await Promise.all([
         fetch(url).then((res) => res.json()),
         new Promise((resolve) => setTimeout(resolve, 700)), // minimum loading time

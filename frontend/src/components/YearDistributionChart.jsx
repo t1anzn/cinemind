@@ -1,4 +1,20 @@
-import React, { useMemo } from "react";
+/**
+ * YearDistributionChart Component
+ *
+ * Bar chart visualization for displaying movie release year distribution using Chart.js.
+ * Features:
+ * - Toggle between yearly and decade grouping modes
+ * - Configurable maximum number of bars to display (10-100)
+ * - Smart year sampling for large datasets to prevent overcrowding
+ * - Optional data labels with toggle control
+ * - Responsive design with proper chart scaling
+ * - Dark theme styling with white text and grid lines
+ * - Fallback UI for empty datasets
+ *
+ * Used in MovieAnalytics component for temporal trend visualization.
+ */
+
+import { useMemo } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,

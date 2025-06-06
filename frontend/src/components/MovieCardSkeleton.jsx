@@ -1,3 +1,19 @@
+/**
+ * MovieCardSkeleton Component
+ *
+ * Loading skeleton placeholder for MovieCard components during data fetching.
+ * Features:
+ * - Animated pulse effect for visual feedback
+ * - Matches exact dimensions and layout of MovieCard
+ * - Maintains 2:3 aspect ratio for poster area
+ * - Gradient shimmer animation overlay
+ * - Placeholder blocks for title and year text
+ * - Consistent spacing and styling with actual cards
+ * - Smooth opacity transitions for loading states
+ *
+ * Used in MovieGrid components while movies are being loaded from API.
+ */
+
 export default function MovieCardSkeleton() {
   return (
     <div className="animate-pulse group relative min-h-[400px] transition-opacity duration-300 ease-in-out">

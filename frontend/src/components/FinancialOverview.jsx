@@ -1,3 +1,18 @@
+/**
+ * FinancialOverview Component
+ *
+ * Displays movie financial performance metrics in a styled card layout.
+ * Features:
+ * - Shows budget, revenue, profit/loss, and ROI calculations
+ * - Color-coded profit indicators (green for profit, red for loss)
+ * - Responsive grid layout
+ * - Conditional rendering based on available financial data
+ * - Formatted currency display using utility functions
+ * - Real-time profit and ROI calculations from budget/revenue
+ *
+ * Used in movie detail pages to showcase box office performance.
+ */
+
 import * as movieDisplayUtils from "../utils/movieDisplayUtils";
 
 export default function FinancialOverview({ movie }) {

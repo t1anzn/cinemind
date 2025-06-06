@@ -1,3 +1,18 @@
+/**
+ * CustomSelect Component
+ *
+ * Reusable dropdown select component built with Headless UI Listbox.
+ * Features:
+ * - Styled dropdown with backdrop blur and hover effects
+ * - Smooth transition animations for open/close states
+ * - Selected state highlighting with visual feedback
+ * - Support for optional icons in dropdown options
+ * - Accessible keyboard navigation and focus management
+ * - Customizable through options prop with value/label pairs
+ *
+ * Used throughout SearchBar for language, sorting, and filter selections.
+ */
+
 import { Fragment } from "react";
 import {
   Listbox,

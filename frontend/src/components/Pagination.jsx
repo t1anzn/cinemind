@@ -1,4 +1,19 @@
-import { useState } from "react";
+/**
+ * Pagination Component
+ *
+ * Navigation component for paginated content with smart page numbering.
+ * Features:
+ * - Previous/Next arrow buttons with disabled states
+ * - Smart page number display with ellipsis for large page ranges
+ * - Current page highlighting with blue background
+ * - Hover effects and smooth transitions on all interactive elements
+ * - Fixed width container for consistent layout
+ * - Range-based page numbering (shows 2 pages before/after current)
+ * - First/last page shortcuts when applicable
+ *
+ * Used in MoviePage component for search result navigation.
+ */
+
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 export default function Pagination({ currentPage, totalPages, onPageChange }) {

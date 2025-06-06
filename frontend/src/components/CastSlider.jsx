@@ -1,3 +1,18 @@
+/**
+ * CastSlider Component
+ *
+ * Interactive horizontal scrolling component for displaying movie cast members.
+ * Features:
+ * - Displays up to 15 cast members with profile images, names, and character roles
+ * - Drag-to-scroll functionality with mouse and touch support
+ * - Navigation arrows that appear/hide based on scroll position
+ * - Responsive design with hover effects and smooth animations
+ * - Fallback images for missing profile photos
+ * - Shows "+X more" indicator when cast exceeds 15 members
+ *
+ * Used in MovieOverview component to showcase movie cast with interactive browsing.
+ */
+
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";

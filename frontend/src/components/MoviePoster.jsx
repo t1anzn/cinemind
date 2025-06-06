@@ -1,4 +1,11 @@
-import React from "react";
+/**
+ * MoviePoster Component
+ *
+ * Responsive movie poster display with fixed width and shadow styling.
+ * Hidden on mobile, visible on medium+ screens. Uses keyposter_url for optimized loading.
+ *
+ * Used in MovieHeader component as part of the hero section layout.
+ */
 
 export default function MoviePoster({ movie }) {
   return (

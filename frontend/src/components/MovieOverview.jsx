@@ -1,3 +1,19 @@
+/**
+ * MovieOverview Component
+ *
+ * Content section displaying movie synopsis, cast, and production details.
+ * Features:
+ * - Movie plot overview with formatted typography
+ * - Includes the CastSlider component for displaying cast members
+ * - Production information (language, countries, spoken languages)
+ * - Responsive column layout for mobile/desktop
+ * - Consistent spacing and typography hierarchy
+ * - Integration with cast details from API data
+ * - Fallback handling for missing cast information
+ *
+ * Used in movie detail pages as the main content area.
+ */
+
 import CastSlider from "./CastSlider";
 
 export default function MovieOverview({ movie }) {

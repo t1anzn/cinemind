@@ -1,4 +1,20 @@
 ---
+/**
+ * Movie Detail Page
+ *
+ * Dynamic route for individual movie pages with comprehensive movie information.
+ * Features:
+ * - Static site generation with getStaticPaths for all movie IDs
+ * - Server-side data fetching for movie details and AI sentiment analysis
+ * - Error handling with fallback UI and debug information
+ * - Responsive grid layout with sidebar and main content areas
+ * - Integration of multiple movie components (header, overview, media, reviews)
+ * - Client-side hydration for interactive components
+ * - SEO-optimized page titles with movie name and release year
+ *
+ * Used for displaying detailed information about individual movies.
+ */
+
 import Layout from "../../layouts/Layout.astro";
 import MovieHeader from "../../components/MovieHeader";
 import MovieOverview from "../../components/MovieOverview";
@@ -8,7 +24,6 @@ import MovieReviews from "../../components/MovieReviews";
 import FinancialOverview from "../../components/FinancialOverview";
 import MovieMedia from "../../components/MovieMedia.jsx";
 import * as movieDisplayUtils from "../../utils/movieDisplayUtils.jsx";
-import { useState } from "react";
 
 export async function getStaticPaths() {
   try {

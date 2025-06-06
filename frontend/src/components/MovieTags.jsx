@@ -1,3 +1,15 @@
+/**
+ * MovieTags Component
+ *
+ * Displays genre and keyword tags in styled pills format.
+ * Features:
+ * - Two sections: Genres with blue styling, Keywords with gray styling
+ * - Responsive flex-wrap layout with consistent spacing
+ * - Hover effects with color transitions on tag badges
+ *
+ * Used in movie detail page sidebar to display categorization metadata.
+ */
+
 export default function MovieTags({ movie }) {
   return (
     <>

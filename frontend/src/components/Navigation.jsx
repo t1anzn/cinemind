@@ -1,3 +1,17 @@
+/**
+ * Navigation Component
+ *
+ * Sticky header navigation with responsive mobile menu.
+ * Features:
+ * - Sticky positioning with backdrop blur and transparency effects
+ * - Gradient logo styling with hover animations
+ * - Desktop horizontal navigation with hover effects
+ * - Mobile hamburger menu with slide-out sidebar
+ * - Backdrop overlay with click-to-close functionality
+ *
+ * Used site-wide as the primary navigation interface.
+ */
+
 import { useState } from "react";
 
 export default function Navbar() {

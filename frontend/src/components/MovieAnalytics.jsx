@@ -1,4 +1,20 @@
-import React, { useState, useEffect } from "react"; // Add useEffect
+/**
+ * MovieAnalytics Component
+ *
+ * Comprehensive analytics dashboard displaying movie data visualizations.
+ * Features:
+ * - Three interactive Chart.js visualizations (year, genre, financial)
+ * - Configurable chart controls for customization (grouping, sorting, limits)
+ * - Client-side only rendering to prevent hydration errors
+ * - Loading states and fallback UI handling
+ * - Responsive grid layout with styled control panels
+ * - Real-time chart updates based on user interactions
+ * - Support for decade grouping, metric switching, and data label toggles
+ *
+ * Used as a tab in MoviePage component for data exploration and insights.
+ */
+
+import { useState, useEffect } from "react"; // Add useEffect
 import YearDistributionChart from "./YearDistributionChart";
 import GenreDistributionChart from "./GenreDistributionChart";
 import FinancialPerformanceChart from "./FinancialPerformanceChart";

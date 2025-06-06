@@ -1,3 +1,19 @@
+/**
+ * MovieHeader Component
+ *
+ * Hero section displaying movie title, backdrop, poster, and metadata.
+ * Features:
+ * - Full-height backdrop image with gradient overlay
+ * - Error handling and fallback images for missing backdrops
+ * - Responsive layout with mobile/desktop poster positioning
+ * - Movie metadata display (rating, year, runtime, tagline)
+ * - Color-coded rating badges using utility functions
+ * - Debug information in development mode
+ * - Graceful error handling for invalid movie data
+ *
+ * Used at the top of movie detail pages as the primary hero section.
+ */
+
 import MoviePoster from "./MoviePoster";
 import * as movieDisplayUtils from "../utils/movieDisplayUtils";
 

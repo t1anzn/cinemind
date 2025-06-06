@@ -1,3 +1,21 @@
+/**
+ * SearchBar Component
+ *
+ * Advanced search interface with filtering, sorting, and real-time suggestions.
+ * Features:
+ * - Real-time movie title suggestions from Flask API with dropdown display
+ * - Multi-select genre filtering with visual tag indicators
+ * - Language filtering with dropdown selection
+ * - Sorting options (popularity, rating, release date, alphabetical)
+ * - Sort order controls (ascending/descending)
+ * - Active filter display with removable tags and animations
+ * - Dynamically updating movie grid on filter changes
+ * - Responsive grid layout with gradient styling
+ * - Reset functionality to clear all filters
+ *
+ * Used in MoviePage component for comprehensive movie search and filtering.
+ */
+
 import { useState, useEffect } from "react";
 import {
   MagnifyingGlassIcon,

@@ -1,3 +1,19 @@
+/**
+ * MovieDetails Component
+ *
+ * Static information card displaying core movie metadata and ratings.
+ * Features:
+ * - Release date with formatted display using utility functions
+ * - Runtime conversion to hours and minutes format
+ * - Movie status and production information
+ * - Color-coded user rating badge with dynamic styling
+ * - Visual popularity indicator with progress bar
+ * - Responsive card layout with gradient styling
+ * - Consistent typography and spacing patterns
+ *
+ * Used in movie detail page sidebar for essential movie information.
+ */
+
 import * as movieDisplayUtils from "../utils/movieDisplayUtils";
 
 export default function MovieDetails({ movie }) {
