@@ -18,7 +18,7 @@
  * visual feedback for all accessibility modifications across the platform.
  */
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AccessibilityPanel({ isOpen, onClose }) {
   const [motionReduced, setMotionReduced] = useState(false);
@@ -573,6 +573,45 @@ export default function AccessibilityPanel({ isOpen, onClose }) {
 
         {/* Footer */}
         <div className="mt-3 pt-3 border-t border-slate-700">
+          {/* Keyboard Navigation Instructions */}
+          <div className="mb-3 p-2 bg-slate-800/30 rounded-lg border border-slate-700/30">
+            <h4 className="text-xs font-semibold text-white mb-2 uppercase tracking-wide">
+              Keyboard Navigation
+            </h4>
+            <div className="text-xs text-slate-400 space-y-1 leading-relaxed">
+              <p>
+                <kbd className="bg-slate-700 px-1 py-0.5 rounded text-cyan-300">
+                  Tab
+                </kbd>{" "}
+                to navigate forward
+              </p>
+              <p>
+                <kbd className="bg-slate-700 px-1 py-0.5 rounded text-cyan-300">
+                  Shift+Tab
+                </kbd>{" "}
+                to navigate backward
+              </p>
+              <p>
+                <kbd className="bg-slate-700 px-1 py-0.5 rounded text-cyan-300">
+                  Space
+                </kbd>{" "}
+                to toggle checkboxes
+              </p>
+              <p>
+                <kbd className="bg-slate-700 px-1 py-0.5 rounded text-cyan-300">
+                  Enter
+                </kbd>{" "}
+                to activate buttons
+              </p>
+              <p>
+                <kbd className="bg-slate-700 px-1 py-0.5 rounded text-cyan-300">
+                  Esc
+                </kbd>{" "}
+                to close panel
+              </p>
+            </div>
+          </div>
+
           <p className="text-xs text-slate-400 text-center leading-relaxed">
             Need help?{" "}
             <a
