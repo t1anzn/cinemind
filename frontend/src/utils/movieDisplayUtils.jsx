@@ -1,3 +1,17 @@
+/**
+ * Movie Display Utilities
+ *
+ * This module provides utility functions for formatting and displaying movie data
+ * in a user-friendly format. Functions handle date formatting, runtime conversion,
+ * visual styling, and financial calculations for movie information.
+ *
+ * Key Features:
+ * - Date formatting (year extraction and full date display)
+ * - Runtime conversion (minutes to hours/minutes format)
+ * - Visual styling for ratings and popularity
+ * - Financial calculations (budget, revenue, profit, ROI)
+ */
+
 export function getReleaseYear(dateString) {
   if (!dateString) return "Unknown";
   try {
