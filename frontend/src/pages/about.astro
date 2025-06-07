@@ -1,26 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import astroLogo from "../assets/astro-svgrepo-com.svg?url";
+import pythonLogo from "../assets/python-svgrepo-com.svg?url";
+import sqliteLogo from "../assets/sqlite-svgrepo-com.svg?url";
+import flaskLogo from "../assets/flask-svgrepo-com.svg?url";
+import tmdbLogo from "../assets/tmdb.svg?url";
+import geminiLogo from "../assets/google-gemini-icon.svg?url";
 ---
-
-<div
-  class="floating-background fixed inset-0 w-full h-full overflow-hidden pointer-events-none"
->
-  <p
-    class="floating-text-1 text-[12vw] font-bold opacity-[0.03] absolute whitespace-nowrap"
-  >
-    PLS GIVE US A JOB
-  </p>
-  <p
-    class="floating-text-2 text-[12vw] font-bold opacity-[0.03] absolute whitespace-nowrap"
-  >
-    PLS GIVE US A JOB
-  </p>
-  <p
-    class="floating-text-3 text-[12vw] font-bold opacity-[0.03] absolute whitespace-nowrap"
-  >
-    PLS GIVE US A JOB
-  </p>
-</div>
 
 <Layout title="About | CineMind">
   <main class="flex-grow">
@@ -29,10 +15,11 @@ import Layout from "../layouts/Layout.astro";
       <div class="text-center mb-16 relative">
         <a
           href="/"
-          class="inline-block text-5xl font-light tracking-widest text-white relative group mb-8"
+          class="inline-block text-5xl font-light tracking-widest text-white relative group mb-8 transition-all duration-300 hover:scale-105"
+          aria-label="Return to CineMind homepage"
         >
           <span
-            class="bg-gradient-to-r from-cyan-200 to-blue-400 bg-clip-text text-transparent hover:from-blue-400 hover:to-cyan-200 transition-all duration-500"
+            class="bg-gradient-to-r from-cyan-200 to-blue-400 bg-clip-text text-transparent transition-all duration-300 group-hover:[text-shadow:0_0_5px_rgba(34,211,238,0.6)]"
           >
             CINE<span class="font-bold">MIND</span>
           </span>
@@ -40,42 +27,71 @@ import Layout from "../layouts/Layout.astro";
         <p
           class="text-slate-400 text-xl font-light max-w-2xl mx-auto animate-fade-in"
         >
-          Your intelligent companion for exploring the world of cinema
+          Advanced cinema analytics and intelligent movie discovery platform
         </p>
+      </div>
+
+      {/* Mission Statement */}
+      <div class="mb-16 max-w-4xl mx-auto scroll-animate" data-delay="0">
+        <div
+          class="group bg-gradient-to-b from-slate-800/30 to-transparent hover:from-slate-800/40 transition-all duration-300
+                    shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-8 text-center relative overflow-hidden"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-cyan-200/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          >
+          </div>
+          <h2 class="text-3xl text-white font-bold mb-6 relative">
+            Our Mission
+          </h2>
+          <p
+            class="text-slate-300 font-light leading-relaxed text-lg max-w-3xl mx-auto relative"
+          >
+            CineMind transforms how audiences discover, analyze, and understand
+            cinema through data-driven insights and artificial intelligence. We
+            bridge the gap between raw movie data and meaningful entertainment
+            decisions, empowering users with comprehensive analytics and
+            intelligent recommendations.
+          </p>
+        </div>
       </div>
 
       {/* About Sections */}
       <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
         <div
           class="group bg-gradient-to-b from-slate-800/30 to-transparent hover:from-slate-800/40 transition-all duration-300
-                    shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-8 relative overflow-hidden"
+                    shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-8 relative overflow-hidden scroll-animate"
+          data-delay="0"
         >
           <div
             class="absolute inset-0 bg-gradient-to-r from-cyan-200/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           >
           </div>
           <h2 class="text-2xl text-white font-bold mb-4 relative">
-            About The Project
+            About CineMind
           </h2>
           <p class="text-slate-300 font-light leading-relaxed relative">
-            CineMind is what happens when two university students have way too
-            much free time over spring break. Some might call it a "waste of
-            time" and they'd be absolutely right, if learning full-stack
-            development, AI integration and building data visualisations was a
-            waste. But hey, at least we didn't just binge Netflix... we BUILT it
-            (kind of, without the watching part of course.)
+            CineMind is a comprehensive cinema analytics platform that leverages
+            modern web technologies and artificial intelligence to provide deep
+            insights into the film industry. Built with performance and user
+            experience in mind, our platform processes extensive movie databases
+            to deliver actionable intelligence for movie enthusiasts, industry
+            professionals, and casual viewers alike.
           </p>
         </div>
 
         <div
           class="group bg-gradient-to-b from-slate-800/30 to-transparent hover:from-slate-800/40 transition-all duration-300
-                    shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-8 relative overflow-hidden"
+                    shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-8 relative overflow-hidden scroll-animate"
+          data-delay="0"
         >
           <div
             class="absolute inset-0 bg-gradient-to-r from-cyan-200/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           >
           </div>
-          <h2 class="text-2xl text-white font-bold mb-4 relative">Features</h2>
+          <h2 class="text-2xl text-white font-bold mb-4 relative">
+            Key Features
+          </h2>
           <ul
             class="text-slate-300 font-light leading-relaxed space-y-3 relative"
           >
@@ -83,338 +99,1144 @@ import Layout from "../layouts/Layout.astro";
               class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
             >
               <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
-              <span>Comprehensive movie information and statistics</span>
+              <span>Comprehensive movie database with detailed analytics</span>
             </li>
             <li
               class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
             >
               <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
-              <span>Financial performance metrics and analysis</span>
+              <span>Financial performance tracking and ROI analysis</span>
             </li>
             <li
               class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
             >
               <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
-              <span>AI-powered Analysis</span>
+              <span>AI-powered content analysis and recommendations</span>
             </li>
             <li
               class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
             >
               <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
-              <span>'Curated' reviews and ratings</span>
+              <span>Aggregated reviews and professional ratings</span>
             </li>
             <li
               class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
             >
               <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
-              <span>Movie Data Visualisations </span>
+              <span>Interactive data visualizations and trend analysis</span>
             </li>
             <li
               class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
             >
               <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
-              <span>Advanced search and filtering capabilities</span>
+              <span>Advanced search with intelligent filtering</span>
             </li>
             <li
               class="flex items-center space-x-2 hover:translate-x-1 transition-transform"
             >
               <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
-              <span>Responsive and modern user interface</span>
+              <span>Mobile-optimized responsive design</span>
             </li>
           </ul>
         </div>
       </div>
 
-      {/* Technology Stack */}
-      <div class="mt-12 max-w-4xl mx-auto">
-        <div
-          class="group bg-gradient-to-b from-slate-800/30 to-transparent hover:from-slate-800/40 transition-all duration-300
-                    shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-8"
-        >
-          <h2 class="text-2xl text-white font-bold mb-8 text-center">
-            Technology Stack
-          </h2>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div
-              class="text-center transform hover:scale-105 transition-transform duration-300"
-            >
+      {/* Technology Stack - Redesigned as icons */}
+      <div class="mt-20 max-w-5xl mx-auto scroll-animate" data-delay="0">
+        <h2 class="text-3xl text-white font-bold mb-12 text-center">
+          Built with Modern Technology
+        </h2>
+        <div class="relative">
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-cyan-500/10 rounded-2xl"
+          >
+          </div>
+          <div
+            class="relative bg-slate-900/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8"
+          >
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div
-                class="w-25 h-25 mx-auto mb-4 rounded-xl bg-gradient-to-br from-cyan-200/20 to-blue-400/20
-                          flex items-center justify-center border border-blue-100/20"
+                class="text-center group cursor-pointer scroll-animate"
+                data-delay="0"
+                role="button"
+                tabindex="0"
+                aria-label="React - Interactive UI framework used in CineMind"
               >
-                <h3 class="text-cyan-400 font-semibold">Frontend</h3>
+                <div
+                  class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl flex items-center justify-center border border-cyan-500/30 group-hover:border-cyan-400 transition-all duration-300 group-hover:scale-110"
+                >
+                  <svg
+                    class="w-10 h-10 text-cyan-400"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.36-.034-.47 0-.92.015-1.36.034.44-.572.895-1.096 1.36-1.564zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.788-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.405-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.36.034.47 0 .92-.015 1.36-.034-.44.572-.895 1.095-1.36 1.56-.465-.467-.92-.988-1.36-1.56z"
+                    ></path>
+                  </svg>
+                </div>
+                <h3 class="text-white font-semibold mb-1">React</h3>
+                <p class="text-slate-400 text-sm">Interactive UI</p>
               </div>
-              <p class="text-slate-300 font-light tracking-wide">
-                React + Astro
-              </p>
-            </div>
-            <div
-              class="text-center transform hover:scale-105 transition-transform duration-300"
-            >
               <div
-                class="w-25 h-25 mx-auto mb-4 rounded-xl bg-gradient-to-br from-cyan-200/20 to-blue-400/20
-                          flex items-center justify-center border border-blue-100/20"
+                class="text-center group cursor-pointer scroll-animate"
+                data-delay="100"
+                role="button"
+                tabindex="0"
+                aria-label="Astro - Frontend framework powering CineMind's user interface"
               >
-                <h3 class="text-cyan-400 font-semibold">Backend</h3>
+                <div
+                  class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl flex items-center justify-center border border-cyan-500/30 group-hover:border-cyan-400 transition-all duration-300 group-hover:scale-110"
+                >
+                  <img
+                    src={astroLogo}
+                    alt="Astro framework logo - modern frontend framework"
+                    class="w-10 h-10"
+                    style="filter: brightness(0) saturate(100%) invert(64%) sepia(88%) saturate(3730%) hue-rotate(174deg) brightness(91%) contrast(83%);"
+                  />
+                </div>
+                <h3 class="text-white font-semibold mb-1">Astro</h3>
+                <p class="text-slate-400 text-sm">Frontend Framework</p>
               </div>
-              <p class="text-slate-300 font-light tracking-wide">
-                Python Flask
-              </p>
-            </div>
-            <div
-              class="text-center transform hover:scale-105 transition-transform duration-300"
-            >
               <div
-                class="w-25 h-25 mx-auto mb-4 rounded-xl bg-gradient-to-br from-cyan-200/20 to-blue-400/20
-                          flex items-center justify-center border border-blue-100/20"
+                class="text-center group cursor-pointer scroll-animate"
+                data-delay="200"
+                role="button"
+                tabindex="0"
+                aria-label="Python - Backend programming language for CineMind's server logic"
               >
-                <h3 class="text-cyan-400 font-semibold">Styling</h3>
+                <div
+                  class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl flex items-center justify-center border border-cyan-500/30 group-hover:border-cyan-400 transition-all duration-300 group-hover:scale-110"
+                >
+                  <img
+                    src={pythonLogo}
+                    alt="Python programming language logo - backend development"
+                    class="w-10 h-10"
+                    style="filter: brightness(0) saturate(100%) invert(64%) sepia(88%) saturate(3730%) hue-rotate(174deg) brightness(91%) contrast(83%);"
+                  />
+                </div>
+                <h3 class="text-white font-semibold mb-1">Python</h3>
+                <p class="text-slate-400 text-sm">Backend Logic</p>
               </div>
-              <p class="text-slate-300 font-light tracking-wide">
-                Tailwind CSS
-              </p>
-            </div>
-            <div
-              class="text-center transform hover:scale-105 transition-transform duration-300"
-            >
               <div
-                class="w-25 h-25 mx-auto mb-4 rounded-xl bg-gradient-to-br from-cyan-200/20 to-blue-400/20
-                          flex items-center justify-center border border-blue-100/20"
+                class="text-center group cursor-pointer scroll-animate"
+                data-delay="300"
+                role="button"
+                tabindex="0"
+                aria-label="SQLite - Database system for storing movie data"
               >
-                <h3 class="text-cyan-400 font-semibold">Database</h3>
+                <div
+                  class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl flex items-center justify-center border border-cyan-500/30 group-hover:border-cyan-400 transition-all duration-300 group-hover:scale-110"
+                >
+                  <img
+                    src={sqliteLogo}
+                    alt="SQLite database logo - lightweight database solution"
+                    class="w-10 h-10"
+                    style="filter: brightness(0) saturate(100%) invert(64%) sepia(88%) saturate(3730%) hue-rotate(174deg) brightness(91%) contrast(83%);"
+                  />
+                </div>
+                <h3 class="text-white font-semibold mb-1">SQLite</h3>
+                <p class="text-slate-400 text-sm">Data Storage</p>
               </div>
-              <p class="text-slate-300 font-light tracking-wide">SQLite</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Credits Section */}
-      <div class="mt-12 max-w-4xl mx-auto">
-        <div
-          class="group bg-gradient-to-b from-slate-800/30 to-transparent hover:from-slate-800/40 transition-all duration-300
-                    shadow-md shadow-blue-400/50 border border-blue-100/50 rounded-lg p-8"
-        >
-          <h2 class="text-2xl text-white font-bold mb-8 text-center">
-            Developers
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Platform Statistics - Redesigned as dashboard */}
+      <div class="mt-20 max-w-6xl mx-auto scroll-animate" data-delay="0">
+        <h2 class="text-3xl text-white font-bold mb-12 text-center">
+          Platform Overview
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div
+            class="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300 group scroll-animate"
+            data-delay="0"
+          >
             <div
-              class="p-6 rounded-lg bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-cyan-500/10
-                        hover:border-cyan-500/30 transition-all duration-300 group/card relative overflow-hidden"
+              class="w-16 h-16 mx-auto mb-4 bg-cyan-500/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform"
+            >
+              <svg
+                class="w-8 h-8 text-cyan-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2z"
+                ></path>
+              </svg>
+            </div>
+            <div class="text-3xl font-bold text-cyan-400 mb-2">85,000+</div>
+            <p class="text-slate-300 text-sm font-medium">Movies</p>
+            <p class="text-slate-400 text-xs mt-1">In Database</p>
+          </div>
+          <div
+            class="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300 group scroll-animate"
+            data-delay="100"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-cyan-500/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform"
+            >
+              <svg
+                class="w-8 h-8 text-cyan-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
+            </div>
+            <div class="text-3xl font-bold text-cyan-400 mb-2">2.3M+</div>
+            <p class="text-slate-300 text-sm font-medium">Data Points</p>
+            <p class="text-slate-400 text-xs mt-1">Analyzed Daily</p>
+          </div>
+          <div
+            class="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300 group scroll-animate"
+            data-delay="200"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-cyan-500/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform"
+            >
+              <svg
+                class="w-8 h-8 text-cyan-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                ></path>
+              </svg>
+            </div>
+            <div class="text-3xl font-bold text-cyan-400 mb-2">99.98%</div>
+            <p class="text-slate-300 text-sm font-medium">Uptime</p>
+            <p class="text-slate-400 text-xs mt-1">Reliability</p>
+          </div>
+          <div
+            class="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300 group scroll-animate"
+            data-delay="300"
+          >
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-cyan-500/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform"
+            >
+              <svg
+                class="w-8 h-8 text-cyan-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div class="text-3xl font-bold text-cyan-400 mb-2">5 Min</div>
+            <p class="text-slate-300 text-sm font-medium">Refresh</p>
+            <p class="text-slate-400 text-xs mt-1">Data Updates</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Technology & Data Sources - Horizontal cards */}
+      <div class="mt-20 max-w-6xl mx-auto scroll-animate" data-delay="0">
+        <h2 class="text-3xl text-white font-bold mb-12 text-center">
+          Data Sources & APIs
+        </h2>
+        <div class="space-y-6">
+          <div
+            class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-6 hover:border-cyan-500/30 transition-all duration-300 group scroll-animate"
+            data-delay="0"
+          >
+            <div class="flex items-center space-x-6">
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center border border-cyan-500/30 group-hover:scale-110 transition-transform"
+              >
+                <img
+                  src={tmdbLogo}
+                  alt="The Movie Database (TMDb) API logo - comprehensive movie database service"
+                  class="w-10 h-10"
+                  style="filter: brightness(0) saturate(100%) invert(64%) sepia(88%) saturate(3730%) hue-rotate(174deg) brightness(91%) contrast(83%);"
+                />
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl text-white font-semibold mb-2">TMDb API</h3>
+                <p class="text-slate-300 mb-2">
+                  Comprehensive movie database providing detailed metadata, cast
+                  information, and high-quality images.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                    >Movie Details</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full border border-blue-500/30"
+                    >Cast & Crew</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                    >Images & Posters</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-6 hover:border-cyan-500/30 transition-all duration-300 group scroll-animate"
+            data-delay="100"
+          >
+            <div class="flex items-center space-x-6">
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center border border-cyan-500/30 group-hover:scale-110 transition-transform"
+              >
+                <svg
+                  class="w-10 h-10 text-cyan-400"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-label="YouTube API logo"
+                >
+                  <path
+                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl text-white font-semibold mb-2">
+                  YouTube API
+                </h3>
+                <p class="text-slate-300 mb-2">
+                  Video playback functionality for movie trailers,
+                  behind-the-scenes content, and promotional materials.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                    >Video Streaming</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full border border-blue-500/30"
+                    >Trailers</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                    >Promotional Content</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-6 hover:border-cyan-500/30 transition-all duration-300 group scroll-animate"
+            data-delay="200"
+          >
+            <div class="flex items-center space-x-6">
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center border border-cyan-500/30 group-hover:scale-110 transition-transform"
+              >
+                <img
+                  src={geminiLogo}
+                  alt="Google Gemini AI logo - artificial intelligence service for smart reviews"
+                  class="w-10 h-10"
+                  style="filter: brightness(0) saturate(100%) invert(64%) sepia(88%) saturate(3730%) hue-rotate(174deg) brightness(91%) contrast(83%);"
+                />
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl text-white font-semibold mb-2">Gemini AI</h3>
+                <p class="text-slate-300 mb-2">
+                  Google's Gemini AI powers our intelligent smart review
+                  feature, generating insightful movie reviews and analysis.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                    >Smart Reviews</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full border border-blue-500/30"
+                    >AI Analysis</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                    >Review Generation</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-6 hover:border-cyan-500/30 transition-all duration-300 group scroll-animate"
+            data-delay="300"
+          >
+            <div class="flex items-center space-x-6">
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center border border-cyan-500/30 group-hover:scale-110 transition-transform"
+              >
+                <img
+                  src={flaskLogo}
+                  alt="Flask framework logo - Python web framework for API development"
+                  class="w-10 h-10"
+                  style="filter: brightness(0) saturate(100%) invert(64%) sepia(88%) saturate(3730%) hue-rotate(174deg) brightness(91%) contrast(83%);"
+                />
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl text-white font-semibold mb-2">
+                  Custom Flask API
+                </h3>
+                <p class="text-slate-300 mb-2">
+                  Custom Python Flask API with 15+ endpoints handling data
+                  processing, search, filtering, and analytics capabilities.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                    >15+ Endpoints</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full border border-blue-500/30"
+                    >Search & Filter</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                    >Analytics Engine</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Industry Recognition - Split layout */}
+      <div class="mt-20 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12">
+          <div class="space-y-8 scroll-animate" data-delay="0">
+            <div>
+              <h2 class="text-3xl text-white font-bold mb-6">
+                Built with Industry Standards
+              </h2>
+              <p class="text-slate-300 leading-relaxed">
+                CineMind follows modern web development best practices and
+                leverages trusted technologies to deliver a reliable, scalable
+                platform for movie data analytics.
+              </p>
+            </div>
+            <div class="space-y-4">
+              <div
+                class="flex items-center space-x-4 p-4 bg-slate-900/40 rounded-xl border border-slate-700/50"
+              >
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-cyan-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-white font-semibold">TMDb API Partner</h3>
+                  <p class="text-slate-400 text-sm">
+                    Official integration with The Movie Database
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex items-center space-x-4 p-4 bg-slate-900/40 rounded-xl border border-slate-700/50"
+              >
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-cyan-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-white font-semibold">Modern Web Standards</h3>
+                  <p class="text-slate-400 text-sm">
+                    Built with React, Astro & modern frameworks
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex items-center space-x-4 p-4 bg-slate-900/40 rounded-xl border border-slate-700/50"
+              >
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6 text-cyan-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-white font-semibold">Data Privacy Focused</h3>
+                  <p class="text-slate-400 text-sm">
+                    No personal data collection or tracking
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-8 scroll-animate" data-delay="200">
+            <div>
+              <h2 class="text-2xl text-white font-bold mb-6">Perfect For</h2>
+              <div class="grid grid-cols-2 gap-4">
+                <div
+                  class="text-center p-6 bg-slate-900/40 rounded-xl border border-slate-700/50 hover:border-cyan-500/30 transition-colors"
+                >
+                  <div
+                    class="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 text-cyan-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-white font-semibold text-sm">
+                    Movie Enthusiasts
+                  </h3>
+                  <p class="text-slate-400 text-xs mt-1">
+                    Discover & analyze films
+                  </p>
+                </div>
+                <div
+                  class="text-center p-6 bg-slate-900/40 rounded-xl border border-slate-700/50 hover:border-cyan-500/30 transition-colors"
+                >
+                  <div
+                    class="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 text-cyan-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-white font-semibold text-sm">
+                    Film Students
+                  </h3>
+                  <p class="text-slate-400 text-xs mt-1">Academic research</p>
+                </div>
+                <div
+                  class="text-center p-6 bg-slate-900/40 rounded-xl border border-slate-700/50 hover:border-cyan-500/30 transition-colors"
+                >
+                  <div
+                    class="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 text-cyan-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-white font-semibold text-sm">
+                    Data Analysts
+                  </h3>
+                  <p class="text-slate-400 text-xs mt-1">Industry insights</p>
+                </div>
+                <div
+                  class="text-center p-6 bg-slate-900/40 rounded-xl border border-slate-700/50 hover:border-cyan-500/30 transition-colors"
+                >
+                  <div
+                    class="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 text-cyan-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <h3 class="text-white font-semibold mb-1">Film Critics</h3>
+                  <p class="text-slate-400 text-xs mt-1">
+                    Professional reviews
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Development Team */}
+        <div class="mt-20 max-w-6xl mx-auto scroll-animate" data-delay="0">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl text-white font-bold mb-4">Meet Our Team</h2>
+            <p class="text-slate-300 max-w-2xl mx-auto">
+              Passionate developers dedicated to creating innovative cinema
+              analytics solutions
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div
+              class="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden scroll-animate"
+              data-delay="0"
             >
               <div
-                class="absolute inset-0 bg-gradient-to-r from-cyan-200/10 to-blue-400/10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"
+                class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               >
               </div>
+
               <div class="relative z-10">
-                <div class="text-center mb-4">
+                <div class="flex flex-col items-center text-center mb-6">
                   <div
-                    class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20
-                           border-2 border-cyan-500/20 overflow-hidden"
+                    class="w-32 h-32 mb-6 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500/30 overflow-hidden group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-cyan-500/20"
                   >
                     <img
                       src="https://api.dicebear.com/9.x/notionists/svg?seed=Luis&scale=150&bodyIconProbability=100&brows=variant02,variant03,variant04,variant05,variant06,variant07,variant08,variant09,variant10,variant11,variant12,variant13,variant01&gestureProbability=40&glasses=variant03&hair=variant04,variant12&lips=variant05,variant04,variant10,variant09,variant01,variant06,variant07,variant03,variant02,variant08,variant11,variant12,variant13,variant14,variant15,variant16,variant17,variant18,variant19,variant20&nose=variant01,variant02,variant03,variant04,variant05,variant06,variant07,variant08,variant09,variant10,variant11,variant12,variant13,variant14,variant15,variant16,variant17,variant18,variant20"
-                      alt="Timothy"
-                      class="w-full h-full"
+                      alt="Timothy Chen - Full Stack Developer and AI Engineer profile picture"
+                      class="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 class="text-xl text-cyan-400 font-medium mb-1">
+
+                  <h3
+                    class="text-2xl text-white font-bold mb-2 group-hover:text-cyan-300 transition-colors"
+                  >
                     Timothy Chen
                   </h3>
-                  <p class="text-slate-400 font-light text-sm mb-2">
-                    Full Stack Developer
-                  </p>
-                  <div class="space-y-1.5">
-                    <p class="text-slate-300 text-sm">
-                      BSc Computer Science Student
-                    </p>
-                    <p class="text-slate-400 text-xs">
-                      University of the Arts London (UAL)
-                    </p>
-                    <p class="text-slate-400/80 text-xs italic mt-2">
-                      "i might have worked on this project.. maybe"
+                  <div
+                    class="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 px-4 py-2 rounded-full border border-cyan-500/30 mb-4"
+                  >
+                    <p class="text-cyan-300 text-sm font-medium">
+                      Full Stack Developer & AI Engineer
                     </p>
                   </div>
-                </div>
-                <div class="flex justify-center gap-4 mt-4">
-                  <a
-                    href="https://github.com/t1anzn"
-                    class="text-slate-400 hover:text-cyan-400 transition-colors"
+
+                  <div class="space-y-2 mb-6">
+                    <p class="text-slate-200 font-medium">
+                      BSc Computer Science Student
+                    </p>
+                    <p class="text-slate-400 text-sm">
+                      University of the Arts London (UAL)
+                    </p>
+                  </div>
+
+                  <div
+                    class="bg-slate-800/50 rounded-xl p-4 mb-6 border border-slate-600/30"
                   >
-                    <svg
-                      class="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
+                    <p class="text-slate-300 text-sm italic leading-relaxed">
+                      "Passionate about building intelligent solutions that
+                      bridge the gap between complex data and meaningful user
+                      experiences in the cinema industry."
+                    </p>
+                  </div>
+
+                  <div class="mb-6">
+                    <h4
+                      class="text-white font-semibold mb-3 text-sm uppercase tracking-wide"
                     >
-                      <path
-                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                      ></path>
-                    </svg>
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/timothy-chen-0a2900286/"
-                    class="text-slate-400 hover:text-cyan-400 transition-colors"
-                  >
-                    <svg
-                      class="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
+                      Key Skills
+                    </h4>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                      <span
+                        class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                      >
+                        React
+                      </span>
+                      <span
+                        class="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full border border-blue-500/30"
+                      >
+                        Python
+                      </span>
+                      <span
+                        class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                      >
+                        AI/ML
+                      </span>
+                      <span
+                        class="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full border border-blue-500/30"
+                      >
+                        Flask
+                      </span>
+                      <span
+                        class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                      >
+                        Astro
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="flex justify-center gap-4">
+                    <a
+                      href="https://github.com/t1anzn"
+                      target="_blank"
+                      class="group/link w-12 h-12 bg-slate-700/50 hover:bg-cyan-500/20 border border-slate-600/50 hover:border-cyan-500/50 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110"
+                      aria-label="Visit Timothy Chen's GitHub profile"
                     >
-                      <path
-                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                      ></path>
-                    </svg>
-                  </a>
+                      <svg
+                        class="w-5 h-5 text-slate-400 group-hover/link:text-cyan-400 transition-colors"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                        ></path>
+                      </svg>
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/timothy-chen-0a2900286/"
+                      target="_blank"
+                      class="group/link w-12 h-12 bg-slate-700/50 hover:bg-blue-500/20 border border-slate-600/50 hover:border-blue-500/50 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110"
+                      aria-label="Visit Timothy Chen's LinkedIn profile"
+                    >
+                      <svg
+                        class="w-5 h-5 text-slate-400 group-hover/link:text-blue-400 transition-colors"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                        ></path>
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div
-              class="p-6 rounded-lg bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-cyan-500/10
-                        hover:border-cyan-500/30 transition-all duration-300 group/card relative overflow-hidden"
+              class="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-500 overflow-hidden scroll-animate"
+              data-delay="200"
             >
               <div
-                class="absolute inset-0 bg-gradient-to-r from-cyan-200/10 to-blue-400/10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"
+                class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               >
               </div>
+
               <div class="relative z-10">
-                <div class="text-center mb-4">
+                <div class="flex flex-col items-center text-center mb-6">
                   <div
-                    class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20
-                           border-2 border-cyan-500/20 overflow-hidden"
+                    class="w-32 h-32 mb-6 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500/30 overflow-hidden group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-cyan-500/20"
                   >
                     <img
                       src="https://api.dicebear.com/9.x/notionists/svg?seed=Brooklynn&flip=true&scale=150&glasses=variant03&hair=variant24,variant12&backgroundColor=transparent"
-                      alt="Balmee"
-                      class="w-full h-full"
+                      alt="Balmee Hunumunt - Backend Developer profile picture"
+                      class="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 class="text-xl text-cyan-400 font-medium mb-1">
+
+                  <h3
+                    class="text-2xl text-white font-bold mb-2 group-hover:text-cyan-300 transition-colors"
+                  >
                     Balmee Hunumunt
                   </h3>
-                  <p class="text-slate-400 font-light text-sm mb-2">
-                    Back End Developer
-                  </p>
-                  <div class="space-y-1.5">
-                    <p class="text-slate-300 text-sm">
-                      BSc Computer Science Student
-                    </p>
-                    <p class="text-slate-400 text-xs">
-                      University of the Arts London (UAL)
-                    </p>
-                    <p class="text-slate-400/80 text-xs italic mt-2">
-                      "I did some backend stuff, I guess"
+                  <div
+                    class="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 px-4 py-2 rounded-full border border-cyan-500/30 mb-4"
+                  >
+                    <p class="text-cyan-300 text-sm font-medium">
+                      Backend Developer
                     </p>
                   </div>
-                </div>
-                <div class="flex justify-center gap-4 mt-4">
-                  <a
-                    href="https://github.com/Balmee"
-                    class="text-slate-400 hover:text-cyan-400 transition-colors"
+
+                  <div class="space-y-2 mb-6">
+                    <p class="text-slate-200 font-medium">
+                      BSc Computer Science Student
+                    </p>
+                    <p class="text-slate-400 text-sm">
+                      University of the Arts London (UAL)
+                    </p>
+                  </div>
+
+                  <div
+                    class="bg-slate-800/50 rounded-xl p-4 mb-6 border border-slate-600/30"
                   >
-                    <svg
-                      class="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
+                    <p class="text-slate-300 text-sm italic leading-relaxed">
+                      "Dedicated to exploring backend technologies and building
+                      robust, scalable systems that power modern web
+                      applications."
+                    </p>
+                  </div>
+
+                  <div class="mb-6">
+                    <h4
+                      class="text-white font-semibold mb-3 text-sm uppercase tracking-wide"
                     >
-                      <path
-                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                      ></path>
-                    </svg>
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/balmee-hunumunt-87080429a/"
-                    class="text-slate-400 hover:text-cyan-400 transition-colors"
-                  >
-                    <svg
-                      class="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
+                      Key Skills
+                    </h4>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                      <span
+                        class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                      >
+                        Python
+                      </span>
+                      <span
+                        class="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full border border-blue-500/30"
+                      >
+                        Flask
+                      </span>
+                      <span
+                        class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                      >
+                        SQLite
+                      </span>
+                      <span
+                        class="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full border border-blue-500/30"
+                      >
+                        API Design
+                      </span>
+                      <span
+                        class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30"
+                      >
+                        Data Processing
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="flex justify-center gap-4">
+                    <a
+                      href="https://github.com/Balmee"
+                      target="_blank"
+                      class="group/link w-12 h-12 bg-slate-700/50 hover:bg-cyan-500/20 border border-slate-600/50 hover:border-cyan-500/50 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110"
+                      aria-label="Visit Balmee Hunumunt's GitHub profile"
                     >
-                      <path
-                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                      ></path>
-                    </svg>
-                  </a>
+                      <svg
+                        class="w-5 h-5 text-slate-400 group-hover/link:text-cyan-400 transition-colors"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                        ></path>
+                      </svg>
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/balmee-hunumunt-87080429a/"
+                      target="_blank"
+                      class="group/link w-12 h-12 bg-slate-700/50 hover:bg-blue-500/20 border border-slate-600/50 hover:border-blue-500/50 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110"
+                      aria-label="Visit Balmee Hunumunt's LinkedIn profile"
+                    >
+                      <svg
+                        class="w-5 h-5 text-slate-400 group-hover/link:text-blue-400 transition-colors"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                        ></path>
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Contact Section - Email Form */}
+        <div class="mt-20 max-w-4xl mx-auto scroll-animate" data-delay="0">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl text-white font-bold mb-4">Get In Touch</h2>
+            <p class="text-slate-300 max-w-2xl mx-auto">
+              Have questions about our platform or interested in partnerships?
+              We'd love to hear from you.
+            </p>
+          </div>
+
+          <div
+            class="bg-slate-900/60 border border-slate-700/50 rounded-2xl p-8 backdrop-blur-sm"
+          >
+            <form class="space-y-6" aria-label="Contact form">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="name"
+                    class="block text-sm font-medium text-slate-300 mb-2"
+                  >
+                    Name <span class="text-red-400" aria-label="required"
+                      >*</span
+                    >
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    aria-required="true"
+                    aria-describedby="name-help"
+                    class="w-full px-4 py-3 bg-slate-800/50 border border-slate-600/50 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all"
+                    placeholder="Your full name"
+                  />
+                  <div id="name-help" class="sr-only">
+                    Enter your full name for contact purposes
+                  </div>
+                </div>
+                <div>
+                  <label
+                    for="email"
+                    class="block text-sm font-medium text-slate-300 mb-2"
+                  >
+                    Email <span class="text-red-400" aria-label="required"
+                      >*</span
+                    >
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    aria-required="true"
+                    aria-describedby="email-help"
+                    class="w-full px-4 py-3 bg-slate-800/50 border border-slate-600/50 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all"
+                    placeholder="your.email@example.com"
+                  />
+                  <div id="email-help" class="sr-only">
+                    Provide a valid email address for our response
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="subject"
+                  class="block text-sm font-medium text-slate-300 mb-2"
+                >
+                  Subject <span class="text-red-400" aria-label="required"
+                    >*</span
+                  >
+                </label>
+                <select
+                  id="subject"
+                  name="subject"
+                  required
+                  aria-required="true"
+                  aria-describedby="subject-help"
+                  class="w-full px-4 py-3 bg-slate-800/50 border border-slate-600/50 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all"
+                >
+                  <option value="">Select a topic</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="support">Technical Support</option>
+                  <option value="partnership">Business Partnership</option>
+                  <option value="press">Media & Press</option>
+                  <option value="api">API Access</option>
+                  <option value="other">Other</option>
+                </select>
+                <div id="subject-help" class="sr-only">
+                  Choose the topic that best describes your inquiry
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="message"
+                  class="block text-sm font-medium text-slate-300 mb-2"
+                >
+                  Message <span class="text-red-400" aria-label="required"
+                    >*</span
+                  >
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  required
+                  aria-required="true"
+                  aria-describedby="message-help"
+                  class="w-full px-4 py-3 bg-slate-800/50 border border-slate-600/50 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all resize-vertical"
+                  placeholder="Tell us about your inquiry, project, or how we can help you..."
+                ></textarea>
+                <div id="message-help" class="sr-only">
+                  Provide detailed information about your inquiry or request
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  id="newsletter"
+                  name="newsletter"
+                  aria-describedby="newsletter-help"
+                  class="w-4 h-4 bg-slate-800/50 border border-slate-600/50 rounded text-cyan-500 focus:ring-cyan-500/50 focus:ring-2"
+                />
+                <label for="newsletter" class="text-sm text-slate-300">
+                  Subscribe to our newsletter for updates and insights
+                </label>
+                <div id="newsletter-help" class="sr-only">
+                  Optional: Subscribe to receive updates about CineMind
+                </div>
+              </div>
+
+              <div
+                class="flex flex-col sm:flex-row gap-4 items-center justify-between pt-4"
+              >
+                <p class="text-xs text-slate-400">
+                  We'll respond within 24 hours during business days
+                </p>
+                <button
+                  type="submit"
+                  class="group px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:ring-offset-2 focus:ring-offset-slate-900"
+                  aria-label="Submit contact form message"
+                >
+                  <span class="flex items-center space-x-2">
+                    <span>Send Message</span>
+                    <svg
+                      class="w-4 h-4 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="mt-8 text-center text-slate-400 text-sm">
+            <p>Business Hours: Monday - Friday, 9:00 AM - 6:00 PM PST</p>
+            <p class="mt-1">CineMind Analytics Inc. | Mountain View, CA</p>
           </div>
         </div>
       </div>
     </div>
   </main>
-</Layout>
 
-<style>
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
+  <style>
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    to {
+
+    @keyframes slide-up {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fade-in 0.8s ease-out forwards;
+    }
+
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(50px);
+      transition:
+        opacity 0.8s ease-out,
+        transform 0.8s ease-out;
+    }
+
+    .scroll-animate.animate {
       opacity: 1;
       transform: translateY(0);
     }
-  }
-  .animate-fade-in {
-    animation: fade-in 0.8s ease-out forwards;
-  }
-  .floating-background {
-    z-index: 0;
-    background: transparent;
-  }
+  </style>
 
-  .floating-text-1 {
-    animation: float1 60s linear infinite;
-    top: 10%;
-    left: -100%;
-    color: rgb(203 213 225);
-  }
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
 
-  .floating-text-2 {
-    animation: float2 75s linear infinite;
-    top: 40%;
-    left: -150%;
-    color: rgb(96 165 250);
-  }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const delay = parseInt(
+              entry.target.getAttribute("data-delay") || "0"
+            );
 
-  .floating-text-3 {
-    animation: float3 90s linear infinite;
-    top: 70%;
-    left: -120%;
-    color: rgb(34 211 238);
-  }
+            setTimeout(() => {
+              entry.target.classList.add("animate");
+            }, delay);
 
-  @keyframes float1 {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(300%);
-    }
-  }
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
 
-  @keyframes float2 {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(300%);
-    }
-  }
-
-  @keyframes float3 {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(300%);
-    }
-  }
-</style>
+      const animateElements = document.querySelectorAll(".scroll-animate");
+      animateElements.forEach((el) => observer.observe(el));
+    });
+  </script>
+</Layout>
