@@ -4,10 +4,7 @@ CineMind is a comprehensive movie exploration and data platform that helps users
 
 ## 🎥 Demo
 
-
-
 https://github.com/user-attachments/assets/bc0ec213-9ea9-4cb0-8a8f-0c47bb2dc4a8
-
 
 _Watch CineMind in action - showcasing movie search, AI-powered reviews, and data visualizations._
 
@@ -21,6 +18,7 @@ _Watch CineMind in action - showcasing movie search, AI-powered reviews, and dat
 - Custom Flask API for data management and processing
 - Movie analytics and insights
 - Responsive web interface built with Astro
+- Accessibility features including dyslexia-friendly fonts, font size slider, high contrast mode, reduced motion options, and keyboard navigation
 
 ## 🛠️ Tech Stack
 
