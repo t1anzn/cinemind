@@ -24,8 +24,11 @@ export default function MovieHeader({ movie }) {
   if (!movie || typeof movie !== "object") {
     console.error("Invalid movie object received:", movie);
     return (
-      <div className="relative h-[70vh] bg-slate-900">
-        <div className="content-wrapper relative h-full flex items-center justify-center z-10">
+      <div className="relative h-[70vh] bg-slate-900" data-video-container>
+        <div
+          className="content-wrapper relative h-full flex items-center justify-center z-10"
+          data-text-content
+        >
           <div className="text-center">
             <h1 className="text-3xl text-white font-bold">
               Movie Data Unavailable
@@ -57,8 +60,8 @@ export default function MovieHeader({ movie }) {
       : defaultBackdrop;
 
   return (
-    <div className="relative h-[70vh]">
-      <div className="absolute inset-0 bg-black">
+    <div className="relative h-[70vh]" data-video-container>
+      <div className="absolute inset-0">
         <div className="w-full h-full">
           <img
             className="w-full h-full object-cover overflow-hidden"
@@ -85,7 +88,10 @@ export default function MovieHeader({ movie }) {
         </div>
       )}
 
-      <div className="content-wrapper relative h-full flex items-end pb-16 z-10">
+      <div
+        className="content-wrapper relative h-full flex items-end pb-16 z-10"
+        data-text-content
+      >
         <div className="flex flex-col md:flex-row gap-8">
           <div className="hidden md:block w-64 flex-shrink-0">
             <MoviePoster movie={movie} />

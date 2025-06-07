@@ -36,7 +36,51 @@ import SmoothScroll from "../components/SmoothScroll";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <!-- Add OpenDyslexic web font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=OpenDyslexic:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+
     <script src="https://www.youtube.com/iframe_api"></script>
+    
+    <!-- Apply accessibility settings immediately on page load -->
+    <script>
+      // Apply settings before page renders to prevent flash
+      (function() {
+        // Check for stored accessibility preferences
+        const motionPref = localStorage.getItem("motion-preference");
+        const contrastPref = localStorage.getItem("contrast-preference");
+        const dyslexiaPref = localStorage.getItem("dyslexia-font-preference") || "none";
+        const fontPref = localStorage.getItem("font-size-preference") || "100";
+        
+        // Check OS preferences
+        const osReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const osHighContrast = window.matchMedia("(prefers-contrast: high)").matches;
+        
+        // Apply motion settings
+        if (motionPref === "reduced" || (motionPref === null && osReducedMotion)) {
+          document.body.classList.add("manual-reduced-motion");
+          window.currentMotionReduced = true;
+        }
+        
+        // Apply contrast settings
+        if (contrastPref === "high" || (contrastPref === null && osHighContrast)) {
+          document.body.classList.add("high-contrast");
+        }
+        
+        // Apply font settings
+        if (dyslexiaPref !== "none") {
+          document.body.classList.add(`dyslexia-friendly-${dyslexiaPref}`);
+        }
+        
+        // Apply font size
+        document.documentElement.style.fontSize = fontPref + "%";
+      })();
+    </script>
   </head>
   <body>
     <SmoothScroll client:load>
@@ -45,15 +89,579 @@ import SmoothScroll from "../components/SmoothScroll";
         <slot />
         <Footer />
       </div>
-
-      <style>
-        html,
-        body {
-          margin: 0;
-          width: 100%;
-          height: 100%;
-        }
-      </style>
     </SmoothScroll>
+
+    <!-- Simplified script for CSS styles only -->
+    <script>
+      // Just ensure currentMotionReduced is available globally
+      window.currentMotionReduced = window.currentMotionReduced || false;
+      
+      // Re-apply accessibility settings after page load (backup)
+      document.addEventListener('DOMContentLoaded', function() {
+        const contrastPref = localStorage.getItem("contrast-preference");
+        const osHighContrast = window.matchMedia("(prefers-contrast: high)").matches;
+        
+        if (contrastPref === "high" || (contrastPref === null && osHighContrast)) {
+          document.body.classList.add("high-contrast");
+          
+          // Force inline styles for high contrast as backup
+          setTimeout(() => {
+            if (document.body.classList.contains("high-contrast")) {
+              const allElements = document.querySelectorAll('*');
+              allElements.forEach(el => {
+                el.style.setProperty('background-color', '#000000', 'important');
+                el.style.setProperty('color', '#ffffff', 'important');
+                el.style.setProperty('border-color', '#ffffff', 'important');
+              });
+            }
+          }, 100);
+        }
+      });
+    </script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Custom slider styling for better UX */
+      .slider-custom {
+        background: #334155 !important;
+      }
+
+      .slider-custom::-webkit-slider-thumb {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #06b6d4;
+        cursor: pointer;
+        border: 2px solid #1e293b;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: all 0.15s ease;
+        margin-top: -7px; /* Center the thumb on the track */
+      }
+
+      .slider-custom::-webkit-slider-thumb:hover {
+        background: #0891b2;
+        transform: scale(1.1);
+      }
+
+      .slider-custom::-webkit-slider-track {
+        width: 100%;
+        height: 2px;
+        cursor: pointer;
+        background: transparent;
+        border-radius: 1px;
+      }
+
+      .slider-custom::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #06b6d4;
+        cursor: pointer;
+        border: 2px solid #1e293b;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: all 0.15s ease;
+      }
+
+      .slider-custom::-moz-range-thumb:hover {
+        background: #0891b2;
+        transform: scale(1.1);
+      }
+
+      .slider-custom::-moz-range-track {
+        width: 100%;
+        height: 2px;
+        cursor: pointer;
+        background: #334155;
+        border-radius: 1px;
+        border: none;
+      }
+
+      /* Prevent text selection during slider interaction */
+      .slider-custom:active {
+        user-select: none;
+      }
+
+      /* Stable positioning for accessibility panel */
+      #accessibility-panel {
+        position: fixed !important;
+        top: 60px !important;
+        right: 20px !important;
+        transform: none !important;
+        max-width: calc(100vw - 40px) !important;
+        max-height: calc(100vh - 80px) !important;
+        width: 320px !important;
+      }
+
+      /* Custom scrollbar for accessibility panel */
+      #accessibility-panel::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      #accessibility-panel::-webkit-scrollbar-track {
+        background: #1e293b;
+        border-radius: 3px;
+      }
+
+      #accessibility-panel::-webkit-scrollbar-thumb {
+        background: #475569;
+        border-radius: 3px;
+      }
+
+      #accessibility-panel::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+      }
+
+      /* Ensure panel content doesn't overflow horizontally */
+      #accessibility-panel * {
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* Accessibility styles */
+      .high-contrast {
+        filter: contrast(150%) brightness(1.2);
+      }
+
+      /* High contrast mode - use higher specificity to override Tailwind */
+      body.high-contrast * {
+        background-color: #000000 !important;
+        color: #ffffff !important;
+        border-color: #ffffff !important;
+      }
+
+      /* Exclude video elements from high contrast */
+      body.high-contrast video,
+      body.high-contrast iframe,
+      body.high-contrast embed,
+      body.high-contrast object {
+        background-color: unset !important;
+        color: unset !important;
+        border-color: unset !important;
+        filter: none !important;
+      }
+
+      /* Exclude YouTube and video containers */
+      body.high-contrast .video-container,
+      body.high-contrast .youtube-player,
+      body.high-contrast [id*="youtube"],
+      body.high-contrast [class*="video"],
+      body.high-contrast [class*="player"] {
+        background-color: unset !important;
+        color: unset !important;
+        border-color: unset !important;
+        filter: none !important;
+      }
+
+      /* Reset video wrapper elements */
+      body.high-contrast .video-container *,
+      body.high-contrast .youtube-player *,
+      body.high-contrast [id*="youtube"] *,
+      body.high-contrast [class*="video"] *,
+      body.high-contrast [class*="player"] * {
+        background-color: unset !important;
+        color: unset !important;
+        border-color: unset !important;
+        filter: none !important;
+      }
+
+      /* Specific overrides for common elements */
+      body.high-contrast div,
+      body.high-contrast section,
+      body.high-contrast header,
+      body.high-contrast nav,
+      body.high-contrast main,
+      body.high-contrast footer {
+        background-color: #000000 !important;
+        color: #ffffff !important;
+      }
+
+      /* Text elements */
+      body.high-contrast h1,
+      body.high-contrast h2,
+      body.high-contrast h3,
+      body.high-contrast h4,
+      body.high-contrast h5,
+      body.high-contrast h6,
+      body.high-contrast p,
+      body.high-contrast span,
+      body.high-contrast a {
+        color: #ffffff !important;
+      }
+
+      /* Buttons and interactive elements */
+      body.high-contrast button,
+      body.high-contrast input,
+      body.high-contrast select,
+      body.high-contrast textarea {
+        background-color: #000000 !important;
+        color: #ffffff !important;
+        border: 2px solid #ffffff !important;
+      }
+
+      /* Links */
+      body.high-contrast a {
+        color: #ffffff !important;
+        text-decoration: underline !important;
+      }
+
+      body.high-contrast a:hover {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+
+      /* Movie cards and images */
+      body.high-contrast .movie-card,
+      body.high-contrast img {
+        border: 2px solid #ffffff !important;
+      }
+
+      /* Remove any gradients or background images */
+      body.high-contrast * {
+        background-image: none !important;
+        background-clip: unset !important;
+        -webkit-background-clip: unset !important;
+        filter: none !important;
+      }
+
+      /* But allow video elements to keep their properties */
+      body.high-contrast video,
+      body.high-contrast iframe,
+      body.high-contrast embed,
+      body.high-contrast object,
+      body.high-contrast .video-container,
+      body.high-contrast .video-container *,
+      body.high-contrast .youtube-player,
+      body.high-contrast .youtube-player * {
+        background-image: unset !important;
+        background-clip: unset !important;
+        -webkit-background-clip: unset !important;
+        filter: unset !important;
+      }
+
+      /* Prevent text selection during slider interaction */
+      .slider-custom:active {
+        user-select: none;
+      }
+
+      /* Stable positioning for accessibility panel */
+      #accessibility-panel {
+        position: fixed !important;
+        top: 60px !important;
+        right: 20px !important;
+        transform: none !important;
+        max-width: calc(100vw - 40px) !important;
+        max-height: calc(100vh - 80px) !important;
+        width: 320px !important;
+      }
+
+      /* Custom scrollbar for accessibility panel */
+      #accessibility-panel::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      #accessibility-panel::-webkit-scrollbar-track {
+        background: #1e293b;
+        border-radius: 3px;
+      }
+
+      #accessibility-panel::-webkit-scrollbar-thumb {
+        background: #475569;
+        border-radius: 3px;
+      }
+
+      #accessibility-panel::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+      }
+
+      /* Ensure panel content doesn't overflow horizontally */
+      #accessibility-panel * {
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* Accessibility styles */
+      .high-contrast {
+        filter: contrast(150%) brightness(1.2);
+      }
+
+      /* High contrast mode - proper color adjustments with Tailwind overrides */
+      body.high-contrast {
+        background-color: #000000 !important;
+        filter: none !important;
+      }
+
+      body.high-contrast,
+      body.high-contrast .bg-black {
+        background-color: #000000 !important;
+        filter: none !important;
+      }
+
+      /* Background color overrides */
+      body.high-contrast .bg-slate-900,
+      body.high-contrast .bg-slate-800,
+      body.high-contrast .bg-slate-700,
+      body.high-contrast .bg-slate-900\/95,
+      body.high-contrast .bg-slate-900\/60,
+      body.high-contrast .bg-slate-800\/50,
+      body.high-contrast .bg-slate-900\/40 {
+        background-color: #000000 !important;
+      }
+
+      /* Text color overrides */
+      body.high-contrast .text-slate-300,
+      body.high-contrast .text-slate-400,
+      body.high-contrast .text-slate-500,
+      body.high-contrast .text-white\/90,
+      body.high-contrast .text-white\/80,
+      body.high-contrast .text-white {
+        color: #ffffff !important;
+      }
+
+      /* Cyan and blue text to white */
+      body.high-contrast .text-cyan-400,
+      body.high-contrast .text-cyan-300,
+      body.high-contrast .text-cyan-200,
+      body.high-contrast .text-blue-400,
+      body.high-contrast .text-blue-300 {
+        color: #ffffff !important;
+        font-weight: bold !important;
+      }
+
+      /* Border overrides */
+      body.high-contrast .border-slate-700,
+      body.high-contrast .border-slate-600,
+      body.high-contrast .border-slate-800,
+      body.high-contrast .border-slate-700\/50,
+      body.high-contrast .border-slate-600\/50,
+      body.high-contrast .border-slate-800\/50 {
+        border-color: #ffffff !important;
+      }
+
+      /* Gradient overrides */
+      body.high-contrast .bg-gradient-to-r,
+      body.high-contrast .bg-gradient-to-br,
+      body.high-contrast .bg-gradient-to-b,
+      body.high-contrast .bg-gradient-to-t,
+      body.high-contrast .bg-gradient-to-l {
+        background: #000000 !important;
+        background-image: none !important;
+      }
+
+      /* Gradient text overrides */
+      body.high-contrast .bg-gradient-to-r.bg-clip-text,
+      body.high-contrast .text-transparent {
+        background: none !important;
+        background-clip: unset !important;
+        -webkit-background-clip: unset !important;
+        color: #ffffff !important;
+      }
+
+      /* Button overrides */
+      body.high-contrast button {
+        background-color: #000000 !important;
+        color: #ffffff !important;
+        border: 2px solid #ffffff !important;
+      }
+
+      body.high-contrast button:hover {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+
+      /* Form elements */
+      body.high-contrast input,
+      body.high-contrast select,
+      body.high-contrast textarea {
+        background-color: #000000 !important;
+        color: #ffffff !important;
+        border: 2px solid #ffffff !important;
+      }
+
+      body.high-contrast input:focus,
+      body.high-contrast select:focus,
+      body.high-contrast textarea:focus {
+        outline: 3px solid #ffffff !important;
+        outline-offset: 2px !important;
+        box-shadow: none !important;
+      }
+
+      /* Movie cards */
+      body.high-contrast .movie-card {
+        border: 2px solid #ffffff !important;
+        background-color: #000000 !important;
+      }
+
+      body.high-contrast .movie-card:hover {
+        border-color: #ffffff !important;
+        background-color: #000000 !important;
+      }
+
+      /* Shadow overrides */
+      body.high-contrast .shadow-lg,
+      body.high-contrast .shadow-xl,
+      body.high-contrast .shadow-md {
+        box-shadow: 0 0 0 2px #ffffff !important;
+      }
+
+      /* Navigation and header elements */
+      body.high-contrast header,
+      body.high-contrast nav {
+        background-color: #000000 !important;
+        border-color: #ffffff !important;
+      }
+
+      /* Accessibility panel specific overrides */
+      body.high-contrast #accessibility-panel {
+        background-color: #000000 !important;
+        border: 2px solid #ffffff !important;
+      }
+
+      /* Link overrides */
+      body.high-contrast a {
+        color: #ffffff !important;
+        text-decoration: underline !important;
+      }
+
+      body.high-contrast a:hover {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+
+      /* Hover state overrides */
+      body.high-contrast .hover\:text-cyan-400:hover,
+      body.high-contrast .hover\:text-cyan-300:hover,
+      body.high-contrast .hover\:text-white:hover,
+      body.high-contrast .group-hover\:text-cyan-300:hover {
+        color: #000000 !important;
+        background-color: #ffffff !important;
+        text-decoration: underline !important;
+      }
+
+      /* Backdrop blur overrides */
+      body.high-contrast .backdrop-blur-sm,
+      body.high-contrast .backdrop-blur-md {
+        backdrop-filter: none !important;
+        background-color: #000000 !important;
+      }
+
+      /* Remove old filter-based high contrast */
+      body.high-contrast {
+        background-color: #000000 !important;
+        filter: none !important;
+      }
+
+      /* Dyslexia-friendly font options with proper fallbacks */
+      body.dyslexia-friendly-opendyslexic,
+      body.dyslexia-friendly-opendyslexic * {
+        font-family: "OpenDyslexic", "Lucida Grande", "Trebuchet MS", sans-serif !important;
+      }
+
+      body.dyslexia-friendly-arial,
+      body.dyslexia-friendly-arial * {
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+        letter-spacing: 0.05em !important;
+        line-height: 1.6 !important;
+      }
+
+      body.dyslexia-friendly-comic,
+      body.dyslexia-friendly-comic * {
+        font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE",
+          "Marker Felt", cursive, sans-serif !important;
+        letter-spacing: 0.03em !important;
+        line-height: 1.5 !important;
+      }
+
+      body.dyslexia-friendly-verdana,
+      body.dyslexia-friendly-verdana * {
+        font-family: Verdana, Geneva, "DejaVu Sans", sans-serif !important;
+        letter-spacing: 0.04em !important;
+        line-height: 1.6 !important;
+      }
+
+      body.dyslexia-friendly-tahoma,
+      body.dyslexia-friendly-tahoma * {
+        font-family: Tahoma, Geneva, "Lucida Sans Unicode", sans-serif !important;
+        letter-spacing: 0.03em !important;
+        line-height: 1.5 !important;
+      }
+
+      /* Legacy class for backward compatibility */
+      body.dyslexia-friendly,
+      body.dyslexia-friendly * {
+        font-family: "OpenDyslexic", "Lucida Grande", "Trebuchet MS", sans-serif !important;
+      }
+
+      /* Reduced motion styles - only when manually enabled or OS preference is set */
+      @media (prefers-reduced-motion: reduce) {
+        .scroll-animate {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+
+        .transition-transform,
+        .hover\\:scale-105,
+        .hover\\:scale-110,
+        .group-hover\\:scale-105,
+        .group-hover\\:scale-110 {
+          transform: none !important;
+          transition: none !important;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* Manual reduced motion - when user explicitly enables the accessibility option */
+      body.manual-reduced-motion {
+        .scroll-animate {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+
+        .transition-transform,
+        .hover\\:scale-105,
+        .hover\\:scale-110,
+        .group-hover\\:scale-105,
+        .group-hover\\:scale-110 {
+          transform: none !important;
+          transition: none !important;
+        }
+
+        /* Disable all hover scale animations including movie cards */
+        *:hover {
+          transform: none !important;
+        }
+
+        /* Disable focus animations for movie cards */
+        .movie-card:hover,
+        .movie-card:focus,
+        .movie-card:focus-within {
+          transform: none !important;
+          scale: none !important;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
   </body>
 </html>

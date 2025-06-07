@@ -17,35 +17,102 @@ import Lenis from "@studio-freight/lenis";
 
 export default function SmoothScroll({ children }) {
   const lenisRef = useRef(null);
+  const rafRef = useRef(null);
 
-  useEffect(() => {
-    // Initialize Lenis smooth scrolling
-    lenisRef.current = new Lenis({
+  const initializeLenis = () => {
+    if (lenisRef.current) return; // Already initialized
+
+    const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential ease out
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       direction: "vertical",
       gestureDirection: "vertical",
       smooth: true,
       mouseMultiplier: 1,
-      smoothTouch: false, // Disable smooth scrolling on touch devices (better performance)
+      smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
     });
 
-    // Create a callback for RAF (request animation frame)
+    lenisRef.current = lenis;
+    window.lenis = lenis;
+
     function raf(time) {
-      lenisRef.current?.raf(time);
-      requestAnimationFrame(raf);
+      lenis.raf(time);
+      rafRef.current = requestAnimationFrame(raf);
     }
 
-    // Start the animation frame loop
-    requestAnimationFrame(raf);
+    rafRef.current = requestAnimationFrame(raf);
+  };
 
-    // Clean up on component unmount
+  const destroyLenis = () => {
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+    if (lenisRef.current) {
+      lenisRef.current.destroy();
+      lenisRef.current = null;
+      window.lenis = null;
+    }
+  };
+
+  const checkMotionPreference = () => {
+    const osReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const manualReducedMotion = document.body.classList.contains(
+      "manual-reduced-motion"
+    );
+    const storedPreference = localStorage.getItem("motion-preference");
+
+    return (
+      osReducedMotion || manualReducedMotion || storedPreference === "reduced"
+    );
+  };
+
+  const handleMotionChange = () => {
+    if (checkMotionPreference()) {
+      destroyLenis();
+    } else {
+      if (!lenisRef.current) {
+        initializeLenis();
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Initialize Lenis if motion is not reduced
+    if (!checkMotionPreference()) {
+      initializeLenis();
+    }
+
+    // Listen for storage changes (when preference is updated)
+    window.addEventListener("storage", handleMotionChange);
+
+    // Listen for class changes on body
+    const observer = new MutationObserver(handleMotionChange);
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    // Listen for custom events from accessibility panel
+    const handleAccessibilityChange = () => {
+      setTimeout(handleMotionChange, 50); // Small delay to ensure class changes are applied
+    };
+    window.addEventListener("accessibilityChanged", handleAccessibilityChange);
+
     return () => {
-      lenisRef.current?.destroy();
+      window.removeEventListener("storage", handleMotionChange);
+      window.removeEventListener(
+        "accessibilityChanged",
+        handleAccessibilityChange
+      );
+      observer.disconnect();
+      destroyLenis();
     };
   }, []);
 
-  return children;
+  return <>{children}</>;
 }

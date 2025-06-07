@@ -1,0 +1,51 @@
+/* ...existing code... */
+
+/* High contrast mode styles - more specific selectors */
+.high-contrast * {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Exclude ALL images from getting black backgrounds */
+.high-contrast img {
+  background-color: transparent !important;
+}
+
+/* Exclude video containers and their children from high contrast background */
+.high-contrast [data-video-container],
+.high-contrast [data-video-container] *:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(p):not(span):not(a):not(button) {
+  background-color: transparent !important;
+}
+
+/* Allow text content in video containers to have white text but transparent background */
+.high-contrast [data-text-content] *:not(img) {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Specifically target YouTube thumbnails and movie images */
+.high-contrast img[src*="youtube.com"],
+.high-contrast img[src*="ytimg.com"],
+.high-contrast img[alt*="trailer"],
+.high-contrast img[alt*="poster"],
+.high-contrast img[alt*="backdrop"],
+.high-contrast img[alt*="Movie"] {
+  background-color: transparent !important;
+}
+
+/* Handle gradient elements specifically */
+.high-contrast [class*="bg-gradient"]:not([data-video-container] [class*="bg-gradient"]),
+.high-contrast [class*="from-blue"]:not([data-video-container] [class*="from-blue"]),
+.high-contrast [class*="to-blue"]:not([data-video-container] [class*="to-blue"]) {
+  background: #000000 !important;
+  background-image: none !important;
+}
+
+/* Override genre pills to have black background but only outside video containers */
+.high-contrast [data-text-content] .from-blue-500\/50,
+.high-contrast [data-text-content] .to-blue-500\/30 {
+  background: #000000 !important;
+  background-image: none !important;
+}

@@ -51,7 +51,7 @@ export default function FeaturedSlider({ featuredMovies = [] }) {
 
   return (
     <>
-      <div className="relative h-[75vh] overflow-hidden">
+      <div className="relative h-[75vh] overflow-hidden" data-video-container>
         {/* Slider Background */}
         <div className="absolute inset-0 z-10 transition-opacity duration-1000">
           <div className="relative w-full h-full overflow-hidden">
@@ -74,7 +74,10 @@ export default function FeaturedSlider({ featuredMovies = [] }) {
         </div>
 
         {/* Movie Content */}
-        <div className="content-wrapper relative h-full flex items-end pb-25 md:pb-20 sm:pb-15 z-20">
+        <div
+          className="content-wrapper relative h-full flex items-end pb-25 md:pb-20 sm:pb-15 z-20"
+          data-text-content
+        >
           <div className="p-6 md:p-3 sm:p-2 rounded-lg max-w-2xl sm:max-w-md">
             <h1 className="text-3xl lg:text-5xl whitespace-pre md:text-4xl font-extralight text-white mb-3 tracking-wider">
               {currentMovie.title}

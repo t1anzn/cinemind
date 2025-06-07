@@ -31,7 +31,7 @@ export default function MovieMedia({ movie }) {
   const [isTheaterMode, setIsTheaterMode] = useState(false);
   const [isPosterFocusMode, setIsPosterFocusMode] = useState(false);
   const [focusedPosterIndex, setFocusedPosterIndex] = useState(0);
-  const [isMuted, setIsMuted] = useState(true); // Shared mute state
+  const [isMuted, setIsMuted] = useState(true);
   const [selectedTab, setSelectedTab] = useState(0);
   const [isVideosExpanded, setIsVideosExpanded] = useState(false);
   const [videoPage, setVideoPage] = useState(1);
@@ -232,6 +232,7 @@ export default function MovieMedia({ movie }) {
                     key={url}
                     onClick={() => openTheaterMode(index)}
                     className="group relative aspect-video bg-slate-900 rounded-lg overflow-hidden"
+                    data-video-container
                   >
                     <img
                       src={`https://img.youtube.com/vi/${extractYouTubeId(
@@ -278,6 +279,7 @@ export default function MovieMedia({ movie }) {
                     key={url}
                     onClick={() => openPosterFocusMode(index)}
                     className="group relative aspect-[2/3] bg-slate-900 rounded-lg overflow-hidden"
+                    data-video-container
                   >
                     <img
                       src={url}
@@ -319,6 +321,7 @@ export default function MovieMedia({ movie }) {
                     key={url}
                     onClick={() => openBackdropFocusMode(index)}
                     className="group relative aspect-video bg-slate-900 rounded-lg overflow-hidden"
+                    data-video-container
                   >
                     <img
                       src={url}
@@ -357,11 +360,12 @@ export default function MovieMedia({ movie }) {
       {isTheaterMode && (
         <div
           className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center"
-          onClick={closeTheaterMode} // Close theater mode when clicking on the background
+          onClick={closeTheaterMode}
+          data-video-container
         >
           <div
             className="relative w-full max-w-7xl aspect-video"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when interacting with the video
+            onClick={(e) => e.stopPropagation()}
           >
             <YouTubePlayer
               videoId={extractYouTubeId(trailerUrls[currentTrailerIndex])}
@@ -388,6 +392,7 @@ export default function MovieMedia({ movie }) {
         <div
           className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4 overflow-y-auto"
           onClick={closePosterFocusMode}
+          data-video-container
         >
           <div
             className="relative w-full max-w-4xl md:max-w-3xl max-h-[90vh] my-8"
@@ -412,6 +417,7 @@ export default function MovieMedia({ movie }) {
         <div
           className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4 overflow-y-auto"
           onClick={closeBackdropFocusMode}
+          data-video-container
         >
           <div
             className="relative w-full max-w-5xl max-h-[90vh] my-8"

@@ -1035,7 +1035,11 @@ import geminiLogo from "../assets/google-gemini-icon.svg?url";
           Includes proper form labeling and ARIA descriptions
       */
       }
-      <section class="mt-20 max-w-4xl mx-auto scroll-animate" data-delay="0">
+      <section
+        id="contact"
+        class="mt-20 max-w-4xl mx-auto scroll-animate"
+        data-delay="0"
+      >
         {/* Contact section header */}
         <header class="text-center mb-12">
           <h2 class="text-3xl text-white font-bold mb-4">Get In Touch</h2>
@@ -1290,41 +1294,64 @@ import geminiLogo from "../assets/google-gemini-icon.svg?url";
     /* ================================
        SCROLL ANIMATION CONTROLLER
        ================================
-       Intersection Observer implementation for progressive content reveal
-       Handles staggered animations with customizable delays
+       Page-specific scroll animations that work with site-wide accessibility preferences
     */
 
+    // Declare global window property
+    declare global {
+      interface Window {
+        currentMotionReduced?: boolean;
+      }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
-      // Configuration for when animations should trigger
-      const observerOptions = {
-        threshold: 0.1, // Trigger when 10% of element is visible
-        rootMargin: "0px 0px -50px 0px", // Start animation 50px before element enters viewport
-      };
+      // Wait for accessibility preferences to be initialized
+      setTimeout(() => {
+        const currentMotionReduced =
+          (window as any).currentMotionReduced ||
+          document.body.classList.contains("manual-reduced-motion") ||
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      // Create intersection observer to watch for elements entering viewport
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          // Only animate elements that are entering the viewport
-          if (entry.isIntersecting) {
-            // Get custom delay from data attribute (defaults to 0)
-            const delay = parseInt(
-              entry.target.getAttribute("data-delay") || "0"
-            );
+        // Configuration for when animations should trigger
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px",
+        };
 
-            // Apply animation after specified delay for staggered effect
-            setTimeout(() => {
-              entry.target.classList.add("animate");
-            }, delay);
+        // Create intersection observer
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const delay = parseInt(
+                entry.target.getAttribute("data-delay") || "0"
+              );
 
-            // Stop observing this element to prevent re-animation
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
+              // Eliminate delays entirely for reduced motion users
+              const actualDelay = currentMotionReduced ? 0 : delay;
 
-      // Find all elements marked for scroll animation and start observing
-      const animateElements = document.querySelectorAll(".scroll-animate");
-      animateElements.forEach((el) => observer.observe(el));
+              setTimeout(() => {
+                entry.target.classList.add("animate");
+              }, actualDelay);
+
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        // Start observing elements only if animations are enabled
+        if (!currentMotionReduced) {
+          const animateElements = document.querySelectorAll(".scroll-animate");
+          animateElements.forEach((el) => observer.observe(el));
+        } else {
+          // If reduced motion, make all elements immediately visible
+          const animateElements = document.querySelectorAll(".scroll-animate");
+          animateElements.forEach((el) => {
+            (el as HTMLElement).style.opacity = "1";
+            (el as HTMLElement).style.transform = "none";
+            el.classList.add("animate");
+          });
+        }
+      }, 100);
     });
   </script>
 </Layout>
