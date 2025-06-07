@@ -4,7 +4,10 @@ CineMind is a comprehensive movie exploration and data platform that helps users
 
 ## 🎥 Demo
 
-https://github.com/user-attachments/assets/your-video-file.mp4
+
+
+https://github.com/user-attachments/assets/bc0ec213-9ea9-4cb0-8a8f-0c47bb2dc4a8
+
 
 _Watch CineMind in action - showcasing movie search, AI-powered reviews, and data visualizations._
 
