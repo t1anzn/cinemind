@@ -1,3 +1,9 @@
+# ============================== #
+# CineMind Flask API             #
+# Backend server for movie data #
+# ============================== #
+
+# === Imports === #
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
@@ -8,22 +14,22 @@ from google import genai  # Import the Gemini AI library
 from dotenv import load_dotenv
 from pathlib import Path
 
+# === App Setup === #
 app = Flask(__name__)
 CORS(app) # Enable CORS for all routes
 
-# Path to your existing cinemind.db database
-basedir = os.path.abspath(os.path.dirname(__file__))
+# === Database Config === #
+basedir = os.path.abspath(os.path.dirname(__file__)) # Path to existing cinemind.db database
 #db_path = os.path.join(os.path.dirname(basedir), 'models', 'cinemind.db')
 db_path = os.path.join(os.path.dirname(basedir), '..', 'migration_project', 'cinema_migrations.db')
 
-# Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the database connection
 db = SQLAlchemy(app)
 
-# Load environment variables
+# === Environment Variable Loader === #
 def load_environment():
     """Load environment variables from multiple possible locations"""
     possible_paths = [
@@ -57,7 +63,8 @@ if not load_environment():
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 client = genai.Client(api_key=GEMINI_API_KEY)
 
-# Defining Models
+# === Models === #
+# Each model maps to a table in the SQLite database
 class Cast(db.Model):
     __tablename__ = 'cast'
     actor_id = db.Column(db.Integer, primary_key=True)
@@ -101,6 +108,7 @@ class Movie(db.Model):
     keyposter_url = db.Column(db.Text)
     keyvideo_url = db.Column(db.Text)
 
+# === Join Tables === #
 class MovieGenre(db.Model):
     __tablename__ = 'movie_genre'
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'), primary_key=True)
@@ -144,7 +152,7 @@ class MovieCast(db.Model):
     actor_id = db.Column(db.Integer, db.ForeignKey('cast.actor_id'), primary_key=True)
     character_id = db.Column(db.Integer, db.ForeignKey('characters.character_id'), primary_key=True)
 
-# Endpoints
+# === Endpoints === #
 @app.route('/movies', methods=['GET'])
 def get_movies():
     # Pagination parameters from query string, with default values
@@ -224,8 +232,7 @@ def get_spoken_languages():
     languages = SpokenLanguages.query.all()
     return jsonify([{'id': language.language_id, 'name': language.language_name, 'iso_code': language.iso_code} for language in languages])
 
-
-# Enhanced Endpoints: makes use of the Relationship tables to link table information
+# === Enhanced Endpoints: makes use of the Relationship tables to link table information ===#
 @app.route('/featured', methods=['GET'])
 def get_featured():
 
@@ -479,7 +486,7 @@ def results_movies():
     else:
         base_query = base_query.order_by(sort_column.desc())
 
-    # Pagination
+    # === Pagination === #
     pagination = base_query.paginate(page=page, per_page=per_page, error_out=False)
     movies = pagination.items
 
