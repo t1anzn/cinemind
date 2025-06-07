@@ -1,48 +1,205 @@
-# Astro Starter Kit: Basics
+# CineMind 🎬
 
-```sh
-npm create astro@latest -- --template basics
+CineMind is a comprehensive movie exploration and data platform that helps users discover and explore films through rich data from The Movie Database (TMDB) API and intelligent insights. Built as a full-stack application with a custom Flask API backend, it provides detailed movie information, analytics, and features an AI-powered smart review section that uses Google's Gemini API to summarize reviews and provide intelligent commentary.
+
+## 🎥 Demo
+
+https://github.com/user-attachments/assets/your-video-file.mp4
+
+_Watch CineMind in action - showcasing movie search, AI-powered reviews, and data visualizations._
+
+## ✨ Features
+
+- Movie search and discovery with trailers, posters, and backdrops
+- Comprehensive movie metadata including cast, crew, and financial performance
+- User reviews integration
+- AI-powered review summaries (via Gemini API)
+- Interactive analytical charts and database visualizations
+- Custom Flask API for data management and processing
+- Movie analytics and insights
+- Responsive web interface built with Astro
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- **Astro** - Modern web framework for content-focused websites
+- **React** - Interactive UI components
+- **Tailwind CSS** - Utility-first CSS framework
+
+### Backend
+
+- **Python Flask** - Lightweight web framework
+- **SQLite** - Local database for movie data storage
+- **Google Gemini API** - AI-powered review summarization
+
+### Data & Analytics
+
+- **Pandas** - Data manipulation and analysis
+- **Chart.js** - Interactive data visualizations
+- **TMDB API** - Movie metadata and information
+
+## 📁 Project Directories
+
+### Frontend (`/frontend`)
+
+- **`src/pages/`** - Astro page components and routing
+- **`src/components/`** - Reusable React components
+- **`src/layouts/`** - Page layout templates
+- **`src/styles/`** - CSS and styling files
+- **`src/utils/`** - Utility functions and helpers
+- **`src/hooks/`** - Custom React hooks
+- **`src/assets/`** - SVG logos and graphics used in the about section
+- **`public/`** - Static assets (images, icons, etc.)
+
+### Backend (`/backend`)
+
+- **`app/`** - Main Flask application code and development notebooks
+  - **`app.py`** - Main Flask application entry point
+  - **`api_and_db_testing.ipynb`** - Initial API testing and database implementation work from the start of the project
+  - **`cinemind_toolkit.ipynb`** - Well-formatted utilities and commands for regular database operations and API management
+  - **`cinemind_ai.ipynb`** - Testing and experimentation with the Gemini AI API for review analysis
+- **`data/`** - CSV datasets and raw data files
+  - **`tmdb_5000_movies.csv`** - Core movie dataset with metadata, budget, revenue, and ratings
+  - **`tmdb_5000_credits.csv`** - Cast and crew information for movies
+- **`models/`** - Original SQLite database files (now legacy - replaced by migration system)
+- **`tests/`** - Unit testing files and test notebooks
+  - **`test_database.ipynb`** - Comprehensive unit tests for database functionality and data integrity
+- **`requirements.txt`** - Python dependencies
+
+### Other
+
+- **`diagrams/`** - Project documentation and diagrams, mainly showing the backend database structure with Mermaid diagrams
+- **`migration_project/`** - **Current active database** - SQLAlchemy-based implementation with Alembic migrations (more powerful than the original cinemind.db)
+
+## 🛠️ Setup Instructions
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+- Git
+- Python 3.8 or higher
+- Flask
+
+### Frontend Setup
+
+1. **Clone the repository**
+
+   ```sh
+   git clone <repository-url>
+   cd cinemind/frontend
+   ```
+
+2. **Install dependencies**
+
+   ```sh
+   npm install
+   ```
+
+3. **Start development server**
+   ```sh
+   npm run dev
+   ```
+   The frontend will be available at `http://localhost:4321`
+
+### Backend Setup
+
+1. **[Optional] Create a virtual environment (from project root)**
+
+   ```sh
+   # From the cinemind root directory
+   python -m venv venv
+
+   # Activate virtual environment
+   # On Windows:
+   venv\Scripts\activate
+
+   # On macOS/Linux:
+   source venv/bin/activate
+   ```
+
+2. **Navigate to backend directory**
+
+   ```sh
+   cd backend
+   ```
+
+3. **Install Python dependencies**
+
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+4. **Configure environment variables**
+
+   ```sh
+   # Create a .env file in the backend/app directory
+   # Add your API keys as shown in the Environment Variables section below
+   ```
+
+5. **Start Flask server**
+   ```sh
+   cd app
+   flask run
+   ```
+
+### Full-Stack Development
+
+1. **Start both frontend and backend**
+
+   ```sh
+   # Terminal 1 - Backend
+   cd backend/app && flask run
+
+   # Terminal 2 - Frontend
+   cd frontend && npm run dev
+   ```
+
+## 🌐 Environment Variables
+
+Create a `.env` file in the backend directory with the following variables:
+
+```env
+TMdb_api_key=your_tmdb_bearer_token_here
+GEMINI_API_KEY=your_gemini_api_key_here
+VITE_API_URL=http://localhost:5000
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+**Getting API Keys:**
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- **TMDB API**: Get your bearer token from [TMDB API Settings](https://www.themoviedb.org/settings/api)
+- **Gemini API**: Get your API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 🤝 Contributing
 
-## 🚀 Project Structure
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Inside of your Astro project, you'll see the following folders and files:
+## 📚 Learn More
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- [Astro Documentation](https://docs.astro.build)
+- [Movie Database API Documentation](https://developers.themoviedb.org/3)
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 👥 Credits
 
-## 🧞 Commands
+This project was developed by:
 
-All commands are run from the root of the project, from a terminal:
+**Timothy Chen** - Lead Full-Stack Developer & AI Engineer
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- BSc Computer Science Student at University of the Arts London (UAL)
+- Full-stack development with frontend leadership, backend architecture, AI integration with Gemini API, and system design
+- [GitHub](https://github.com/t1anzn) | [LinkedIn](https://www.linkedin.com/in/timothy-chen-0a2900286/)
 
-## 👀 Want to learn more?
+**Balmee Hunumunt** - Backend Lead Developer
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- BSc Computer Science Student at University of the Arts London (UAL)
+- Backend development, API architecture, database design, and TMDB API data processing
+- [GitHub](https://github.com/Balmee) | [LinkedIn](https://www.linkedin.com/in/balmee-hunumunt-87080429a/)
+
+## 📄 License
+
+This project is part of the UAL Data-Driven Full Stack course.
