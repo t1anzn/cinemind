@@ -183,7 +183,11 @@ VITE_API_URL=http://localhost:5000
 ## 🎨 Design & Planning
 
 - [Miro Board - Project Planning & Wireframes](https://miro.com/welcomeonboard/MWNqbGFuSnR2eGFpWmZvOHpZa0dnWXNNZ3BXOGZNNjErOGw3L0pZOWpqSy8zSEF0cmNjSEFTeFllNXhvMEpHay95ZWZFcDREMjBacUoweTArSUF4VHFTRzlyVU9LNnJNdzdvR3FJeVpKelkrK1pId2U0M1VNNFRYM3YyUWtHY1BQdGo1ZEV3bUdPQWRZUHQzSGl6V2NBPT0hdjE=?share_link_id=349313849409)
+  
+![miro](https://github.com/user-attachments/assets/d91dd2c9-f489-4868-adf7-67029a2428ba)
+
 - [Figma - UI/UX Design System](https://www.figma.com/design/PGvnXwsl5oZu1HCtS92Qo9/Movie-Database-Wireframe?node-id=0-1&t=r7HSsxrDrFJ8ZyHN-1)
+  ![2379a43d47043e5ed8d5fa77fb05382f](https://github.com/user-attachments/assets/3860f400-ea05-4460-8edf-10704ded2ecb)
 
 ## 📚 Learn More
 
