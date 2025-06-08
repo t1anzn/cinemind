@@ -89,6 +89,7 @@ _Watch CineMind in action - showcasing movie search, AI-powered reviews, and dat
 
    ```sh
    git clone https://github.com/t1anzn/cinemind
+   # OR download the ZIP file from GitHub and extract it
    cd cinemind/frontend
    ```
 
@@ -120,34 +121,29 @@ _Watch CineMind in action - showcasing movie search, AI-powered reviews, and dat
    source venv/bin/activate
    ```
 
-2. **Navigate to backend directory**
-
-   ```sh
-   cd backend
-   ```
-
-3. **Install Python dependencies**
+2. **Install Python dependencies**
 
    ```sh
    pip install -r requirements.txt
    ```
 
-4. **Configure environment variables**
+3. **Configure environment variables**
 
    ```sh
-   # Create a .env file in the backend/app directory
+   # Create a .env file in the root directory (or other supported locations)
+   # The Flask app will automatically detect .env files in multiple locations
    # Add your API keys as shown in the Environment Variables section below
    ```
 
-5. **Start Flask server**
+4. **Start Flask server**
    ```sh
-   cd app
+   cd backend/app
    flask run
    ```
 
 ### Full-Stack Development
 
-1. **Start both frontend and backend**
+1. **Start both frontend and backend manually**
 
    ```sh
    # Terminal 1 - Backend
@@ -157,9 +153,27 @@ _Watch CineMind in action - showcasing movie search, AI-powered reviews, and dat
    cd frontend && npm run dev
    ```
 
+2. **Alternative: Use the convenience script (Windows only)**
+
+   ```sh
+   # Run the batch script from the project root
+   start-servers.bat
+   ```
+
+   **Note**: The `start-servers.bat` script only works if your virtual environment is located at `cinemind/venv` (created in the project root as shown in the Backend Setup instructions).
+
 ## 🌐 Environment Variables
 
-Create a `.env` file in the backend directory with the following variables:
+Create a `.env` file in one of the following supported locations:
+
+- **Root directory**: `cinemind/.env` (recommended)
+- **Backend app directory**: `cinemind/backend/app/.env`
+- **Frontend directory**: `cinemind/frontend/.env`
+- **Backend directory**: `cinemind/backend/.env`
+
+The Flask app will automatically detect and load the .env file from any of these locations.
+
+Add the following variables to your .env file:
 
 ```env
 TMdb_api_key=your_tmdb_bearer_token_here
@@ -183,9 +197,8 @@ VITE_API_URL=http://localhost:5000
 ## 🎨 Design & Planning
 
 - [Miro Board - Project Planning & Wireframes](https://miro.com/welcomeonboard/MWNqbGFuSnR2eGFpWmZvOHpZa0dnWXNNZ3BXOGZNNjErOGw3L0pZOWpqSy8zSEF0cmNjSEFTeFllNXhvMEpHay95ZWZFcDREMjBacUoweTArSUF4VHFTRzlyVU9LNnJNdzdvR3FJeVpKelkrK1pId2U0M1VNNFRYM3YyUWtHY1BQdGo1ZEV3bUdPQWRZUHQzSGl6V2NBPT0hdjE=?share_link_id=349313849409)
-  
-![miro](https://github.com/user-attachments/assets/d7102c66-5c17-425a-82ab-8dbdc1600af0)
 
+![miro](https://github.com/user-attachments/assets/d7102c66-5c17-425a-82ab-8dbdc1600af0)
 
 - [Figma - UI/UX Design System](https://www.figma.com/design/PGvnXwsl5oZu1HCtS92Qo9/Movie-Database-Wireframe?node-id=0-1&t=r7HSsxrDrFJ8ZyHN-1)
   ![2379a43d47043e5ed8d5fa77fb05382f](https://github.com/user-attachments/assets/3860f400-ea05-4460-8edf-10704ded2ecb)
