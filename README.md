@@ -88,7 +88,7 @@ _Watch CineMind in action - showcasing movie search, AI-powered reviews, and dat
 1. **Clone the repository**
 
    ```sh
-   git clone <repository-url>
+   git clone https://github.com/t1anzn/cinemind
    cd cinemind/frontend
    ```
 
