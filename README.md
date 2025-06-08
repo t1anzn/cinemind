@@ -180,6 +180,11 @@ VITE_API_URL=http://localhost:5000
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+## 🎨 Design & Planning
+
+- [Miro Board - Project Planning & Wireframes](https://miro.com/welcomeonboard/MWNqbGFuSnR2eGFpWmZvOHpZa0dnWXNNZ3BXOGZNNjErOGw3L0pZOWpqSy8zSEF0cmNjSEFTeFllNXhvMEpHay95ZWZFcDREMjBacUoweTArSUF4VHFTRzlyVU9LNnJNdzdvR3FJeVpKelkrK1pId2U0M1VNNFRYM3YyUWtHY1BQdGo1ZEV3bUdPQWRZUHQzSGl6V2NBPT0hdjE=?share_link_id=349313849409)
+- [Figma - UI/UX Design System](https://www.figma.com/design/PGvnXwsl5oZu1HCtS92Qo9/Movie-Database-Wireframe?node-id=0-1&t=r7HSsxrDrFJ8ZyHN-1)
+
 ## 📚 Learn More
 
 - [Astro Documentation](https://docs.astro.build)
