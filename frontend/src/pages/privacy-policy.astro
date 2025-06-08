@@ -1,0 +1,257 @@
+---
+/**
+ * Privacy Policy Page
+ *
+ * Legal page containing CineMind's privacy policy and data protection practices.
+ * Features:
+ * - Comprehensive privacy policy content
+ * - Consistent styling with design system
+ * - Responsive layout
+ *
+ * Used to inform users about data collection and usage practices.
+ */
+
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Privacy Policy - CineMind">
+  <main class="py-16">
+    <div class="content-wrapper max-w-4xl mx-auto">
+      <div class="space-y-8">
+        <!-- Title -->
+        <div class="text-center space-y-4">
+          <h1
+            class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+          >
+            Privacy Policy
+          </h1>
+          <p class="text-slate-400 text-lg">Last updated: June 8th 2025</p>
+        </div>
+
+        <!-- Content -->
+        <div class="prose prose-invert prose-cyan max-w-none space-y-8">
+          <!-- Introduction -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">Introduction</h2>
+            <p class="text-slate-300 leading-relaxed">
+              CineMind Analytics Inc. ("we," "our," or "us") is committed to
+              protecting your privacy. This privacy policy explains our minimal
+              data collection practices when you use our movie analytics
+              platform. We believe in privacy by design and only collect the
+              absolute minimum data necessary to provide accessibility features.
+            </p>
+          </section>
+
+          <!-- Information We Collect -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Information We Collect
+            </h2>
+            <div class="space-y-4">
+              <h3 class="text-xl font-medium text-slate-200">
+                Accessibility Preferences
+              </h3>
+              <p class="text-slate-300 leading-relaxed">
+                We only collect and store your accessibility preferences locally
+                on your device to enhance your experience. This includes:
+              </p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>Theme preferences (dark/light mode)</li>
+                <li>Font size and contrast settings</li>
+                <li>Motion reduction preferences</li>
+                <li>Screen reader compatibility settings</li>
+              </ul>
+
+              <h3 class="text-xl font-medium text-slate-200">
+                What We Don't Collect
+              </h3>
+              <p class="text-slate-300 leading-relaxed">
+                We do not collect, store, or process:
+              </p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>Personal information (names, emails, addresses)</li>
+                <li>User accounts or login credentials</li>
+                <li>Movie ratings, reviews, or watchlist data</li>
+                <li>Search queries or browsing behavior</li>
+                <li>Device information or IP addresses</li>
+                <li>Analytics or tracking data</li>
+                <li>Cookies for tracking purposes</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- How We Use Your Information -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              How We Use Your Information
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              The accessibility preferences we collect are used solely to:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>Provide a personalized and accessible user experience</li>
+              <li>
+                Remember your display and accessibility settings across sessions
+              </li>
+              <li>Ensure compliance with accessibility standards</li>
+            </ul>
+          </section>
+
+          <!-- Data Storage -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Data Storage and Sharing
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              Your accessibility preferences are stored locally in your
+              browser's local storage. This data never leaves your device and is
+              not transmitted to our servers or shared with any third parties.
+              We have no access to this information.
+            </p>
+          </section>
+
+          <!-- Third-Party Services -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Third-Party Services
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              Our platform integrates with the following third-party services:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>
+                <strong>The Movie Database (TMDB) API:</strong> Used to display movie
+                information, ratings, metadata, and user reviews. When you search
+                for movies, your queries are sent directly to TMDB's servers.
+              </li>
+              <li>
+                <strong>YouTube Player API:</strong> Used to embed and display movie
+                trailers and video content. Video playback is handled directly by
+                YouTube's embedded player, which may collect usage data according
+                to YouTube's privacy policy.
+              </li>
+              <li>
+                <strong>Google Gemini API:</strong> Used exclusively for the "Smart
+                Review" feature to provide AI-powered sentiment analysis of existing
+                user reviews. Review data is processed by Google's services only
+                when you view this specific feature.
+              </li>
+            </ul>
+            <p class="text-slate-300 leading-relaxed">
+              Please refer to TMDB's, YouTube's, and Google's respective privacy
+              policies for information about their data practices. We do not
+              store or log the queries sent to these services.
+            </p>
+          </section>
+
+          <!-- Cookies -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Cookies and Tracking
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              We do not use cookies for tracking or analytics purposes. We only
+              use essential browser storage (localStorage) to save your
+              accessibility preferences locally on your device. No tracking
+              technologies are employed on our platform.
+            </p>
+          </section>
+
+          <!-- Data Control -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Your Data Control
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              Since your accessibility preferences are stored locally on your
+              device, you have complete control over this data. You can:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>Clear your preferences through your browser settings</li>
+              <li>Reset preferences using our accessibility panel</li>
+              <li>
+                Use private/incognito browsing to avoid storing any preferences
+              </li>
+            </ul>
+          </section>
+
+          <!-- Security -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">Security</h2>
+            <p class="text-slate-300 leading-relaxed">
+              Since we don't collect or store personal data on our servers,
+              there are no security risks related to data breaches of your
+              personal information. Your accessibility preferences remain secure
+              on your local device.
+            </p>
+          </section>
+
+          <!-- Children's Privacy -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Children's Privacy
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              While our platform does not collect any personal information, we
+              must note that our movie database contains films with various age
+              ratings, including content that may not be suitable for children.
+              Parents and guardians should supervise children's use of our
+              platform. We recommend parental guidance when children under 13
+              access movie information, as some content may include mature
+              themes, violence, or other age-inappropriate material.
+            </p>
+            <p class="text-slate-300 leading-relaxed">
+              From a privacy perspective, the minimal accessibility data stored
+              locally poses no privacy risks to children or any other users, as
+              no personal information is collected or transmitted.
+            </p>
+          </section>
+
+          <!-- Changes to Policy -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Changes to This Policy
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              We may update this privacy policy to reflect changes in our
+              practices or for legal compliance. Any changes will be posted on
+              this page with an updated revision date. Since we collect minimal
+              data, changes will likely be minor and related to clarifications
+              rather than new data collection practices.
+            </p>
+          </section>
+
+          <!-- Contact -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">Contact Us</h2>
+            <p class="text-slate-300 leading-relaxed">
+              If you have questions about this privacy policy or our data
+              practices, please contact us:
+            </p>
+            <div class="bg-slate-800/50 rounded-lg p-6 space-y-2">
+              <p class="text-slate-300">Email: privacy@cinemind.com</p>
+              <p class="text-slate-300">
+                Address: 1600 Amphitheatre Parkway, Mountain View, CA 94043
+              </p>
+              <p class="text-slate-300">Phone: +1 (555) 123-4567</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .content-wrapper {
+      padding: 0 2rem;
+    }
+  }
+</style>

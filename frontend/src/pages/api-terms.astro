@@ -1,0 +1,420 @@
+---
+/**
+ * API Terms Page
+ *
+ * Legal page containing API terms of use and developer policies.
+ * Features:
+ * - Comprehensive API terms and usage policies
+ * - Consistent styling with design system
+ * - Responsive layout
+ *
+ * Used to inform developers about API usage terms and conditions.
+ */
+
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="API Terms - CineMind">
+  <main class="py-16">
+    <div class="content-wrapper max-w-4xl mx-auto">
+      <div class="space-y-8">
+        <!-- Title -->
+        <div class="text-center space-y-4">
+          <h1
+            class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+          >
+            API Terms of Use
+          </h1>
+          <p class="text-slate-400 text-lg">Last updated: June 8th 2025</p>
+        </div>
+
+        <!-- Content -->
+        <div class="prose prose-invert prose-cyan max-w-none space-y-8">
+          <!-- Introduction -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">API Overview</h2>
+            <p class="text-slate-300 leading-relaxed">
+              CineMind Analytics Inc. ("we," "our," or "us") provides API access
+              to certain functionality of our movie analytics platform. These
+              API Terms of Use govern your access to and use of CineMind's
+              Application Programming Interfaces (APIs). By accessing or using
+              our APIs, you agree to be bound by these terms.
+            </p>
+            <div
+              class="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4"
+            >
+              <p class="text-slate-300 leading-relaxed">
+                <strong>Important Notice:</strong> CineMind's API is currently in
+                development and not publicly available. These terms will apply when
+                API access becomes available.
+              </p>
+            </div>
+          </section>
+
+          <!-- API Services -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Available API Services
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              When available, our API will provide access to:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>Movie search and discovery endpoints</li>
+              <li>Movie metadata and ratings information</li>
+              <li>AI-powered sentiment analysis results (Smart Review data)</li>
+              <li>Popularity and trending movie data</li>
+              <li>Genre and category filtering capabilities</li>
+            </ul>
+            <p class="text-slate-300 leading-relaxed">
+              <strong>Data Sources:</strong> Our API aggregates data from The Movie
+              Database (TMDB) and provides enhanced analytics through our AI processing.
+              Direct access to third-party APIs should be obtained from the respective
+              providers.
+            </p>
+          </section>
+
+          <!-- Registration and Authentication -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Registration and API Keys
+            </h2>
+            <div class="space-y-4">
+              <h3 class="text-xl font-medium text-slate-200">
+                API Key Requirements
+              </h3>
+              <p class="text-slate-300 leading-relaxed">
+                To access our API, you will need to:
+              </p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>Register for a developer account</li>
+                <li>Provide accurate contact and application information</li>
+                <li>Obtain a unique API key for authentication</li>
+                <li>Keep your API key secure and confidential</li>
+                <li>Agree to these API Terms of Use</li>
+              </ul>
+
+              <h3 class="text-xl font-medium text-slate-200">
+                Account Responsibilities
+              </h3>
+              <p class="text-slate-300 leading-relaxed">
+                You are responsible for:
+              </p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>Maintaining the security of your API credentials</li>
+                <li>All activity that occurs under your API key</li>
+                <li>Notifying us immediately of any unauthorized use</li>
+                <li>Ensuring your application complies with these terms</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Usage Limits and Rate Limiting -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Usage Limits and Rate Limiting
+            </h2>
+            <div class="space-y-4">
+              <h3 class="text-xl font-medium text-slate-200">Rate Limits</h3>
+              <p class="text-slate-300 leading-relaxed">
+                Our API will implement rate limiting to ensure fair usage:
+              </p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li><strong>Free Tier:</strong> 1,000 requests per day</li>
+                <li>
+                  <strong>Developer Tier:</strong> 10,000 requests per day
+                </li>
+                <li>
+                  <strong>Commercial Tier:</strong> Custom limits based on agreement
+                </li>
+                <li>
+                  <strong>Burst Limits:</strong> Maximum 10 requests per second
+                </li>
+              </ul>
+
+              <h3 class="text-xl font-medium text-slate-200">
+                Quota Management
+              </h3>
+              <p class="text-slate-300 leading-relaxed">
+                API quotas reset daily at 00:00 UTC. Exceeding rate limits will
+                result in HTTP 429 (Too Many Requests) responses. Repeated
+                violations may result in temporary or permanent API access
+                suspension.
+              </p>
+            </div>
+          </section>
+
+          <!-- Acceptable Use -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Acceptable Use Policy
+            </h2>
+            <div class="space-y-4">
+              <h3 class="text-xl font-medium text-slate-200">Permitted Uses</h3>
+              <p class="text-slate-300 leading-relaxed">
+                You may use our API to:
+              </p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>Build applications that enhance movie discovery</li>
+                <li>Create educational or research projects</li>
+                <li>Develop commercial applications with proper attribution</li>
+                <li>Integrate movie data into existing platforms</li>
+              </ul>
+
+              <h3 class="text-xl font-medium text-slate-200">
+                Prohibited Uses
+              </h3>
+              <p class="text-slate-300 leading-relaxed">
+                You may NOT use our API to:
+              </p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>Scrape or systematically download large datasets</li>
+                <li>Create competing movie database services</li>
+                <li>Violate intellectual property rights</li>
+                <li>Distribute malware or engage in harmful activities</li>
+                <li>Circumvent rate limits or technical restrictions</li>
+                <li>Resell raw API data without value addition</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Data Usage and Attribution -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Data Usage and Attribution
+            </h2>
+            <div class="space-y-4">
+              <h3 class="text-xl font-medium text-slate-200">
+                Attribution Requirements
+              </h3>
+              <p class="text-slate-300 leading-relaxed">
+                When using our API data, you must:
+              </p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>
+                  Provide clear attribution to CineMind as the data source
+                </li>
+                <li>Include links back to cinemind.com where appropriate</li>
+                <li>
+                  Acknowledge that data originates from TMDB and other third
+                  parties
+                </li>
+                <li>
+                  Display required attribution text: "Powered by CineMind
+                  Analytics"
+                </li>
+              </ul>
+
+              <h3 class="text-xl font-medium text-slate-200">Data Handling</h3>
+              <p class="text-slate-300 leading-relaxed">You agree to:</p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>
+                  Use data only for the purposes stated in your application
+                </li>
+                <li>Implement appropriate data caching to reduce API calls</li>
+                <li>Not store excessive amounts of API data locally</li>
+                <li>
+                  Respect data freshness and update cached content regularly
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- API Availability and Support -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              API Availability and Support
+            </h2>
+            <div class="space-y-4">
+              <h3 class="text-xl font-medium text-slate-200">Service Level</h3>
+              <p class="text-slate-300 leading-relaxed">
+                We strive to maintain high API availability but do not
+                guarantee:
+              </p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>100% uptime or uninterrupted service</li>
+                <li>Specific response times or performance levels</li>
+                <li>Backward compatibility for all API versions</li>
+                <li>Advance notice of all maintenance windows</li>
+              </ul>
+
+              <h3 class="text-xl font-medium text-slate-200">
+                Developer Support
+              </h3>
+              <p class="text-slate-300 leading-relaxed">We provide:</p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>API documentation and code examples</li>
+                <li>Developer support via email</li>
+                <li>Status page for service announcements</li>
+                <li>Community forum for developer discussions</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Versioning and Changes -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              API Versioning and Changes
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              We may update our API to add features, fix issues, or improve
+              performance:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>
+                <strong>Backward Compatible Changes:</strong> No advance notice required
+              </li>
+              <li>
+                <strong>Breaking Changes:</strong> 30 days advance notice via email
+              </li>
+              <li>
+                <strong>Security Updates:</strong> May be implemented immediately
+              </li>
+              <li>
+                <strong>API Deprecation:</strong> 90 days notice before discontinuation
+              </li>
+            </ul>
+            <p class="text-slate-300 leading-relaxed">
+              We recommend using API versioning in your applications and
+              monitoring our developer communications for updates.
+            </p>
+          </section>
+
+          <!-- Privacy and Security -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Privacy and Security
+            </h2>
+            <div class="space-y-4">
+              <h3 class="text-xl font-medium text-slate-200">
+                Data Protection
+              </h3>
+              <p class="text-slate-300 leading-relaxed">
+                Our API follows the same privacy principles as our main
+                platform:
+              </p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>
+                  We log minimal request data for debugging and rate limiting
+                </li>
+                <li>No personal user data is collected through API usage</li>
+                <li>API access logs are retained for 30 days maximum</li>
+                <li>All API communications use HTTPS encryption</li>
+              </ul>
+
+              <h3 class="text-xl font-medium text-slate-200">
+                Security Requirements
+              </h3>
+              <p class="text-slate-300 leading-relaxed">API users must:</p>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>Use HTTPS for all API requests</li>
+                <li>Securely store and transmit API keys</li>
+                <li>Implement proper error handling</li>
+                <li>Report security vulnerabilities responsibly</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Termination -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Termination of API Access
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              We may suspend or terminate your API access for:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>Violation of these API terms</li>
+              <li>Abuse of rate limits or technical restrictions</li>
+              <li>Non-payment of applicable fees</li>
+              <li>Violation of our main Terms of Service</li>
+              <li>Legal or regulatory requirements</li>
+            </ul>
+            <p class="text-slate-300 leading-relaxed">
+              Upon termination, you must immediately cease using the API and
+              delete any cached data obtained through our service.
+            </p>
+          </section>
+
+          <!-- Fees and Billing -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Fees and Billing
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              API pricing structure (when available):
+            </p>
+            <div class="grid md:grid-cols-3 gap-4 my-6">
+              <div
+                class="bg-slate-800/30 rounded-lg p-4 border border-slate-600/30"
+              >
+                <h4 class="text-white font-medium mb-2">Free Tier</h4>
+                <p class="text-slate-300 text-sm">1,000 requests/day</p>
+                <p class="text-cyan-400 text-lg font-bold">$0/month</p>
+              </div>
+
+              <div
+                class="bg-slate-800/30 rounded-lg p-4 border border-cyan-500/30"
+              >
+                <h4 class="text-white font-medium mb-2">Developer Tier</h4>
+                <p class="text-slate-300 text-sm">10,000 requests/day</p>
+                <p class="text-cyan-400 text-lg font-bold">$29/month</p>
+              </div>
+
+              <div
+                class="bg-slate-800/30 rounded-lg p-4 border border-slate-600/30"
+              >
+                <h4 class="text-white font-medium mb-2">Commercial Tier</h4>
+                <p class="text-slate-300 text-sm">Custom limits</p>
+                <p class="text-cyan-400 text-lg font-bold">Contact us</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Contact Information -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Developer Support
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              For API-related questions, support, or partnership inquiries:
+            </p>
+            <div class="bg-slate-800/50 rounded-lg p-6 space-y-2">
+              <p class="text-slate-300">
+                <strong>API Support:</strong> api@cinemind.com
+              </p>
+              <p class="text-slate-300">
+                <strong>Developer Relations:</strong> developers@cinemind.com
+              </p>
+              <p class="text-slate-300">
+                <strong>Business Partnerships:</strong> partnerships@cinemind.com
+              </p>
+              <p class="text-slate-300">
+                Address: 1600 Amphitheatre Parkway, Mountain View, CA 94043
+              </p>
+              <p class="text-slate-300">Phone: +1 (555) 123-4567</p>
+            </div>
+            <p class="text-slate-300 leading-relaxed">
+              <strong>Documentation:</strong> When available, comprehensive API documentation
+              will be provided at docs.cinemind.com
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .content-wrapper {
+      padding: 0 2rem;
+    }
+  }
+</style>

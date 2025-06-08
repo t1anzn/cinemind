@@ -1,0 +1,275 @@
+---
+/**
+ * Terms of Service Page
+ *
+ * Legal page containing CineMind's terms of service and user agreements.
+ * Features:
+ * - Comprehensive terms of service content
+ * - Consistent styling with design system
+ * - Responsive layout
+ *
+ * Used to inform users about service terms and conditions.
+ */
+
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Terms of Service - CineMind">
+  <main class="py-16">
+    <div class="content-wrapper max-w-4xl mx-auto">
+      <div class="space-y-8">
+        <!-- Title -->
+        <div class="text-center space-y-4">
+          <h1
+            class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+          >
+            Terms of Service
+          </h1>
+          <p class="text-slate-400 text-lg">Last updated: June 8th 2025</p>
+        </div>
+
+        <!-- Content -->
+        <div class="prose prose-invert prose-cyan max-w-none space-y-8">
+          <!-- Introduction -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Agreement to Terms
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              These Terms of Service ("Terms") govern your use of the CineMind
+              movie analytics platform operated by CineMind Analytics Inc.
+              ("we," "our," or "us"). By accessing or using our service, you
+              agree to be bound by these Terms. If you disagree with any part of
+              these terms, you may not access the service.
+            </p>
+          </section>
+
+          <!-- Service Description -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Service Description
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              CineMind is a movie analytics platform that provides:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>
+                Movie information, ratings, and metadata from The Movie Database
+                (TMDB)
+              </li>
+              <li>Embedded YouTube trailers and video content</li>
+              <li>
+                AI-powered sentiment analysis of user reviews via our Smart
+                Review feature
+              </li>
+              <li>Movie search and discovery tools</li>
+              <li>Accessibility features and customization options</li>
+            </ul>
+          </section>
+
+          <!-- User Responsibilities -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              User Responsibilities
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              When using CineMind, you agree to:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>Use the service for lawful purposes only</li>
+              <li>Respect intellectual property rights of content creators</li>
+              <li>Not attempt to reverse engineer or hack our systems</li>
+              <li>Not use automated systems to scrape or collect data</li>
+              <li>Comply with all applicable laws and regulations</li>
+              <li>Report any bugs or security vulnerabilities responsibly</li>
+            </ul>
+          </section>
+
+          <!-- Content and Intellectual Property -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Content and Intellectual Property
+            </h2>
+            <div class="space-y-4">
+              <h3 class="text-xl font-medium text-slate-200">
+                Third-Party Content
+              </h3>
+              <p class="text-slate-300 leading-relaxed">
+                Movie data, images, and reviews are provided by The Movie
+                Database (TMDB) and are subject to their terms of use. Video
+                content is provided by YouTube and subject to YouTube's terms of
+                service.
+              </p>
+
+              <h3 class="text-xl font-medium text-slate-200">Our Platform</h3>
+              <p class="text-slate-300 leading-relaxed">
+                The CineMind platform, including its design, functionality, and
+                AI features, is owned by CineMind Analytics Inc. and protected
+                by copyright and other intellectual property laws.
+              </p>
+            </div>
+          </section>
+
+          <!-- Age Restrictions -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Age Restrictions and Content Ratings
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              Our platform displays movies with various age ratings, including
+              content that may not be suitable for children. Users under 13
+              should use this service only under parental supervision. Parents
+              and guardians are responsible for monitoring their children's use
+              of our platform and the content they access.
+            </p>
+          </section>
+
+          <!-- AI Services -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              AI-Powered Features
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              Our Smart Review feature uses Google's Gemini AI to analyze
+              sentiment in user reviews. By using this feature, you acknowledge
+              that:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>AI analysis may contain errors or biases</li>
+              <li>AI summaries are not substitutes for reading full reviews</li>
+              <li>
+                Review data is processed by Google's services according to their
+                terms
+              </li>
+              <li>AI outputs are provided for informational purposes only</li>
+            </ul>
+          </section>
+
+          <!-- Service Availability -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Service Availability
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              We strive to maintain service availability but cannot guarantee
+              uninterrupted access. We may temporarily suspend service for
+              maintenance, updates, or other operational needs. We are not
+              liable for any damages resulting from service interruptions.
+            </p>
+          </section>
+
+          <!-- Disclaimers -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">Disclaimers</h2>
+            <p class="text-slate-300 leading-relaxed">
+              CineMind is provided "as is" without warranties of any kind. We
+              disclaim all warranties, express or implied, including but not
+              limited to:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>Accuracy or completeness of movie information</li>
+              <li>Availability of third-party content (videos, reviews)</li>
+              <li>Performance or reliability of AI features</li>
+              <li>Compatibility with all devices or browsers</li>
+            </ul>
+          </section>
+
+          <!-- Limitation of Liability -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Limitation of Liability
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              To the fullest extent permitted by law, CineMind Analytics Inc.
+              shall not be liable for any indirect, incidental, special,
+              consequential, or punitive damages, including but not limited to
+              loss of profits, data, or goodwill, arising from your use of our
+              service.
+            </p>
+          </section>
+
+          <!-- Third-Party Services -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Third-Party Services
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              Our platform integrates with third-party services including TMDB,
+              YouTube, and Google Gemini AI. Your use of these integrated
+              services is subject to their respective terms of service and
+              privacy policies. We are not responsible for the practices or
+              content of these third-party services.
+            </p>
+          </section>
+
+          <!-- Termination -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">Termination</h2>
+            <p class="text-slate-300 leading-relaxed">
+              We may terminate or suspend access to our service immediately,
+              without prior notice, for any reason, including breach of these
+              Terms. Upon termination, your right to use the service will cease
+              immediately.
+            </p>
+          </section>
+
+          <!-- Governing Law -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">Governing Law</h2>
+            <p class="text-slate-300 leading-relaxed">
+              These Terms shall be governed and construed in accordance with the
+              laws of the State of California, United States, without regard to
+              its conflict of law provisions. Any disputes shall be resolved in
+              the courts of California.
+            </p>
+          </section>
+
+          <!-- Changes to Terms -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Changes to Terms
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              We reserve the right to modify these Terms at any time. Changes
+              will be posted on this page with an updated revision date. Your
+              continued use of the service after changes constitutes acceptance
+              of the new Terms.
+            </p>
+          </section>
+
+          <!-- Contact Information -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Contact Information
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              If you have questions about these Terms of Service, please contact
+              us:
+            </p>
+            <div class="bg-slate-800/50 rounded-lg p-6 space-y-2">
+              <p class="text-slate-300">Email: legal@cinemind.com</p>
+              <p class="text-slate-300">
+                Address: 1600 Amphitheatre Parkway, Mountain View, CA 94043
+              </p>
+              <p class="text-slate-300">Phone: +1 (555) 123-4567</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .content-wrapper {
+      padding: 0 2rem;
+    }
+  }
+</style>

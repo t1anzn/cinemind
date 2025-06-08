@@ -22,31 +22,31 @@ export default function Footer() {
             {/* Legal Links */}
             <div className="flex flex-wrap justify-center gap-6 text-xs">
               <a
-                href="#"
+                href="/privacy-policy"
                 className="text-slate-400 hover:text-cyan-400 transition-colors"
               >
                 Privacy Policy
               </a>
               <a
-                href="#"
+                href="/terms-of-service"
                 className="text-slate-400 hover:text-cyan-400 transition-colors"
               >
                 Terms of Service
               </a>
               <a
-                href="#"
+                href="/cookie-policy"
                 className="text-slate-400 hover:text-cyan-400 transition-colors"
               >
                 Cookie Policy
               </a>
               <a
-                href="#"
+                href="/dmca"
                 className="text-slate-400 hover:text-cyan-400 transition-colors"
               >
                 DMCA
               </a>
               <a
-                href="#"
+                href="/api-terms"
                 className="text-slate-400 hover:text-cyan-400 transition-colors"
               >
                 API Terms

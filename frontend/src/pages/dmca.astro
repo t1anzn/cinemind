@@ -1,0 +1,304 @@
+---
+/**
+ * DMCA Page
+ *
+ * Legal page containing DMCA takedown notice and copyright policy.
+ * Features:
+ * - Comprehensive DMCA takedown notice content
+ * - Consistent styling with design system
+ * - Responsive layout
+ *
+ * Used to inform users about copyright policies and takedown procedures.
+ */
+
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="DMCA - CineMind">
+  <main class="py-16">
+    <div class="content-wrapper max-w-4xl mx-auto">
+      <div class="space-y-8">
+        <!-- Title -->
+        <div class="text-center space-y-4">
+          <h1
+            class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+          >
+            DMCA Policy
+          </h1>
+          <p class="text-slate-400 text-lg">Last updated: June 8th 2025</p>
+        </div>
+
+        <!-- Content -->
+        <div class="prose prose-invert prose-cyan max-w-none space-y-8">
+          <!-- Introduction -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Copyright Policy
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              CineMind Analytics Inc. ("we," "our," or "us") respects the
+              intellectual property rights of others and expects our users to do
+              the same. We respond to clear notices of alleged copyright
+              infringement in accordance with the Digital Millennium Copyright
+              Act (DMCA).
+            </p>
+          </section>
+
+          <!-- Our Content Sources -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Our Content Sources
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              CineMind does not host or store copyrighted content directly. Our
+              platform integrates with:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>
+                <strong>The Movie Database (TMDB):</strong> Movie metadata, images,
+                and user reviews
+              </li>
+              <li>
+                <strong>YouTube:</strong> Embedded movie trailers and promotional
+                content
+              </li>
+              <li>
+                <strong>Google Gemini AI:</strong> AI-generated analysis of publicly
+                available reviews
+              </li>
+            </ul>
+            <p class="text-slate-300 leading-relaxed">
+              All content is sourced from these third-party services according
+              to their respective terms of service and API usage guidelines.
+            </p>
+          </section>
+
+          <!-- DMCA Takedown Process -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              DMCA Takedown Notice
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              If you believe that content on CineMind infringes your copyright,
+              you may submit a takedown notice. Your notice must include:
+            </p>
+
+            <div class="space-y-4">
+              <h3 class="text-xl font-medium text-slate-200">
+                Required Information
+              </h3>
+              <ul class="text-slate-300 space-y-2 list-disc list-inside">
+                <li>Your physical or electronic signature</li>
+                <li>
+                  Identification of the copyrighted work claimed to be infringed
+                </li>
+                <li>
+                  Identification of the material that is claimed to be
+                  infringing and its location on our platform
+                </li>
+                <li>
+                  Your contact information (address, telephone number, email
+                  address)
+                </li>
+                <li>
+                  A statement that you have a good faith belief that use of the
+                  material is not authorized
+                </li>
+                <li>
+                  A statement that the information in the notification is
+                  accurate
+                </li>
+                <li>
+                  A statement, under penalty of perjury, that you are authorized
+                  to act on behalf of the copyright owner
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Submission Instructions -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              How to Submit a DMCA Notice
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              Send your complete DMCA takedown notice to our designated
+              copyright agent:
+            </p>
+            <div class="bg-slate-800/50 rounded-lg p-6 space-y-2">
+              <h4 class="text-white font-medium">DMCA Agent</h4>
+              <p class="text-slate-300">Email: dmca@cinemind.com</p>
+              <p class="text-slate-300">
+                Address: DMCA Agent, CineMind Analytics Inc.<br />
+                1600 Amphitheatre Parkway<br />
+                Mountain View, CA 94043
+              </p>
+            </div>
+            <p class="text-slate-300 leading-relaxed">
+              <strong>Note:</strong> Only DMCA notices should be sent to this email
+              address. For other inquiries, please use our general contact information.
+            </p>
+          </section>
+
+          <!-- Response Process -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Our Response Process
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              Upon receiving a valid DMCA notice, we will:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>Review the notice for completeness and validity</li>
+              <li>
+                Remove or disable access to the allegedly infringing material
+              </li>
+              <li>Notify the user who posted the content (if applicable)</li>
+              <li>Document the takedown for our records</li>
+            </ul>
+            <p class="text-slate-300 leading-relaxed">
+              Since we primarily display content from third-party APIs (TMDB,
+              YouTube), many copyright issues may need to be addressed directly
+              with those platforms.
+            </p>
+          </section>
+
+          <!-- Counter-Notification -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Counter-Notification Process
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              If you believe content was removed in error, you may submit a
+              counter-notification that includes:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>Your physical or electronic signature</li>
+              <li>Identification of the material that was removed</li>
+              <li>
+                A statement under penalty of perjury that the material was
+                removed by mistake
+              </li>
+              <li>Your name, address, and telephone number</li>
+              <li>
+                A statement consenting to jurisdiction in your judicial district
+              </li>
+            </ul>
+          </section>
+
+          <!-- Third-Party Content -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Third-Party Content Notices
+            </h2>
+            <div class="space-y-4">
+              <h3 class="text-xl font-medium text-slate-200">YouTube Videos</h3>
+              <p class="text-slate-300 leading-relaxed">
+                For embedded YouTube videos (trailers), copyright issues should
+                be reported directly to YouTube through their copyright
+                reporting system. We embed videos using YouTube's official embed
+                codes and do not host video content ourselves.
+              </p>
+
+              <h3 class="text-xl font-medium text-slate-200">TMDB Content</h3>
+              <p class="text-slate-300 leading-relaxed">
+                Movie metadata, images, and reviews are sourced from The Movie
+                Database (TMDB). For issues with this content, you may also
+                contact TMDB directly or submit a DMCA notice to us, and we will
+                evaluate whether to discontinue displaying the specific content.
+              </p>
+            </div>
+          </section>
+
+          <!-- False Claims -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              False Claims Warning
+            </h2>
+            <div
+              class="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4"
+            >
+              <p class="text-slate-300 leading-relaxed">
+                <strong>Important:</strong> Under Section 512(f) of the DMCA, any
+                person who knowingly materially misrepresents that material is infringing
+                may be subject to liability for damages. Please ensure your claim
+                is valid before submitting a DMCA notice.
+              </p>
+            </div>
+          </section>
+
+          <!-- Repeat Infringers -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Repeat Infringer Policy
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              CineMind will terminate access for users who are determined to be
+              repeat infringers of copyrighted material. Since our platform
+              primarily displays third-party content and does not host
+              user-generated content, repeat infringement typically relates to
+              systematic misuse of our platform.
+            </p>
+          </section>
+
+          <!-- Safe Harbor -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Safe Harbor Compliance
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              CineMind operates as a platform that displays content from
+              third-party sources. We comply with DMCA safe harbor provisions
+              by:
+            </p>
+            <ul class="text-slate-300 space-y-2 list-disc list-inside">
+              <li>Designating an agent to receive copyright notices</li>
+              <li>Responding promptly to valid takedown notices</li>
+              <li>Implementing a repeat infringer policy</li>
+              <li>
+                Not interfering with standard technical measures used by
+                copyright owners
+              </li>
+            </ul>
+          </section>
+
+          <!-- Contact Information -->
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-cyan-400">
+              Contact Information
+            </h2>
+            <p class="text-slate-300 leading-relaxed">
+              For questions about this DMCA policy or copyright issues:
+            </p>
+            <div class="bg-slate-800/50 rounded-lg p-6 space-y-2">
+              <p class="text-slate-300">
+                <strong>DMCA Notices:</strong> dmca@cinemind.com
+              </p>
+              <p class="text-slate-300">
+                <strong>General Legal:</strong> legal@cinemind.com
+              </p>
+              <p class="text-slate-300">
+                Address: 1600 Amphitheatre Parkway, Mountain View, CA 94043
+              </p>
+              <p class="text-slate-300">Phone: +1 (555) 123-4567</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .content-wrapper {
+      padding: 0 2rem;
+    }
+  }
+</style>
