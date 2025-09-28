@@ -23,7 +23,7 @@ basedir = os.path.abspath(os.path.dirname(__file__)) # Path to existing cinemind
 #db_path = os.path.join(os.path.dirname(basedir), 'models', 'cinemind.db')
 db_path = os.path.join(os.path.dirname(basedir), '..', 'migration_project', 'cinema_migrations.db')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:***REMOVED***@host.docker.internal:5432/cinemind'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the database connection
@@ -565,4 +565,4 @@ def index():
     return jsonify({'message': 'Connected to CineMind Flask API'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)

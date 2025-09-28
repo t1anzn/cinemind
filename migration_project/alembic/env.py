@@ -66,9 +66,7 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    # Get the config section and override the database URL with the app config
     configuration = config.get_section(config.config_ini_section)
-    configuration["sqlalchemy.url"] = app_config.Config.SQLALCHEMY_DATABASE_URI
 
     connectable = engine_from_config(
         configuration,
@@ -80,7 +78,7 @@ def run_migrations_online() -> None:
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
-            render_as_batch = True # SQLite support - enables ALTER TABLE operations
+            render_as_batch=True
         )
 
         with context.begin_transaction():
