@@ -17,21 +17,24 @@
 import Layout from "../layouts/Layout.astro";
 import FeaturedSlider from "../components/FeaturedSlider";
 import MovieGrid from "../components/MovieGrid";
+export const prerender = false;
+
+const backendUrl = process.env.BACKEND_URL || "http://127.0.0.1:5000";
 
 // Fetch featured movies from the backend
-const featuredMoviesResponse = await fetch("http://127.0.0.1:5000/featured");
+const featuredMoviesResponse = await fetch(`${backendUrl}/featured`);
 const featuredMoviesData = await featuredMoviesResponse.json();
 const featuredMovies = featuredMoviesData || [];
 // console.log("Fetched featured movies", featuredMovies);
 
 // Fetch popular movies from the backend
-const popularMoviesResponse = await fetch("http://127.0.0.1:5000/popular");
+const popularMoviesResponse = await fetch(`${backendUrl}/popular`);
 const popularMoviesData = await popularMoviesResponse.json();
 const popularMovies = popularMoviesData || [];
 //console.log("Fetched popular movies", popularMovies);
 
 // Fetch randomised explore movies from the backend
-const exploreMoviesResponse = await fetch("http://127.0.0.1:5000/explore");
+const exploreMoviesResponse = await fetch(`${backendUrl}/explore`);
 const exploreMoviesData = await exploreMoviesResponse.json();
 const exploreMovies = exploreMoviesData || [];
 //console.log("Fetched explore movies", exploreMovies);

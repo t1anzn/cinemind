@@ -18,7 +18,7 @@ import MoviePoster from "./MoviePoster";
 import * as movieDisplayUtils from "../utils/movieDisplayUtils";
 
 export default function MovieHeader({ movie }) {
-  console.log("MovieHeader received movie data:", movie); // Debug log
+  //console.log("MovieHeader received movie data:", movie); // Debug log
 
   // Check if movie object is valid
   if (!movie || typeof movie !== "object") {

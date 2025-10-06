@@ -45,7 +45,8 @@ export default function MoviePage() {
     setIsLoading(true);
 
     try {
-      const url = new URL("http://127.0.0.1:5000/results");
+      const backendUrl = process.env.BACKEND_URL || "http://127.0.0.1:5000";
+      const url = new URL(`${backendUrl}/results`);
       url.searchParams.set("query", queryParams.query);
       queryParams.genres.forEach((g) => url.searchParams.append("genre", g));
       url.searchParams.set("language", queryParams.language);
@@ -80,7 +81,7 @@ export default function MoviePage() {
   // Fetch all genres to create a mapping of genre IDs to names
   const fetchGenres = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/genres");
+      const response = await fetch(`${backendUrl}/genres`);
       const genres = await response.json();
 
       // Create a mapping of genre ID to genre name
@@ -103,9 +104,7 @@ export default function MoviePage() {
       const moviesWithGenreData = await Promise.all(
         movies.map(async (movie) => {
           try {
-            const response = await fetch(
-              `http://127.0.0.1:5000/movies/${movie.id}`
-            );
+            const response = await fetch(`${backendUrl}/movies/${movie.id}`);
             const fullMovieData = await response.json();
 
             return {
@@ -137,7 +136,7 @@ export default function MoviePage() {
       const genreMapping = await fetchGenres();
 
       // 2. Fetch movie data
-      const url = new URL("http://127.0.0.1:5000/results");
+      const url = new URL(`${backendUrl}/results`);
       url.searchParams.set("query", ""); // Empty query to get all movies
       url.searchParams.set("sort_by", "vote_average"); // Sort by rating
       url.searchParams.set("order", "desc"); // Highest rated first
@@ -180,7 +179,7 @@ export default function MoviePage() {
   // Handle page change from pagination component
   const handlePageChange = (pageNum) => {
     setCurrentPage(pageNum); // Update the currentPage state
-    console.log("Page Change Triggered:" + pageNum);
+    //console.log("Page Change Triggered:" + pageNum);
   };
 
   // Handle tab switching

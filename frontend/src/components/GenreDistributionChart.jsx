@@ -33,14 +33,14 @@ export default function GenreDistributionChart({
   const genreData = useMemo(() => {
     // Memoize the genre data calculation to avoid unnecessary re-renders
     if (!movies || movies.length === 0) {
-      console.log("No movies data available");
+      //console.log("No movies data available");
       return { labels: [], counts: [] };
     }
 
     // Debug the movie structure
-    console.log("Movie data structure sample:", movies[0]);
-    console.log("Total movies to analyze:", movies.length);
-    console.log("Genre map:", genreMap);
+    //g("Movie data structure sample:", movies[0]);
+    //console.log("Total movies to analyze:", movies.length);
+    //console.log("Genre map:", genreMap);
 
     // Create a map to count genre occurrences
     const genreCounts = {};
@@ -77,14 +77,14 @@ export default function GenreDistributionChart({
       }
     });
 
-    console.log(
-      `Found ${movieGenreCount} movies with genre data out of ${movies.length} total movies`
-    );
-    console.log("Genre counts:", genreCounts);
+    // console.log(
+    //   `Found ${movieGenreCount} movies with genre data out of ${movies.length} total movies`
+    // );
+    // console.log("Genre counts:", genreCounts);
 
     // If no genres were found, check if we need to fetch genre data separately
     if (Object.keys(genreCounts).length === 0) {
-      console.warn("No genre data found in the movies data");
+      //console.warn("No genre data found in the movies data");
     }
 
     // Convert to array of [genre, count] pairs
@@ -124,13 +124,13 @@ export default function GenreDistributionChart({
   }, [movies, maxGenres, sortBy, genreMap]);
 
   // Add a useEffect to log when the component renders with new data
-  useEffect(() => {
-    console.log("GenreDistributionChart rendered with data:", {
-      movieCount: movies?.length,
-      genreLabels: genreData.labels,
-      genreCounts: genreData.counts,
-    });
-  }, [movies, genreData]);
+  // useEffect(() => {
+  //   console.log("GenreDistributionChart rendered with data:", {
+  //     movieCount: movies?.length,
+  //     genreLabels: genreData.labels,
+  //     genreCounts: genreData.counts,
+  //   });
+  // }, [movies, genreData]);
 
   // Generate colors for pie chart
   const generateColors = (count) => {

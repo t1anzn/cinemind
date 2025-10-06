@@ -23,7 +23,7 @@ basedir = os.path.abspath(os.path.dirname(__file__)) # Path to existing cinemind
 #db_path = os.path.join(os.path.dirname(basedir), 'models', 'cinemind.db')
 db_path = os.path.join(os.path.dirname(basedir), '..', 'migration_project', 'cinema_migrations.db')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:***REMOVED***@host.docker.internal:5432/cinemind'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the database connection
@@ -298,7 +298,7 @@ def get_explore():
     
 @app.route('/movies/<int:id>', methods=['GET'])
 def get_movie_by_id(id):
-    print(f"Received request for movie with ID {id}")  # Debugging statement
+    #print(f"Received request for movie with ID {id}")  # Debugging statement
     movie = Movie.query.get(id)
 
     if not movie:

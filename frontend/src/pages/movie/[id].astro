@@ -16,6 +16,7 @@
  */
 
 import Layout from "../../layouts/Layout.astro";
+const backendUrl = process.env.BACKEND_URL || "http://127.0.0.1:5000";
 import MovieHeader from "../../components/MovieHeader";
 import MovieOverview from "../../components/MovieOverview";
 import MovieDetails from "../../components/MovieDetails";
@@ -24,10 +25,12 @@ import MovieReviews from "../../components/MovieReviews";
 import FinancialOverview from "../../components/FinancialOverview";
 import MovieMedia from "../../components/MovieMedia.jsx";
 import * as movieDisplayUtils from "../../utils/movieDisplayUtils.jsx";
+export const prerender = false;
 
 export async function getStaticPaths() {
+  const backendUrl = process.env.BACKEND_URL || "http://127.0.0.1:5000";
   try {
-    const res = await fetch("http://127.0.0.1:5000/movies/ids");
+    const res = await fetch(`${backendUrl}/movies/ids`);
     const data = await res.json();
 
     const paths = data.map((movie: { id: number }) => ({
@@ -92,10 +95,10 @@ let sentiment = null;
 let debugInfo = null;
 
 try {
-  console.log(`Fetching movie with ID: ${id}`);
+  //console.log(`Fetching movie with ID: ${id}`);
 
   // Fetch movie by ID
-  const response = await fetch(`http://127.0.0.1:5000/movies/${id}`);
+  const response = await fetch(`${backendUrl}/movies/${id}`);
   const responseStatus = response.status;
 
   // Store debug info
@@ -110,7 +113,7 @@ try {
   }
 
   const responseData = await response.json();
-  console.log("Movie data received:", responseData);
+  //console.log("Movie data received:", responseData);
 
   // Make sure the response data is valid
   if (!responseData || typeof responseData !== "object") {
@@ -122,7 +125,7 @@ try {
   // Fetch sentiment analysis for the movie
   try {
     const sentimentResponse = await fetch(
-      `http://127.0.0.1:5000/movies/${id}/sentiment`
+      `${backendUrl}/movies/${id}/sentiment`
     );
     if (sentimentResponse.ok) {
       const sentimentData = await sentimentResponse.json();
