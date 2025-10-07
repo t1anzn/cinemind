@@ -11,6 +11,10 @@ from alembic import context
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+# Use SQLALCHEMY_DATABASE_URI from environment if available
+db_url = os.getenv("SQLALCHEMY_DATABASE_URI")
+if db_url:
+    config.set_main_option("sqlalchemy.url", db_url)
 
 # Add parent directory to sys.path
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
