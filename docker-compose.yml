@@ -1,7 +1,6 @@
-version: '3.8'
 services:
   db:
-    image: postgres:15
+    image: postgres:18
     restart: always
     environment:
       POSTGRES_DB: cinemind
@@ -11,6 +10,12 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./db_init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d cinemind"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     build:
@@ -21,8 +26,14 @@ services:
     environment:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
       - SQLALCHEMY_DATABASE_URI=postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/cinemind
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_NAME=cinemind
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    command: sh -c "sleep 5 && cd migration_project && alembic upgrade head && cd .. && python app/app.py"
 
   frontend:
     build: ./frontend
